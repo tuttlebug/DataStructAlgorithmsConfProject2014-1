@@ -8,17 +8,18 @@ import java.awt.*;
 public class createPlaces {
     
     public static void main (String[] args) {
+        // create Player
+        Player player = new Player();
+        
         // create village and cave
         int[] villSpawnPoint = {0, 0};
-        int[] villSize = {700, 600};
-        Place village = new Place("Village", villSpawnPoint);
+        Place village = new Place("Village", villSpawnPoint, player);
         int[] caveSpawnPoint = {0, 0};
-        int[] caveSize = {600, 300};
-        Place cave = new Place("Cave", caveSpawnPoint);
+        Place cave = new Place("Cave", caveSpawnPoint, player);
         
         // create backgrounds
-        village.constructPlace(villSize, Color.GREEN);
-        cave.constructPlace(caveSize, Color.GRAY);
+        village.constructPlace(Color.GREEN);
+        cave.constructPlace(Color.GRAY);
         // add accessible areas
         village.addPlace(cave);
         cave.addPlace(village);

@@ -38,12 +38,14 @@ public class Place {
     private ArrayList<String> items;
     private ArrayList<String> neighborList;  // ONLY HERE FOR SAKE OF TOSTRING 
     private int[] spawnPoint;
+    private Player player;
+    
     // Temporary JFrame and JPanel
     private JFrame world;
     private JPanel elements;
     
     // constructor
-    public Place(String name, int[] spawnPoint) {
+    public Place(String name, int[] spawnPoint, Player player) {
         this.name = name;
         this.neighbors =  new ArrayList<Place>();
         this.items = new ArrayList<String>();
@@ -52,6 +54,7 @@ public class Place {
         // Temporary JFrame and JPanel
         this.world = new JFrame();
         this.elements = new JPanel();
+        this.player = new Player();
     }
     
     // methods
@@ -65,10 +68,10 @@ public class Place {
      * @param: int[] of sprite locations 
      *   Will likely need to more parameters
      */
-    public void constructPlace(int[] size, Color background) {
+    public void constructPlace(Color background) {
         // Temporary JFrame and JPanel
         // initialize Panel / setup
-        this.world.setSize(size[0], size[1]);
+        this.world.setSize(700, 600);
         this.world.setTitle(this.name);
         this.world.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
@@ -85,12 +88,8 @@ public class Place {
          * 
          */
         
-        /*~~~~~~~~~~~~~~~~~~
-         * 
-         * 
-         * ~~~~~~~~~~~~~~~~~
-         */
         this.world.add(this.elements);
+        this.world.add(this.player);
         this.world.setVisible(true);
     }
     
