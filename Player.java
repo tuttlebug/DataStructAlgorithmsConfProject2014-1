@@ -48,6 +48,7 @@ public class Player extends JPanel {
         this.radius = 5;
         this.addKeyListener(new ListenerForKeys());
         this.setFocusable(true);
+//        this.setBackground(Color.TRANSLUCENT);
     }
     
     public void paintComponent(Graphics g) {

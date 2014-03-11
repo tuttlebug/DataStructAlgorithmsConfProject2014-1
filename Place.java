@@ -90,6 +90,10 @@ public class Place {
         
         this.world.add(this.elements);
         this.world.add(this.player);
+        /*
+         * ERROR:
+         * this.player panel covers up background
+         */
         this.world.setVisible(true);
     }
     
