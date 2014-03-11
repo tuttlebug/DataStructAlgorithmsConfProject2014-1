@@ -65,13 +65,13 @@ public class Place {
      * @param: int[] of sprite locations 
      *   Will likely need to more parameters
      */
-    public void constructPlace() {
+    public void constructPlace(int[] size, Color background) {
         // Temporary JFrame and JPanel
         // initialize Panel
-        this.world.setSize(700, 500);
-        this.world.setTitle("Village");
+        this.world.setSize(size[0], size[1]);
+        this.world.setTitle(this.name);
         this.world.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.elements.setBackground(Color.GREEN);
+        this.elements.setBackground(background);
         this.world.add(this.elements);
         this.world.setVisible(true);
     }
@@ -104,10 +104,12 @@ public class Place {
     }
     
     // Temporary; for testing
-    public static void main(String[] args) {
-        int [] spawnPoint = { 0, 0};
-        Place village = new Place("Village", spawnPoint);
-        village.constructPlace();
-    }
+//    public static void main(String[] args) {
+//        // variables
+//        int [] spawnPoint = {0, 0};
+//        int[] villSize = {700, 600};
+//        Place village = new Place("Village", spawnPoint);
+//        village.constructPlace(villSize, Color.GREEN);
+//    }
     
 }
