@@ -11,7 +11,8 @@ import java.util.*;
  * String objects will change to Place Objects later;
  * 
  * @ Parameters:
- *      1. Spawn point for character
+ *      1. Name of Place
+ *      2. Spawn point for character
  * 
  * 
  * ?????????????????????????
@@ -34,13 +35,15 @@ public class Place {
     private ArrayList<Place> neighbors;
     private ArrayList<String> items;
     private ArrayList<String> neighborList;  // ONLY HERE FOR SAKE OF TOSTRING 
+    private int[] spawnPoint;
     
     // constructor
-    public Place(String name) {
+    public Place(String name, int[] spawnPoint) {
         this.name = name;
         this.neighbors =  new ArrayList<Place>();
         this.items = new ArrayList<String>();
         this.neighborList = new ArrayList<String>();
+        this.spawnPoint = spawnPoint; 
     }
     
     // methods
