@@ -9,6 +9,12 @@ import java.util.*;
  * 
  * Notes:
  * String objects will change to Place Objects later;
+ * 
+ * 
+ * ?????????????????????????
+ * Things to add:
+ *  1. movement in a place
+ *  2. array of in-bounds and out-of-bounds spaces  
  */
 public class Place {
     
