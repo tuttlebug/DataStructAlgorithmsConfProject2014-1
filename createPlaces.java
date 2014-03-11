@@ -18,7 +18,7 @@ public class createPlaces {
         
         // create backgrounds
 //        village.constructPlace(villSize, Color.GREEN);
-//        cave.constructPlace(caveSize, Color.GRAY);
+//        cav e.constructPlace(caveSize, Color.GRAY);
         // add accessible areas
         village.addPlace(cave);
         cave.addPlace(village);

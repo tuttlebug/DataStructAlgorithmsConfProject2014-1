@@ -65,7 +65,7 @@ public class Place {
      * @param: int[] of sprite locations 
      *   Will likely need to more parameters
      */
-    public void constructPlace(int[] size, Color elements) {
+    public void constructPlace(int[] size, Color background) {
         // Temporary JFrame and JPanel
         // initialize Panel / setup
         this.world.setSize(size[0], size[1]);
