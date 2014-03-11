@@ -15,6 +15,14 @@ import java.util.*;
  * Things to add:
  *  1. movement in a place
  *  2. array of in-bounds and out-of-bounds spaces  
+ * ???????????
+ * 
+ * Worlds:
+ *      Cave [Village]
+ *      Village [Cave, Bridge]
+ *      Foreign town [Bridge, Wilds]
+ *      Wilds [Foreign Town, Shadow Path]
+ *      Shadow Path [Wilds, Temple]
  */
 public class Place {
     
