@@ -106,7 +106,7 @@ public class Place {
     // Temporary; for testing
 //    public static void main(String[] args) {
 //        // variables
-//        int [] spawnPoint = {0, 0};
+//        int[] spawnPoint = {0, 0};
 //        int[] villSize = {700, 600};
 //        Place village = new Place("Village", spawnPoint);
 //        village.constructPlace(villSize, Color.GREEN);

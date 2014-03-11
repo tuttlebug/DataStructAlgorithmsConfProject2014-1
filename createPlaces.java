@@ -11,15 +11,19 @@ public class createPlaces {
         // create village and cave
         int[] villSpawnPoint = {0, 0};
         int[] villSize = {700, 600};
+        Place village = new Place("Village", villSpawnPoint);
         int[] caveSpawnPoint = {0, 0};
         int[] caveSize = {600, 300};
-        
-        // Village 
-        Place village = new Place("Village", villSpawnPoint);
-        village.constructPlace(villSize, Color.GREEN);
-        
-        // Cave
         Place cave = new Place("Cave", caveSpawnPoint);
-        cave.constructPlace(caveSize, Color.GRAY);
+        
+        // create backgrounds
+//        village.constructPlace(villSize, Color.GREEN);
+//        cave.constructPlace(caveSize, Color.GRAY);
+        // add accessible areas
+        village.addPlace(cave);
+        cave.addPlace(village);
+        
+        System.out.println(village);
+        System.out.println(cave);
     }
 }
