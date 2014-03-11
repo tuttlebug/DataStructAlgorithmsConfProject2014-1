@@ -1,4 +1,6 @@
 import java.util.*;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Place object:
@@ -36,6 +38,9 @@ public class Place {
     private ArrayList<String> items;
     private ArrayList<String> neighborList;  // ONLY HERE FOR SAKE OF TOSTRING 
     private int[] spawnPoint;
+    // Temporary JFrame and JPanel
+    private JFrame world;
+    private JPanel elements;
     
     // constructor
     public Place(String name, int[] spawnPoint) {
@@ -44,6 +49,9 @@ public class Place {
         this.items = new ArrayList<String>();
         this.neighborList = new ArrayList<String>();
         this.spawnPoint = spawnPoint; 
+        // Temporary JFrame and JPanel
+        this.world = new JFrame();
+        this.elements = new JPanel();
     }
     
     // methods
@@ -52,9 +60,21 @@ public class Place {
         this.neighborList.add(place.getName());
     }
     
-//    public void sharePlaces(Place place) {
-//        place
-//    }
+    /**
+     * Construct the background and visual of place;
+     * @param: int[] of sprite locations 
+     *   Will likely need to more parameters
+     */
+    public void constructPlace() {
+        // Temporary JFrame and JPanel
+        // initialize Panel
+        this.world.setSize(700, 500);
+        this.world.setTitle("Village");
+        this.world.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.elements.setBackground(Color.GREEN);
+        this.world.add(this.elements);
+        this.world.setVisible(true);
+    }
     
     public void addItem(String item) {
         this.items.add(item);
@@ -81,6 +101,13 @@ public class Place {
     public String toString() {
         return String.format("NAME: %s\nNEIGHBORING AREAS: %s\nAVAILABLE ITEMS: %s\n\n",
                              this.name, this.neighborList, this.items);
+    }
+    
+    // Temporary; for testing
+    public static void main(String[] args) {
+        int [] spawnPoint = { 0, 0};
+        Place village = new Place("Village", spawnPoint);
+        village.constructPlace();
     }
     
 }
