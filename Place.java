@@ -61,17 +61,35 @@ public class Place {
     }
     
     /**
-     * Construct the background and visual of place;
+     * Construct the elements and visual of place;
      * @param: int[] of sprite locations 
      *   Will likely need to more parameters
      */
-    public void constructPlace(int[] size, Color background) {
+    public void constructPlace(int[] size, Color elements) {
         // Temporary JFrame and JPanel
-        // initialize Panel
+        // initialize Panel / setup
         this.world.setSize(size[0], size[1]);
         this.world.setTitle(this.name);
         this.world.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        // adding to the panel
+        // --------------------
+        
+        // background
+        // - will be a real background
         this.elements.setBackground(background);
+        
+        // collideables
+        /**
+         * take in a map of collideable objects
+         * 
+         */
+        
+        /*~~~~~~~~~~~~~~~~~~
+         * 
+         * 
+         * ~~~~~~~~~~~~~~~~~
+         */
         this.world.add(this.elements);
         this.world.setVisible(true);
     }
@@ -102,14 +120,5 @@ public class Place {
         return String.format("NAME: %s\nNEIGHBORING AREAS: %s\nAVAILABLE ITEMS: %s\n\n",
                              this.name, this.neighborList, this.items);
     }
-    
-    // Temporary; for testing
-//    public static void main(String[] args) {
-//        // variables
-//        int[] spawnPoint = {0, 0};
-//        int[] villSize = {700, 600};
-//        Place village = new Place("Village", spawnPoint);
-//        village.constructPlace(villSize, Color.GREEN);
-//    }
     
 }
