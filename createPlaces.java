@@ -4,6 +4,13 @@ import java.awt.*;
 
 /**
  * Testing class
+ * 
+ * Worlds:
+ *      Cave [Village]
+ *      Village [Cave, Bridge]
+ *      Foreign town [Bridge, Wilds]
+ *      Wilds [Foreign Town, Shadow Path]
+ *      Shadow Path [Wilds, Temple]
  */
 public class CreatePlaces {
     
