@@ -8,3 +8,7 @@
  *   2  int array
  * 
  */
+
+public interface Carriable {
+    
+}

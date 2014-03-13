@@ -44,7 +44,6 @@ public class Player extends JPanel {
         this.radius = 5;
         this.addKeyListener(new ListenerForKeys());
         this.setFocusable(true);
-//        this.setBackground(Color.TRANSLUCENT);
     }
     
     public void paintComponent(Graphics g) {
@@ -53,7 +52,7 @@ public class Player extends JPanel {
         int x1 = this.x - this.radius;
         int y1 = this.y - this.radius;
         int diameter = this.radius * 2;
-        Ellipse2D.Double ball = new Ellipse2D.Double(x1, y1, diameter, diameter);
-        pen.fill(ball);
+        Ellipse2D.Double player = new Ellipse2D.Double(x1, y1, diameter, diameter);
+        pen.fill(player);
     }
 }

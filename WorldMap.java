@@ -1,8 +1,15 @@
 import java.util.*;
 
 /**
- * The World map
- * consists of a MaP that keys the world names
+ * The World map:
+ * consists of a Map that keys the world names
+ * 
+ * Worlds:
+ *      Cave [Village]
+ *      Village [Cave, Bridge]
+ *      Foreign town [Bridge, Wilds]
+ *      Wilds [Foreign Town, Shadow Path]
+ *      Shadow Path [Wilds, Temple]
  */
 public class WorldMap {
     

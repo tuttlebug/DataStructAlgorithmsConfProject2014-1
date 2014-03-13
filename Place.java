@@ -97,6 +97,9 @@ public class Place {
         this.world.setVisible(true);
     }
     
+    /**
+     * item should have reference to place that it is in;
+     */
     public void addItem(String item) {
         this.items.add(item);
     }
