@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * Testing class
  */
-public class createPlaces {
+public class CreatePlaces {
     
     public static void main (String[] args) {
         // create Player

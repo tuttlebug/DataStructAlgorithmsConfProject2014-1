@@ -7,10 +7,6 @@ import java.awt.geom.*;  // Ellipse2D
 public class Player extends JPanel {
     
     /**
-     * For now:
-     *    make a circle;
-     *    have the player(circle) move around);  
-     * 
      */
     
     /**
