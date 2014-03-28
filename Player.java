@@ -3,6 +3,10 @@ import javax.swing.*;
 import java.awt.event.*; // MouseListener, MouseMotionListener, MouseEvent, KeyListener, KeyEvent
 import java.awt.*;       // Graphics, Graphics2D, Color
 import java.awt.geom.*;  // Ellipse2D
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * TO DO:
@@ -38,6 +42,8 @@ public class Player extends JPanel {
     private int x, y;
     private int radius; // Temporary
     public Place currentArea;
+    private BufferedImage player;
+    private String currentImage;
 //  private Pack pack; 
     
     public Player() {
@@ -47,6 +53,8 @@ public class Player extends JPanel {
         this.currentArea = null;
         this.addKeyListener(new ListenerForKeys());
         this.setFocusable(true);
+        this.currentImage = "Test Tome left 1.png";
+        
     }
     
     public String toString() {
@@ -64,11 +72,20 @@ public class Player extends JPanel {
         int x1 = this.x - this.radius;
         int y1 = this.y - this.radius;
         int diameter = this.radius * 2;
-        
+        pen.drawImage(player, x1, y1, null);
+        this.loadImage();
+       
 //        ImageIcon test = new ImageIcon("Test Tome left 1.png");
 //        test.paintIcon(this, g, 100, 100);
-        Ellipse2D.Double player = new Ellipse2D.Double(x1, y1, diameter, diameter);
-        pen.fill(player);
+//        Ellipse2D.Double player = new Ellipse2D.Double(x1, y1, diameter, diameter);
+//        pen.fill(player);
+    }
+    
+    public void loadImage() {
+        try {
+           player = ImageIO.read(new File(this.currentImage));
+       } catch (IOException e) {
+       }
     }
 <<<<<<< HEAD
     
