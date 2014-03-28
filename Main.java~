@@ -1,0 +1,22 @@
+//LOTS of import statements go here
+
+public class Main{
+  
+  /*Someday, this is going to be the main file! It will need to do the following:
+   * 
+   * - import (preferably all of) the relevant libraries (this means imports will need to be deleted
+   * from other files later
+   * 
+   * - Instantiate all variables required for the game to commence. 
+   * 
+   * - What else?
+   * 
+   */
+  
+  public static void main(String[] args) {
+    //this is where object instances will be instantiated
+    //Things that we need to instantiate:
+      //World HashMap (containing all the worlds)
+      //Main character Player object
+  }
+}
