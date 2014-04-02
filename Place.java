@@ -13,11 +13,10 @@ import java.awt.event.*;
  * [] Array of "blocked off" areas
  * [] Array of locations for people and items
  * 
- * Things to add/implement:
+ * To Add/Implement:
  * [Ã] movement in a place
  * [] Have constructPlace() create neccessary data to add to the main Frame
  * []
-- Objects placed on top (?)
 
  * Parameters:
  * [] Name of Place

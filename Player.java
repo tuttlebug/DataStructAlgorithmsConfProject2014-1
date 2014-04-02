@@ -9,8 +9,19 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * TO DO:
- * Work on loading image;
+ * The Player Character;
+ * 
+ * Check List:
+ * [Ã] Character sprite 
+ * [] Pack 
+ * 
+ * To Add/Implement:
+ * [Ã] Movement
+ * [Ã] method that loads character sprite
+ *   - [] method that changes Tome's sprites when e moves
+ * [] method that allows Tome to go through eir's pack and use items
+ * [] method that allows Tome to interact with people and objects
+ *   - [] method that allos Tome to pick up items and choose whether to add to eir's pack
  */
 
 public class Player extends JPanel {

@@ -3,6 +3,10 @@ import java.util.*;
 /**
  * The World map:
  * consists of a Map that keys the world names
+ * 
+ * Check List:
+ * [Ã] Map of Places
+ * [] 
  */
 public class WorldMap {
     
