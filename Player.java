@@ -98,8 +98,10 @@ public class Player extends JPanel {
        } catch (IOException e) {
        }
     }
+}
+    /*
 <<<<<<< HEAD
-    
+    /*
     public Pack openPack() {
       return this.Pack();
     }
@@ -134,7 +136,9 @@ public class Player extends JPanel {
       
     }
     */
+    /*
 }
 =======
 }
 >>>>>>> FETCH_HEAD
+*/
