@@ -8,7 +8,6 @@
  * To Add/Implement:
  * [] method that sends the character to a new screen
  */
-// Might extend place object
 public class Gate {
     
     // instance variables
