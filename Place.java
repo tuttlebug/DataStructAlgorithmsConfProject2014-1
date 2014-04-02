@@ -19,7 +19,7 @@ import java.awt.event.*;
  * []
 - Objects placed on top (?)
 
- * @ Parameters:
+ * Parameters:
  * [] Name of Place
  * [] Spawn point for character
  * 
