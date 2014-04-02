@@ -5,22 +5,30 @@ import java.awt.event.*;
 
 /**
  * Place object:
- * contains:
- *   a Map of the places it's conected to;
- *   a Name;
- *   a Map of removable items;
+ * Check-List:
+ * [] A name
+ * [] A map of the places it's connected to
+ * [] A Map of removable items;
+ * [] Image depicting full world
+ * [] Array of "blocked off" areas
+ * [] Array of locations for people and items
  * 
+ * Things to add/implement:
+ * [Ã] movement in a place
+ * [] Have constructPlace() create neccessary data to add to the main Frame
+ * []
+- Objects placed on top (?)
+
  * @ Parameters:
- *      1. Name of Place
- *      2. Spawn point for character
+ * [] Name of Place
+ * [] Spawn point for character
  * 
- * 
- * ?????????????????????????
- * Things to add:
- *  1. movement in a place
- *  2. array of in-bounds and out-of-bounds spaces  
- * ???????????
- * 
+ * Temporary:
+ * [] Color background;
+ * [] JFrame world;
+ * [] JPanel world;
+ * [] ArrayList<String> items;
+ *   - [] Will be turned into a map
  */
 public class Place {
     
@@ -31,20 +39,17 @@ public class Place {
     // instance variables
     private String name; 
     private Map<String, Place> neighbors;
-    private ArrayList<String> items; // WILL BE TURNED INTO A MAP
+    private ArrayList<String> items;
     private ArrayList<String> neighborList;  // ONLY HERE FOR SAKE OF TOSTRING 
     private int[] startPoint;
     private Player player;
-    private Color background;
+    private Color background;  // Temporary (Will be replaced with an Background Image) 
     
     // Temporary JFrame and JPanel
     private JFrame world;
     private JPanel gui; // Menu gui
     
     // constructor
-    /**
-     * background will become an int array of sprite locations
-     */
     public Place(String name, int[] startPoint, Player player, Color background) {
         this.name = name;
         this.neighbors = new HashMap<String, Place>();
@@ -70,11 +75,6 @@ public class Place {
     
     /**
      * Construct the elements and visual of place;
-     *   Will likely need to more parameters
-     * 
-     * TO DOS:
-     *    - To avoid making multiple windows;
-     *      make a main screen frame, and change the frame;
      */
     public void constructPlace() {
         // Temporary JFrame and JPanel
@@ -85,6 +85,7 @@ public class Place {
         this.world.setBackground(this.background);
         
         // adding to the panel
+        //
         // --------------------
         
         // collideables
