@@ -6,8 +6,8 @@ import java.awt.event.*;
 /**
  * Place object:
  * Check-List:
- * [] A name
- * [] A map of the places it's connected to
+ * [Ã] A name
+ * [Ã] A map of the places it's connected to
  * [] A Map of removable items;
  * [] Image depicting full world
  * [] Array of "blocked off" areas
@@ -15,11 +15,10 @@ import java.awt.event.*;
  * 
  * To Add/Implement:
  * [Ã] movement in a place
- * [] Have constructPlace() create neccessary data to add to the main Frame
- * []
+ * [] Have constructPlace() create neccessary data to add to the main window
  * 
  * Parameters:
- * [] Name of Place
+ * [Ã] Name of Place
  * [] Spawn point for character
  * 
  * Temporary:
@@ -40,7 +39,8 @@ public class Place {
     private ArrayList<String> neighborList;  // ONLY HERE FOR SAKE OF TOSTRING 
     private int[] startPoint;
     private Player player;
-    private Color background;  // Temporary (Will be replaced with an Background Image) 
+//    private Color background;  // Temporary (Will be replaced with an Background Image) 
+    private String background;
     private JPanel gui; // Menu gui
     
     // constructor
@@ -71,15 +71,22 @@ public class Place {
      * Construct the elements and visual of place
      * Currently only takes in a color
      */
-    public void constructPlace(Color bg) {
-        this.background = bg;
+//    public void constructPlace(Color bg) {
+//        this.background = bg;
+//    }
+    
+    /**
+     * VERSION 2
+     */
+    public void constructPlace(String image) {
+        this.background = image;
     }
     
     /**
      * VERSION 1
      * Sends construction data to mainWindow
      */
-    public Color sendDetail() {
+    public String sendDetail() {
         return this.background;
     }
     

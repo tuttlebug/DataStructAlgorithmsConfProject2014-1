@@ -6,19 +6,17 @@
  * [Ã] set name
  * [Ã] set closing
  * [Ã] set location
- * [Ã] JPanel for the main world
  * [] Jpanel for the menu
  * 
  * To Add/Implement:
  * [] method that accepts new data and update the window
  * [] move map around with arrow keys
- * [] load an image
- *   - [] make mainWorld extend JPanel; deal with loading image
+ * [Ã] load an image
+ *   - [Ã] switch between images
  * [] load a Place
  * 
  * Temporary:
  * [] shiftWorld with color
- * [] loadBackground
  */
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -36,9 +34,10 @@ public class MainWindow extends JFrame {
     private static final int YLCOORD = 100;
     
     // variables
-    private static JPanel worldPanel = new JPanel();
     private static JPanel menuPanel = new JPanel();
+    private static JLabel currentArea = new JLabel();
     
+    // constructor
     public MainWindow() {
         // standard setup
         setTitle("Game name");
@@ -46,8 +45,7 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //--------add more code after this line -------//
-//        worldPanel.setBackground(Color.BLUE);
-        add(worldPanel);
+        add(currentArea);
         
         //--------add more code before this line -------//
         
@@ -55,69 +53,60 @@ public class MainWindow extends JFrame {
         setVisible(true);
     }
     
+
+    /**
+     * Loads the background image into the frame
+     * @param: An ImageIcon of the background image
+     */
+    public void loadBackground(ImageIcon image) {
+        currentArea.setIcon(image);
+    }
+    
+    /**
+     * Creates the ImageIcon of the background
+     * @param: name of the file
+     * @return: ImageIcon
+     */
+    public ImageIcon createBackground(String name) throws IOException {
+        BufferedImage image = ImageIO.read(new File(name));
+        return new ImageIcon(image);
+    }
+    
     /**
      * VERSION 1
      * changes the screen
      * @param: data to change the screen
      */
-    public void shiftWorld(Color bg) {
-        worldPanel.setBackground(bg);
-    }
+//    public void shiftWorld(Color bg) {
+//        setBackground(bg);
+//    }
     
     /**
      * VERSION 2
      * ""
      * @param: Place
      */
-    public void shiftWorld(Place place) {
-        worldPanel.setBackground(place.sendDetail());
-    }
+//    public void shiftWorld(Place place) {
+//        setBackground(place.sendDetail());
+//    }
     
     /**
-     * VERSION 1
-     * loads the background image
-     * @params: String name to the file;
+     * VERSION 3 
      */
-    public void loadBackground(String name) throws IOException {
-        BufferedImage image = ImageIO.read(new File(name));
-        JLabel label = new JLabel(new ImageIcon(image));
-        worldPanel.add(label);
-        setVisible(true);
-    }
-    
-    /**
-     * VERSION 2
-     */    
-    public void loadBackground2(String name) throws IOException {
-        BackgroundImage bg = new BackgroundImage(name);
-        worldPanel.add(bg);
-    }
-    
-    /**
-     * VERSION 3
-     */
-    public void loadBackground3(JLabel label) {
-        worldPanel.add(label);
-        setVisible(true);
-    }
-    
-    public JLabel createLabel(String name) throws IOException {
-        BufferedImage image = ImageIO.read(new File(name));
-        JLabel label = new JLabel(new ImageIcon(image));
-        return label;
+    public void shiftWorld(String name) throws IOException {
+        ImageIcon bg = createBackground(name);
+        loadBackground(bg);
     }
     
     // testing
     public static void main(String[] args) throws IOException {
         // window
         MainWindow mw = new MainWindow();
-//        mw.loadBackground("utena2.jpg");
-        mw.loadBackground3(mw.createLabel("mtown.png"));
-        
+
         // Place
         Place village = new Place("Village");
-        village.constructPlace(Color.GREEN);
-//        mw.shiftWorld(village);
+        village.constructPlace("Put name here");
+        mw.shiftWorld(village.sendDetail());
         
         
     }
