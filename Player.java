@@ -85,11 +85,6 @@ public class Player extends JPanel {
         int diameter = this.radius * 2;
         pen.drawImage(player, x1, y1, null);
         this.loadImage();
-       
-//        ImageIcon test = new ImageIcon("Test Tome left 1.png");
-//        test.paintIcon(this, g, 100, 100);
-//        Ellipse2D.Double player = new Ellipse2D.Double(x1, y1, diameter, diameter);
-//        pen.fill(player);
     }
     
     public void loadImage() {

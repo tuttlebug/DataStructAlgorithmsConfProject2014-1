@@ -17,15 +17,13 @@ import java.awt.event.*;
  * [Ã] movement in a place
  * [] Have constructPlace() create neccessary data to add to the main Frame
  * []
-
+ * 
  * Parameters:
  * [] Name of Place
  * [] Spawn point for character
  * 
  * Temporary:
  * [] Color background;
- * [] JFrame world;
- * [] JPanel world;
  * [] ArrayList<String> items;
  *   - [] Will be turned into a map
  */
@@ -43,21 +41,17 @@ public class Place {
     private int[] startPoint;
     private Player player;
     private Color background;  // Temporary (Will be replaced with an Background Image) 
-    
-    // Temporary JFrame and JPanel
-    private JFrame world;
     private JPanel gui; // Menu gui
     
     // constructor
-    public Place(String name, int[] startPoint, Player player, Color background) {
+//    public Place(String name, int[] startPoint, Player player, Color background) {
+    public Place(String name) {
         this.name = name;
         this.neighbors = new HashMap<String, Place>();
         this.items = new ArrayList<String>();
         this.neighborList = new ArrayList<String>();
         this.startPoint = startPoint; 
         this.background = background;
-        // Temporary JFrame and JPanel
-        this.world = new JFrame();  // Make this into a seperate class, main frame.
         this.gui = new JPanel();
         this.player = new Player();
     }
@@ -73,28 +67,20 @@ public class Place {
     }
     
     /**
-     * Construct the elements and visual of place;
+     * VERSION 1
+     * Construct the elements and visual of place
+     * Currently only takes in a color
      */
-    public void constructPlace() {
-        // Temporary JFrame and JPanel
-        // initialize Panel / setup
-        this.world.setSize(700, 600);
-        this.world.setTitle(this.name);
-        this.world.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.world.setBackground(this.background);
-        
-        // adding to the panel
-        //
-        // --------------------
-        
-        // collideables
-        /**
-         * take in a map of collideable objects
-         */
-        
-        this.world.add(this.gui);
-        this.world.add(this.player);
-        this.world.setVisible(true);
+    public void constructPlace(Color bg) {
+        this.background = bg;
+    }
+    
+    /**
+     * VERSION 1
+     * Sends construction data to mainWindow
+     */
+    public Color sendDetail() {
+        return this.background;
     }
     
     
