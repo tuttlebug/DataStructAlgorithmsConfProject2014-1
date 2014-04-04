@@ -2,6 +2,10 @@ import java.util.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
 
 /**
  * Place object:
@@ -20,17 +24,15 @@ import java.awt.event.*;
  * Parameters:
  * [Ã] Name of Place
  * [] Spawn point for character
+ * [Ã] Name of background image
  * 
  * Temporary:
- * [] Color background;
+ * [Ã] Color background;
  * [] ArrayList<String> items;
  *   - [] Will be turned into a map
+ * [] Player
  */
-public class Place {
-    
-    //_____
-    // main frame
-    //_____
+public class Place implements LoadImage {
     
     // instance variables
     private String name; 
@@ -38,22 +40,21 @@ public class Place {
     private ArrayList<String> items;
     private ArrayList<String> neighborList;  // ONLY HERE FOR SAKE OF TOSTRING 
     private int[] startPoint;
-    private Player player;
-//    private Color background;  // Temporary (Will be replaced with an Background Image) 
-    private String background;
+//    private Player player;
+    private String imageFile;
+    private ImageIcon background;
     private JPanel gui; // Menu gui
     
     // constructor
-//    public Place(String name, int[] startPoint, Player player, Color background) {
-    public Place(String name) {
+    public Place(String name, String imageFile) {
         this.name = name;
         this.neighbors = new HashMap<String, Place>();
         this.items = new ArrayList<String>();
         this.neighborList = new ArrayList<String>();
-        this.startPoint = startPoint; 
-        this.background = background;
+//        this.startPoint = startPoint; 
+        this.imageFile = imageFile;
         this.gui = new JPanel();
-        this.player = new Player();
+//        this.player = new Player();
     }
     
     // methods
@@ -66,30 +67,25 @@ public class Place {
         return this.neighbors.get(name);
     }
     
-    /**
-     * VERSION 1
-     * Construct the elements and visual of place
-     * Currently only takes in a color
-     */
-//    public void constructPlace(Color bg) {
-//        this.background = bg;
-//    }
-    
-    /**
-     * VERSION 2
-     */
-    public void constructPlace(String image) {
-        this.background = image;
+    public void loadImage() throws IOException {
+        BufferedImage image = ImageIO.read(new File(this.imageFile));
+        this.background = new ImageIcon(image);
     }
     
     /**
      * VERSION 1
      * Sends construction data to mainWindow
      */
-    public String sendDetail() {
+//    public String sendBackground() {
+//        return this.imageFile;
+//    }
+    
+    /**
+     * VERSION 2
+     */
+    public ImageIcon sendBackground() {
         return this.background;
     }
-    
     
     /**
      * item should have reference to place that it is in;

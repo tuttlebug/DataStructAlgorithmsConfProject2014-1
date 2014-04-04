@@ -14,6 +14,7 @@ import java.io.IOException;
  * Check List:
  * [Ã] Character sprite 
  * [] Pack 
+ * [] Should NOT extend JPanel anymore
  * 
  * To Add/Implement:
  * [Ã] Movement
@@ -23,6 +24,7 @@ import java.io.IOException;
  * [] method that allows Tome to interact with people and objects
  *   - [] method that allos Tome to pick up items and choose whether to add to eir's pack
  */
+
 
 public class Player extends JPanel {
    
@@ -95,8 +97,6 @@ public class Player extends JPanel {
     }
 }
     /*
-<<<<<<< HEAD
-    /*
     public Pack openPack() {
       return this.Pack();
     }
@@ -131,9 +131,13 @@ public class Player extends JPanel {
       
     }
     */
-    /*
+
+
+
+/**
+ * VERSION 2
+ *
+public class Player {
+        
 }
-=======
-}
->>>>>>> FETCH_HEAD
 */

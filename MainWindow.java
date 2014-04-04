@@ -7,16 +7,17 @@
  * [Ã] set closing
  * [Ã] set location
  * [] Jpanel for the menu
+ * [] Moveable Image
  * 
  * To Add/Implement:
  * [] method that accepts new data and update the window
  * [] move map around with arrow keys
  * [Ã] load an image
  *   - [Ã] switch between images
- * [] load a Place
+ * [Ã] load a Place
  * 
  * Temporary:
- * [] shiftWorld with color
+ * [Ã] shiftWorld with color
  */
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -53,61 +54,39 @@ public class MainWindow extends JFrame {
         setVisible(true);
     }
     
-
     /**
      * Loads the background image into the frame
      * @param: An ImageIcon of the background image
      */
-    public void loadBackground(ImageIcon image) {
-        currentArea.setIcon(image);
-    }
+//    public void loadBackground(ImageIcon image) {
+//        currentArea.setIcon(image);
+//    }
     
     /**
      * Creates the ImageIcon of the background
      * @param: name of the file
      * @return: ImageIcon
      */
-    public ImageIcon createBackground(String name) throws IOException {
-        BufferedImage image = ImageIO.read(new File(name));
-        return new ImageIcon(image);
-    }
-    
+//    public ImageIcon createBackground(String name) throws IOException {
+//        BufferedImage image = ImageIO.read(new File(name));
+//        return new ImageIcon(image);
+//    }
+
     /**
      * VERSION 1
-     * changes the screen
-     * @param: data to change the screen
+     * Changes the screen image to a new area
+     * @param: name of the file
      */
-//    public void shiftWorld(Color bg) {
-//        setBackground(bg);
+//    public void shiftWorld(String name) throws IOException {
+//        ImageIcon bg = createBackground(name);
+//        loadBackground(bg);
 //    }
     
     /**
      * VERSION 2
-     * ""
-     * @param: Place
      */
-//    public void shiftWorld(Place place) {
-//        setBackground(place.sendDetail());
-//    }
-    
-    /**
-     * VERSION 3 
-     */
-    public void shiftWorld(String name) throws IOException {
-        ImageIcon bg = createBackground(name);
-        loadBackground(bg);
+    public void shiftWorld(ImageIcon image) {
+        currentArea.setIcon(image);
     }
     
-    // testing
-    public static void main(String[] args) throws IOException {
-        // window
-        MainWindow mw = new MainWindow();
-
-        // Place
-        Place village = new Place("Village");
-        village.constructPlace("Put name here");
-        mw.shiftWorld(village.sendDetail());
-        
-        
-    }
 }
