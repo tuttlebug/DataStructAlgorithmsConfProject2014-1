@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
  * [Ã] A name
  * [Ã] A map of the places it's connected to
  * [] A Map of removable items;
- * [] Image depicting full world
+ * [Ã] Image depicting full world
  * [] Array of "blocked off" areas
  * [] Array of locations for people and items
  * 
@@ -67,23 +67,14 @@ public class Place implements LoadImage {
         return this.neighbors.get(name);
     }
     
+    // loads the background image
     public void loadImage() throws IOException {
         BufferedImage image = ImageIO.read(new File(this.imageFile));
         this.background = new ImageIcon(image);
     }
-    
-    /**
-     * VERSION 1
-     * Sends construction data to mainWindow
-     */
-//    public String sendBackground() {
-//        return this.imageFile;
-//    }
-    
-    /**
-     * VERSION 2
-     */
-    public ImageIcon sendBackground() {
+
+    // sends the background over
+    public ImageIcon sendImage() {
         return this.background;
     }
     
@@ -108,8 +99,8 @@ public class Place implements LoadImage {
     }
     
     public String toString() {
-        return String.format("NAME: %s\nNEIGHBORING AREAS: %s\nAVAILABLE ITEMS: %s\n\n",
-                             this.name, this.neighborList, this.items);
+        return String.format("NAME: %s\nNEIGHBORING AREAS: %s\nAVAILABLE ITEMS: %s\nBACKGROUND: %s\n",
+                             this.name, this.neighborList, this.items, this.imageFile);
     }
     
 }

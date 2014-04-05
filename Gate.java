@@ -15,7 +15,7 @@ public class Gate {
     public int[] startPoint;
     public int[] endPoint;
     
-    public Door(String name, int[] startSpawnPoint, int[] endSpawnPoint) {
+    public Gate(String name, int[] startSpawnPoint, int[] endSpawnPoint) {
         this.name = name;
         this.startPoint = startSpawnPoint;
         this.endPoint = endSpawnPoint;

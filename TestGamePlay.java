@@ -1,3 +1,7 @@
+/**
+ * TESTING CLASS
+ */
+
 import java.util.*;
 import javax.swing.*;
 import java.awt.*;
@@ -10,58 +14,74 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.Color;
 
+/**
+ * VERSION 1
+ * for switching images
+ *
+ public class TestGamePlay {
+ public static MainWindow mw = new MainWindow();
+ 
+ public static Place village = new Place("Village", "village.png");
+ public static Place inn = new Place("Inn", "inn.png");
+ public static Place home = new Place("Home", "home.png");
+ public static Place outside = new Place("Outside", "overworld.png");
+ 
+ public static Player tome = new Player();
+ 
+ public static void main (String[] args) throws IOException {
+ Scanner prompt = new Scanner(System.in);
+ 
+ // give places their images
+ village.loadImage();
+ inn.loadImage();
+ home.loadImage();
+ outside.loadImage();
+ 
+ // window and player
+ tome.loadImage();
+ mw.shiftWorld(village.sendImage());
+ //        mw.addPlayer(tome.sendImage());
+ 
+ System.out.println("You are in the village, where do you want to go?");
+ for (int i = 0; i < 3; i++) {
+ String firstQuestion = prompt.nextLine(); 
+ prompt(firstQuestion);
+ }
+ }
+ 
+ public static void prompt(String prompt) throws IOException {
+ if (prompt.equals("home")) {
+ mw.shiftWorld(home.sendImage());
+ } 
+ else if (prompt.equals("inn")) {
+ mw.shiftWorld(inn.sendImage());
+ } 
+ else if (prompt.equals("outside")) {
+ mw.shiftWorld(outside.sendImage());
+ }
+ else {
+ System.out.println("Doesn't exist");
+ }
+ }
+ 
+ }
+ */
+
+/**
+ * VERSION 2
+ */
 public class TestGamePlay {
-    public static MainWindow mw = new MainWindow();
     
-    public static Place village = new Place("Village", "village.png");
-    public static Place inn = new Place("Inn", "inn.png");
-    public static Place home = new Place("Home", "home.png");
-    public static Place outside = new Place("Outside", "overworld.png");
+    private static WorldMap map;
+    private static MainWindow mw;
     
-    public static void main (String[] args) throws IOException {
-//        CreatePlaces.createWorlds();
-        Scanner prompt = new Scanner(System.in);
-//        player.currentlyIn(worldMap.getPlace("Village"));
-//        worldMap.getPlace("Village").constructPlace(Color.GREEN);
-//        worldMap.getPlace("Cave").constructPlace(Color.GRAY);
+    public static void main(String[] args) throws IOException {
+        map = CreatePlaces.createWorldMap();
+        mw = new MainWindow();
         
-        // give places their images
-        village.loadImage();
-        inn.loadImage();
-        home.loadImage();
-        outside.loadImage();
-        // old crappy dialogue
-        /*
-         System.out.println(player);
-         System.out.println("You are in the village, where do you want to go?");
-         System.out.println(worldMap.getPlace("Village"));
-         String question = prompt.nextLine(); 
-         player.currentlyIn(worldMap.getPlace("Village").getPlace(question));
-         System.out.println(player);
-         System.out.println(worldMap.getPlace("Village").getPlace(question));
-         */
-        // window
-        mw.shiftWorld(village.sendBackground());
-        System.out.println("You are in the village, where do you want to go?");
-        for (int i = 0; i < 3; i++) {
-            String firstQuestion = prompt.nextLine(); 
-            prompt(firstQuestion);
-        }
-    }
-    
-    public static void prompt(String prompt) throws IOException {
-        if (prompt.equals("home")) {
-            mw.shiftWorld(home.sendBackground());
-        } 
-        else if (prompt.equals("inn")) {
-            mw.shiftWorld(inn.sendBackground());
-        } 
-        else if (prompt.equals("outside")) {
-            mw.shiftWorld(outside.sendBackground());
-        }
-        else {
-            System.out.println("Doesn't exist");
-        }
+        System.out.println(map);
+        Place current = map.getPlace("Village");
+        mw.shiftWorld(current.sendImage());
     }
     
 }

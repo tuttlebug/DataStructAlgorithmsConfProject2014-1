@@ -12,9 +12,9 @@ import java.io.IOException;
  * The Player Character;
  * 
  * Check List:
- * [Ã] Character sprite 
+ * [] Array of character sprites
  * [] Pack 
- * [] Should NOT extend JPanel anymore
+ * [Ã] Should NOT extend JPanel anymore
  * 
  * To Add/Implement:
  * [Ã] Movement
@@ -25,7 +25,7 @@ import java.io.IOException;
  *   - [] method that allos Tome to pick up items and choose whether to add to eir's pack
  */
 
-
+/*
 public class Player extends JPanel {
    
     // moves the character around
@@ -133,11 +133,60 @@ public class Player extends JPanel {
     */
 
 
-
 /**
  * VERSION 2
- *
-public class Player {
+ */
+public class Player implements LoadImage {
+    
+    // variables
+    ImageIcon sprite;
+    String imageFile;
+    
+    public Player() {
+        this.imageFile = "Test Tome left 1.png";
+    }
+    
+    public void loadImage() throws IOException {
+        BufferedImage image = ImageIO.read(new File(this.imageFile));
+        this.sprite = new ImageIcon(image);
+    }
+    
+    public ImageIcon sendImage() {
+        return this.sprite;
+    }
+    
+    /*
+    public Pack openPack() {
+      return this.Pack();
+    }
+    
+    public class Pack() {
+    
+      //instance variables?
+      private int size;
+      Map<String, Carriable> items;
+      
+      //constructor
+      public Pack(Player) {
+        //what data type should Pack be? Or what data types should it contain?
+        this.items = new HashMap<String, Carriable>();
+      }
+      
+      public HashMap getMap() { //What is the correct return type?
+        return this.items; 
+      }
+      
+      public void addItem(Carriable item) { //or have it return a boolean?
+        //add to ...whatever data type the Pack is going to be. Map?
+        this.size++;
+      }
+      
+      public void removeItem(Carriable item) { //or return a boolean? 
+        //remove from...whatever data type the Pack is going to be. Map?
+        this.size--; 
+      }
+      
+    }
+    */
         
 }
-*/

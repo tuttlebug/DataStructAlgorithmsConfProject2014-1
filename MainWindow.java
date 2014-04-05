@@ -8,6 +8,8 @@
  * [Ã] set location
  * [] Jpanel for the menu
  * [] Moveable Image
+ * [] Player
+ * [] Switch over to Layered Panels
  * 
  * To Add/Implement:
  * [] method that accepts new data and update the window
@@ -37,6 +39,7 @@ public class MainWindow extends JFrame {
     // variables
     private static JPanel menuPanel = new JPanel();
     private static JLabel currentArea = new JLabel();
+//    private static JLabel player = new JLabel();
     
     // constructor
     public MainWindow() {
@@ -47,6 +50,7 @@ public class MainWindow extends JFrame {
         
         //--------add more code after this line -------//
         add(currentArea);
+//        add(player);
         
         //--------add more code before this line -------//
         
@@ -54,39 +58,13 @@ public class MainWindow extends JFrame {
         setVisible(true);
     }
     
-    /**
-     * Loads the background image into the frame
-     * @param: An ImageIcon of the background image
-     */
-//    public void loadBackground(ImageIcon image) {
-//        currentArea.setIcon(image);
-//    }
-    
-    /**
-     * Creates the ImageIcon of the background
-     * @param: name of the file
-     * @return: ImageIcon
-     */
-//    public ImageIcon createBackground(String name) throws IOException {
-//        BufferedImage image = ImageIO.read(new File(name));
-//        return new ImageIcon(image);
-//    }
-
-    /**
-     * VERSION 1
-     * Changes the screen image to a new area
-     * @param: name of the file
-     */
-//    public void shiftWorld(String name) throws IOException {
-//        ImageIcon bg = createBackground(name);
-//        loadBackground(bg);
-//    }
-    
-    /**
-     * VERSION 2
-     */
     public void shiftWorld(ImageIcon image) {
         currentArea.setIcon(image);
     }
+    
+//    public void addPlayer(ImageIcon image) {
+//        player.setIcon(image);
+//        currentArea.add(player);
+//    }
     
 }
