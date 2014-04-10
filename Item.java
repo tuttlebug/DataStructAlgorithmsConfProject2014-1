@@ -2,12 +2,14 @@
  * Interacterable Items
  * 
  * Check List:
- * [] Image
+ * [Ã] Image
  * [] Dimensions
  * [] Boundaries
+ * [] Reference to place that it is in
  * 
  * To Add/Implement:
  * [] Performs action when interacted with
+ * [] Carriable interface
  */
 
 import java.io.IOException;

@@ -104,7 +104,7 @@ public class Place implements LoadImage {
     }
     
     public String toString() {
-        return String.format("NAME: %s\nNEIGHBORING AREAS: %s\nAVAILABLE ITEMS: %s\nBACKGROUND: %s\n",
+        return String.format("\nNAME: %s\nNEIGHBORING AREAS: %s\nAVAILABLE ITEMS: %s\nBACKGROUND: %s\n",
                              this.name, this.neighborList, this.itemList, this.imageFile);
     }
     

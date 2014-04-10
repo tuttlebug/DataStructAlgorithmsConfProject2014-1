@@ -73,12 +73,10 @@ import java.awt.Color;
 public class TestGamePlay {
     
     private static WorldMap wMap;
-    private static ItemMap iMap;
     private static MainWindow mw;
     
     public static void main(String[] args) throws IOException {
         wMap = CreatePlaces.createWorldMap();
-//        iMap = CreatePlaces.createItemMap();
         mw = new MainWindow();
         
         System.out.println(wMap);
