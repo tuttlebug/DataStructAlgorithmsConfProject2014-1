@@ -25,6 +25,7 @@ public class CreatePlaces {
     private static Place shadowPath = new Place("ShadowPath", "shadowPath.png");
     private static Place temple = new Place("Temple", "temple.png");
     
+    // create a map of all Places
     public static WorldMap createWorldMap() throws IOException {
         // add accessible areas
         village.addPlace(bridge);
@@ -63,6 +64,7 @@ public class CreatePlaces {
         return worldMap;
     }
     
+    // create a map of all Items
     public static ItemMap createItemMap() throws IOException {
         
     }
