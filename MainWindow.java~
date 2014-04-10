@@ -33,7 +33,7 @@ public class MainWindow extends JFrame {
     
     private static final int W_WIDTH = 700;
     private static final int W_HEIGHT = 600;
-    private static final int XLCOORD = 370; //sets the spawn point of the game window on the computer screen
+    private static final int XLCOORD = 370;
     private static final int YLCOORD = 100;
     
     // variables
@@ -51,7 +51,6 @@ public class MainWindow extends JFrame {
         //--------add more code after this line -------//
         add(currentArea);
 //        add(player);
-        //To add: JLayeredPanes on top, and pretty much everything else
         
         //--------add more code before this line -------//
         

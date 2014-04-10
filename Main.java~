@@ -16,6 +16,7 @@ public class Main{
   public static void main(String[] args) {
     //this is where object instances will be instantiated
     //Things that we need to instantiate:
+      //the frame that the game will be played in (probably best to do this first!)
       //World HashMap (containing all the worlds)
       //Main character Player object
   }

@@ -3,8 +3,8 @@
  * 
  * Check List:
  * [Ã] Image
- * [] Dimensions (size of sprite)
- * [] Boundaries (i.e., array of lines)
+ * [] Dimensions
+ * [] Boundaries
  * [] Reference to place that it is in
  * 
  * To Add/Implement:
