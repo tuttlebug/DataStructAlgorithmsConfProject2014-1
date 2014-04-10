@@ -27,7 +27,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.Color;
 
 public class MainWindow extends JFrame {
     
@@ -39,7 +38,6 @@ public class MainWindow extends JFrame {
     // variables
     private static JPanel menuPanel = new JPanel();
     private static JLabel currentArea = new JLabel();
-//    private static JLabel player = new JLabel();
     
     // constructor
     public MainWindow() {
@@ -50,8 +48,11 @@ public class MainWindow extends JFrame {
         
         //--------add more code after this line -------//
         add(currentArea);
+<<<<<<< HEAD
 //        add(player);
         //To add: JLayeredPanes on top, and pretty much everything else
+=======
+>>>>>>> FETCH_HEAD
         
         //--------add more code before this line -------//
         
@@ -62,10 +63,5 @@ public class MainWindow extends JFrame {
     public void shiftWorld(ImageIcon image) {
         currentArea.setIcon(image);
     }
-    
-//    public void addPlayer(ImageIcon image) {
-//        player.setIcon(image);
-//        currentArea.add(player);
-//    }
     
 }
