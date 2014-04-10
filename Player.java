@@ -139,8 +139,9 @@ public class Player extends JPanel {
 public class Player implements LoadImage {
     
     // variables
-    ImageIcon sprite;
-    String imageFile;
+    private ImageIcon sprite;
+    private String imageFile;
+    private width, height;
     
     public Player() {
         this.imageFile = "Test Tome left 1.png";
@@ -149,6 +150,8 @@ public class Player implements LoadImage {
     public void loadImage() throws IOException {
         BufferedImage image = ImageIO.read(new File(this.imageFile));
         this.sprite = new ImageIcon(image);
+        this.width = this.sprite.getIconWidth();
+        this.height = this.sprite.getIconHeight();
     }
     
     public ImageIcon sendImage() {

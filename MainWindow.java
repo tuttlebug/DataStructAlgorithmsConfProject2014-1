@@ -27,7 +27,6 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.awt.Color;
 
 public class MainWindow extends JFrame {
     

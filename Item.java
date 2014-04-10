@@ -24,6 +24,7 @@ public class Item implements LoadImage {
     private String name;
     private String imageFile;
     private ImageIcon sprite;
+    private int width, height;
     
     // constructor
     public Item(String name, String imageFile) {
@@ -35,6 +36,8 @@ public class Item implements LoadImage {
     public void loadImage() throws IOException {
         BufferedImage image = ImageIO.read(new File(this.imageFile));
         this.sprite = new ImageIcon(image);
+        this.width = this.sprite.getIconWidth();
+        this.height = this.sprite.getIconHeight();
     }
     
     public ImageIcon sendImage() {
