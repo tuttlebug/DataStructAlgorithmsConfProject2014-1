@@ -72,15 +72,17 @@ import java.awt.Color;
  */
 public class TestGamePlay {
     
-    private static WorldMap map;
+    private static WorldMap wMap;
+    private static ItemMap iMap;
     private static MainWindow mw;
     
     public static void main(String[] args) throws IOException {
-        map = CreatePlaces.createWorldMap();
+        wMap = CreatePlaces.createWorldMap();
+//        iMap = CreatePlaces.createItemMap();
         mw = new MainWindow();
         
-        System.out.println(map);
-        Place current = map.getPlace("Village");
+        System.out.println(wMap);
+        Place current = wMap.getPlace("Village");
         mw.shiftWorld(current.sendImage());
     }
     

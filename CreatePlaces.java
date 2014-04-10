@@ -41,7 +41,11 @@ public class CreatePlaces {
         shadowPath.addPlace(temple);
         temple.addPlace(shadowPath);
         
+        // create items
+        Item dummy = new Item("Dummy", "item.png");
+        
         // Load images
+        // places
         village.loadImage();
         home.loadImage();
         bridge.loadImage();
@@ -50,6 +54,17 @@ public class CreatePlaces {
         wilds.loadImage();
         shadowPath.loadImage();
         temple.loadImage();
+        // items
+        dummy.loadImage();
+        
+        // add items to Places
+        village.addItem(dummy);
+        bridge.addItem(dummy);
+        cave.addItem(dummy);
+        firstTown.addItem(dummy);
+        wilds.addItem(dummy);
+        shadowPath.addItem(dummy);
+        temple.addItem(dummy);
         
         // Add all to World map 
         WorldMap worldMap = new WorldMap();
@@ -63,9 +78,32 @@ public class CreatePlaces {
         
         return worldMap;
     }
-    
+    /**
+     * Probably not needed
+     */
+    /*   
     // create a map of all Items
     public static ItemMap createItemMap() throws IOException {
+        // create items
+        Item dummy = new Item("Dummy", "item.png");
         
+        // load image
+        dummy.loadImage();
+        
+        // add to Places
+        village.addItem(dummy);
+        bridge.addItem(dummy);
+        cave.addItem(dummy);
+        firstTown.addItem(dummy);
+        wilds.addItem(dummy);
+        shadowPath.addItem(dummy);
+        temple.addItem(dummy);
+        
+        // Add all to Item map
+        ItemMap itemMap = new ItemMap();
+        itemMap.add(dummy.getName(), dummy);
+        
+        return itemMap;
     }
+    */
 }

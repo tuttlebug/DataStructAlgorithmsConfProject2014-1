@@ -20,6 +20,7 @@ import javax.imageio.ImageIO;
  * To Add/Implement:
  * [Ã] movement in a place
  * [] Have constructPlace() create neccessary data to add to the main window
+ * [] remove Items and Places from ArrayList when they're removed from the map 
  * 
  * Parameters:
  * [Ã] Name of Place
@@ -37,8 +38,9 @@ public class Place implements LoadImage {
     // instance variables
     private String name; 
     private Map<String, Place> neighbors;
-    private ArrayList<String> items;
+    private Map<String, Item> items;
     private ArrayList<String> neighborList;  // ONLY HERE FOR SAKE OF TOSTRING 
+    private ArrayList<String> itemList;  // ONLY HERE FOR SAKE OF TOSTRING 
     private int[] startPoint;
 //    private Player player;
     private String imageFile;
@@ -49,8 +51,9 @@ public class Place implements LoadImage {
     public Place(String name, String imageFile) {
         this.name = name;
         this.neighbors = new HashMap<String, Place>();
-        this.items = new ArrayList<String>();
+        this.items = new HashMap<String, Item>();
         this.neighborList = new ArrayList<String>();
+        this.itemList = new ArrayList<String>();
 //        this.startPoint = startPoint; 
         this.imageFile = imageFile;
         this.gui = new JPanel();
@@ -58,14 +61,6 @@ public class Place implements LoadImage {
     }
     
     // methods
-    public void addPlace(Place place) {
-        this.neighbors.put(place.getName(), place);
-        this.neighborList.add(place.getName());
-    }
-    
-    public Place getPlace(String name) {
-        return this.neighbors.get(name);
-    }
     
     // loads the background image
     public void loadImage() throws IOException {
@@ -81,18 +76,28 @@ public class Place implements LoadImage {
     /**
      * item should have reference to place that it is in;
      */
-    public void addItem(String item) {
-        this.items.add(item);
+     public void addPlace(Place place) {
+        this.neighbors.put(place.getName(), place);
+        this.neighborList.add(place.getName());
     }
-    
+     
+     
     public void removePlace(String name) {
         this.neighbors.remove(name);
     }
-    
-    public void removeItem(int pos) {
-        this.items.remove(pos);
+     
+     public Place getPlace(String name) {
+        return this.neighbors.get(name);
+    }
+     
+    public void addItem(Item item) {
+        this.items.put(item.getName(), item);
+        this.itemList.add(item.getName());
     }
     
+    public void removeItem(String name) {
+        this.items.remove(name);
+    }   
     
     public String getName() {
         return this.name;
@@ -100,7 +105,7 @@ public class Place implements LoadImage {
     
     public String toString() {
         return String.format("NAME: %s\nNEIGHBORING AREAS: %s\nAVAILABLE ITEMS: %s\nBACKGROUND: %s\n",
-                             this.name, this.neighborList, this.items, this.imageFile);
+                             this.name, this.neighborList, this.itemList, this.imageFile);
     }
     
 }

@@ -1,4 +1,5 @@
 /**
+ * Probably not needed
  * The Item map:
  * consists of a Map that keys the items names to their objects
  * 

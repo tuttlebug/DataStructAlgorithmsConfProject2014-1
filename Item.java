@@ -38,4 +38,12 @@ public class Item implements LoadImage {
     public ImageIcon sendImage() {
         return this.sprite;
     }
+    
+    public String getName() {
+        return this.name;
+    }
+    
+    public String toString() {
+        return this.name;
+    }
 }
