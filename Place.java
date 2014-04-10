@@ -29,8 +29,8 @@ import javax.imageio.ImageIO;
  * 
  * Temporary:
  * [Ã] Color background;
- * [] ArrayList<String> items;
- *   - [] Will be turned into a map
+ * [Ã] ArrayList<String> items;
+ *   - [Ã] Will be turned into a map
  * [] Player
  */
 public class Place implements LoadImage {
