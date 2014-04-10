@@ -14,6 +14,7 @@ import java.io.IOException;
  * Check List:
  * [] Array of character sprites
  * [] Pack 
+ * [Ã] Dimensions
  * [Ã] Should NOT extend JPanel anymore
  * 
  * To Add/Implement:
@@ -141,7 +142,7 @@ public class Player implements LoadImage {
     // variables
     private ImageIcon sprite;
     private String imageFile;
-    private width, height;
+    private int width, height;
     
     public Player() {
         this.imageFile = "Test Tome left 1.png";

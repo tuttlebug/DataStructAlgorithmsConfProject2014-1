@@ -3,7 +3,7 @@
  * 
  * Check List:
  * [Ã] Image
- * [] Dimensions
+ * [Ã] Dimensions
  * [] Boundaries
  * [] Reference to place that it is in
  * 
