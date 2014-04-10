@@ -4,9 +4,12 @@
  * Check List:
  * [Ã] Image
 <<<<<<< HEAD
+<<<<<<< HEAD
  * [] Dimensions (size of sprite)
  * [] Boundaries (i.e., array of lines)
 =======
+=======
+>>>>>>> FETCH_HEAD
  * [Ã] Dimensions
  * [] Boundaries
 >>>>>>> FETCH_HEAD

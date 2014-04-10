@@ -49,8 +49,11 @@ public class MainWindow extends JFrame {
         //--------add more code after this line -------//
         add(currentArea);
 <<<<<<< HEAD
+<<<<<<< HEAD
 //        add(player);
         //To add: JLayeredPanes on top, and pretty much everything else
+=======
+>>>>>>> FETCH_HEAD
 =======
 >>>>>>> FETCH_HEAD
         
