@@ -41,7 +41,7 @@ public class TestGamePlay {
         // window and player
         tome.loadImage();
         mw.shiftWorld(village.sendImage());
-        mw.addPlayer(tome.sendImage());
+        mw.addPlayer(tome.sendImage(), tome.getWidth(), tome.getHeight());
         
         System.out.println("You are in the village, where do you want to go?");
         for (int i = 0; i < 3; i++) {

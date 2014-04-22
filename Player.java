@@ -142,7 +142,7 @@ public class Player implements LoadImage {
     // variables
     private ImageIcon sprite;
     private String imageFile;
-    public int width, height;
+    private int width, height;
     
     public Player() {
         this.imageFile = "Test Tome left 1.png";
@@ -159,6 +159,13 @@ public class Player implements LoadImage {
         return this.sprite;
     }
     
+    public int getHeight() {
+        return this.height;
+    }
+    
+    public int getWidth() {
+        return this.width;
+    }
     /*
     public Pack openPack() {
       return this.Pack();

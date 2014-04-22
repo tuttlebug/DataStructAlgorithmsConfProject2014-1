@@ -54,6 +54,7 @@ public class MainWindow extends JFrame {
         window.setBounds(0, 0, W_WIDTH, W_HEIGHT); 
         currentArea.setBounds(0, 0, W_WIDTH, W_HEIGHT); 
         window.add(currentArea, new Integer(0), 0);
+        window.add(playerLevel, new Integer(1), 0);
         
 //        add(player);
         //To add: JLayeredPanes on top, and pretty much everything else
@@ -69,9 +70,9 @@ public class MainWindow extends JFrame {
         currentArea.setIcon(image);
     }
     
-    public void addPlayer(ImageIcon player) {
-        window.add(playerLevel, new Integer(1), 0);
-        playerLevel.setIcon(player);
+    public void addPlayer(ImageIcon image, int width, int height) { 
+        playerLevel.setBounds(W_WIDTH / 2, W_HEIGHT / 2, width, height);
+        playerLevel.setIcon(image);
     }
     
 }
