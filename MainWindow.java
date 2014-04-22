@@ -17,9 +17,9 @@
  * [Ã] load an image
  *   - [Ã] switch between images
  * [Ã] load a Place
+ * [] JLayeredPanes
  * 
  * Temporary:
- * [Ã] shiftWorld with color
  */
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -36,8 +36,10 @@ public class MainWindow extends JFrame {
     private static final int YLCOORD = 100;
     
     // variables
-    private static JPanel menuPanel = new JPanel();
+//    private static JPanel menuPanel = new JPanel();
+    private static JLayeredPane window = new JLayeredPane();
     private static JLabel currentArea = new JLabel();
+    private static JLabel playerLevel = new JLabel();
     
     // constructor
     public MainWindow() {
@@ -47,7 +49,12 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //--------add more code after this line -------//
-        add(currentArea);
+//        add(currentArea);  
+        add(window);
+        window.setBounds(0, 0, W_WIDTH, W_HEIGHT); 
+        currentArea.setBounds(0, 0, W_WIDTH, W_HEIGHT); 
+        window.add(currentArea, new Integer(0), 0);
+        
 //        add(player);
         //To add: JLayeredPanes on top, and pretty much everything else
 
@@ -60,6 +67,11 @@ public class MainWindow extends JFrame {
     
     public void shiftWorld(ImageIcon image) {
         currentArea.setIcon(image);
+    }
+    
+    public void addPlayer(ImageIcon player) {
+        window.add(playerLevel, new Integer(1), 0);
+        playerLevel.setIcon(player);
     }
     
 }
