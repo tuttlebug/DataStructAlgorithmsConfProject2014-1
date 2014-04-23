@@ -18,6 +18,7 @@ import java.awt.Color;
  * VERSION 1
  * for switching images
  */
+/*
 public class TestGamePlay {
  
     public static MainWindow mw = new MainWindow();
@@ -66,26 +67,29 @@ public class TestGamePlay {
     }
     
 }
-
+*/
 
 
 /**
  * VERSION 2
  */
-/*
+// /*
 public class TestGamePlay {
     
     private static WorldMap wMap;
     private static MainWindow mw;
+    public static Player tome = new Player();
     
     public static void main(String[] args) throws IOException {
         wMap = CreatePlaces.createWorldMap();
         mw = new MainWindow();
         
-        System.out.println(wMap);
+//        System.out.println(wMap);
         Place current = wMap.getPlace("Village");
+        tome.loadImage();
         mw.shiftWorld(current.sendImage());
+        mw.addPlayer(tome.sendImage(), tome.getWidth(), tome.getHeight());
     }
     
 }
-*/
+// */
