@@ -51,6 +51,7 @@ public class MainWindow extends JFrame implements KeyListener {
         }
         System.out.printf("x = %d, y = %d\n", x, y);
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
+        testPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
         currentArea.repaint();
     }
     
@@ -88,12 +89,10 @@ public class MainWindow extends JFrame implements KeyListener {
         //--------add more code after this line -------//
         add(window);
         window.setBounds(0, 0, W_WIDTH, W_HEIGHT); 
-//        testPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.add(currentArea);
         window.add(caPanel, new Integer(0), 0);
-//        window.add(testPanel, new Integer(1), 0);
         window.add(playerLevel, new Integer(2), 0);
         
         //To add: JLayeredPanes on top, and pretty much everything else
@@ -117,7 +116,7 @@ public class MainWindow extends JFrame implements KeyListener {
     }
     
     public void addBoundaries(ArrayList<Line2D.Double> lines) {
-        BoundaryLines testPanel = new BoundaryLines(lines);
+        testPanel = new BoundaryLines(lines);
         testPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         window.add(testPanel, new Integer(1), 0);
     }

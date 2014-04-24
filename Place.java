@@ -7,6 +7,7 @@ import java.awt.geom.Line2D;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import java.util.Arrays;
 
 /**
  * Place object:
@@ -58,6 +59,7 @@ public class Place implements LoadImage {
         this.itemList = new ArrayList<String>();
 //        this.startPoint = startPoint; 
         this.imageFile = imageFile;
+        this.boundaryLines = new ArrayList<Line2D.Double>();
         this.gui = new JPanel();
     }
     
@@ -85,12 +87,12 @@ public class Place implements LoadImage {
     // create lines from points
     public void loadBoundaryLines() {
         for (int i = 0; i < this.boundaryPoints.length; i++) {
-            for (int j = 4; j < this.boundaryPoints[i].length; j++) {
+            for (int j = 3; j < this.boundaryPoints[i].length; j+=3) {
                 Line2D.Double newLine = new Line2D.Double(
-                                                          this.boundaryPoints[i][j-4],
                                                           this.boundaryPoints[i][j-3],
                                                           this.boundaryPoints[i][j-2],
-                                                          this.boundaryPoints[i][j-1]
+                                                          this.boundaryPoints[i][j-1],
+                                                          this.boundaryPoints[i][j]
                                                               );
                 this.boundaryLines.add(newLine);
             }

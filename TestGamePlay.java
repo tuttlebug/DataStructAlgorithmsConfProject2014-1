@@ -86,7 +86,6 @@ public class TestGamePlay {
         tome.loadImage();
         mw.shiftWorld(current.sendImage());
         mw.addPlayer(tome.sendImage(), tome.getWidth(), tome.getHeight());
-        current.loadBoundaryLines();
         mw.addBoundaries(current.sendBoundaries());
     }
     
