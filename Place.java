@@ -31,7 +31,6 @@ import javax.imageio.ImageIO;
  * [Ã] Color background;
  * [Ã] ArrayList<String> items;
  *   - [Ã] Will be turned into a map
- * [] Player
  */
 public class Place implements LoadImage {
     
@@ -44,7 +43,8 @@ public class Place implements LoadImage {
 //    private int[] startPoint;
     private String imageFile;
     private ImageIcon background;
-    private int[][] boundaries;
+    private int[][] boundaryPoints;
+    private ArrayList<Line2D.Double> lines;
     private JPanel gui; // Menu gui
     
     // constructor
@@ -71,12 +71,18 @@ public class Place implements LoadImage {
     }
     
     // assign boundaries for the player
-    public void loadBoundaries(int[][] boundaries) {
-        this.boundaries = boundaries;
+    public void loadBoundaryPoints(int[][] boundaryPoints) {
+        this.boundaryPoints = boundaryPoints;
     }
     
+    // create lines from points
+    public void loadBoundaryLines() {
+        
+    }
+    
+    // send boundaries to MainWindow
     public int[][] sendBoundaries() {
-        return this.boundaries;
+        return this.boundaryPoints;
     }
     
     /**
