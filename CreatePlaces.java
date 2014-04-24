@@ -2,8 +2,9 @@
  * TESTING CLASS
  * 
  * Check List:
- * [] creates all Places
- * [] loads all backgrounds
+ * [Ã] creates all Places
+ * [Ã] loads all Place backgrounds
+ * [] loads all Place boundaries
  * [] creates all Items
  * [] loads all Item images
  */
@@ -81,6 +82,12 @@ public class CreatePlaces {
         wasteland.loadImage();
         secretPaths.loadImage();
         temple.loadImage();
+        
+        // Load boundaries
+        int[][] villageBoundaries = new int[][]{
+          { 0, 0, 0, 0 },
+        };
+        village.loadBoundaries(villageBoundaries);
         
         // items
         dummy.loadImage();

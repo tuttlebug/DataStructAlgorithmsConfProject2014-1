@@ -44,7 +44,7 @@ public class Place implements LoadImage {
 //    private int[] startPoint;
     private String imageFile;
     private ImageIcon background;
-    private int[][] boundaries;
+    private int[] boundaries;
     private JPanel gui; // Menu gui
     
     // constructor
@@ -71,11 +71,11 @@ public class Place implements LoadImage {
     }
     
     // assign boundaries for the player
-    public void loadBoundaries(int[][] boundaries) {
+    public void loadBoundaries(int[] boundaries) {
         this.boundaries = boundaries;
     }
     
-    public int[][] sendBoundaries() {
+    public int[] sendBoundaries() {
         return this.boundaries;
     }
     
