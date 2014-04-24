@@ -15,20 +15,6 @@ public class CreatePlaces {
     
     public static Player player = new Player();
     
-    /* COMPREHENSIVE LIST OF WORLDS (in order of first appearance):
-     * - "Village"
-     * - "ForestPath-Cave"
-     * - "Clearing-Cave"
-     * - "Cave"
-     * - "Bridge"
-     * - "EndBridge"
-     * - "WildForest-ForeignVillage"
-     * - "Foreign Village"
-     * - "Wasteland"
-     * - "SecretPaths"
-     * - "Temple"
-     */ 
-    
     private static Place village = new Place("Village", "village.png");
     private static Place home = new Place("Home", "home.png");
     private static Place bridge = new Place("Bridge", "bridge.png");
