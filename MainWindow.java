@@ -26,10 +26,12 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Line2D;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class MainWindow extends JFrame implements KeyListener {
     
@@ -74,6 +76,7 @@ public class MainWindow extends JFrame implements KeyListener {
     private static JPanel caPanel = new JPanel();
     private static JLabel currentArea = new JLabel();
     private static JLabel playerLevel = new JLabel();
+    private static BoundaryLines testPanel;
     
     // constructor
     public MainWindow() {
@@ -85,11 +88,13 @@ public class MainWindow extends JFrame implements KeyListener {
         //--------add more code after this line -------//
         add(window);
         window.setBounds(0, 0, W_WIDTH, W_HEIGHT); 
+//        testPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.add(currentArea);
         window.add(caPanel, new Integer(0), 0);
-        window.add(playerLevel, new Integer(1), 0);
+//        window.add(testPanel, new Integer(1), 0);
+        window.add(playerLevel, new Integer(2), 0);
         
         //To add: JLayeredPanes on top, and pretty much everything else
 
@@ -112,14 +117,9 @@ public class MainWindow extends JFrame implements KeyListener {
     }
     
     public void addBoundaries(ArrayList<Line2D.Double> lines) {
-        public void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            Graphics2D pen = (Graphics2D) g;
-            for ( Line2D.Double line : lines) {
-                pen.draw(line);
-            }
-        }
-        
+        BoundaryLines testPanel = new BoundaryLines(lines);
+        testPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
+        window.add(testPanel, new Integer(1), 0);
     }
     
 }
