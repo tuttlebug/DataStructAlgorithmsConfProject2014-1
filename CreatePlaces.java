@@ -29,7 +29,6 @@ public class CreatePlaces {
      * - "Temple"
      */ 
     
-
     private static Place village = new Place("Village", "village.png");
     private static Place forestPath_Cave = new Place("ForestPath_Cave", "forestPath_Cave.png");
     private static Place clearing_Cave = new Place("Clearing_Cave", "clearing_Cave.png");
