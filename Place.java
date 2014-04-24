@@ -41,10 +41,10 @@ public class Place implements LoadImage {
     private Map<String, Item> items;
     private ArrayList<String> neighborList;  // ONLY HERE FOR SAKE OF TOSTRING 
     private ArrayList<String> itemList;  // ONLY HERE FOR SAKE OF TOSTRING 
-    private int[] startPoint;
-//    private Player player;
+//    private int[] startPoint;
     private String imageFile;
     private ImageIcon background;
+    private int[] boundaries;
     private JPanel gui; // Menu gui
     
     // constructor
@@ -57,10 +57,7 @@ public class Place implements LoadImage {
 //        this.startPoint = startPoint; 
         this.imageFile = imageFile;
         this.gui = new JPanel();
-//        this.player = new Player();
     }
-    
-    // methods
     
     // loads the background image
     public void loadImage() throws IOException {
@@ -71,6 +68,15 @@ public class Place implements LoadImage {
     // sends the background over
     public ImageIcon sendImage() {
         return this.background;
+    }
+    
+    // assign boundaries for the player
+    public void loadBoundaries(int[] boundaries) {
+        this.boundaries = boundaries;
+    }
+    
+    public int[] sendBoundaries() {
+        return this.boundaries;
     }
     
     /**
