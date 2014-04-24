@@ -104,7 +104,7 @@ public class CreatePlaces {
           { 384, 352, 320, 352 },
           { 320, 352, 320, 224 },  
         };
-        village.loadBoundaries(villageBoundaries);
+        village.loadBoundaryPoints(villageBoundaries);
         
         //for future reference:
 //        { 0, 0, 0, 0 },
