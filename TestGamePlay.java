@@ -73,7 +73,6 @@ public class TestGamePlay {
 /**
  * VERSION 2
  */
-// /*
 public class TestGamePlay {
     
     private static WorldMap wMap;
@@ -92,4 +91,3 @@ public class TestGamePlay {
     }
     
 }
-// */

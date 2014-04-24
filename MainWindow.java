@@ -20,6 +20,7 @@
  * [Ã] JLayeredPanes
  * 
  * Temporary:
+ * currentArea.setBounds(x, y, W_WIDTH, W_HEIGHT) in keyPressed
  */
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -77,8 +78,6 @@ public class MainWindow extends JFrame implements KeyListener {
         setTitle("Game name");
         setSize(W_WIDTH, W_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.addKeyListener(this);
-        this.setFocusable(true);
         
         //--------add more code after this line -------//
         add(window);
@@ -92,6 +91,8 @@ public class MainWindow extends JFrame implements KeyListener {
         
         //--------add more code before this line -------//
         
+        this.addKeyListener(this);
+        this.setFocusable(true);
         setLocation(XLCOORD, YLCOORD);
         setVisible(true);
     }
