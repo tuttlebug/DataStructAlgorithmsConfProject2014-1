@@ -97,46 +97,9 @@ public class Player extends JPanel {
        }
     }
 }
-    /*
-    public Pack openPack() {
-      return this.Pack();
-    }
-    
-    
-    /*
-    public class Pack() {
-    
-      //instance variables?
-      private int size;
-      Map<String, Carriable> items;
-      
-      //constructor
-      public Pack(Player) {
-        //what data type should Pack be? Or what data types should it contain?
-        this.items = new HashMap<String, Carriable>();
-      }
-      
-      public HashMap getMap() { //What is the correct return type?
-        return this.items; 
-      }
-      
-      public void addItem(Carriable item) { //or have it return a boolean?
-        //add to ...whatever data type the Pack is going to be. Map?
-        this.size++;
-      }
-      
-      public void removeItem(Carriable item) { //or return a boolean? 
-        //remove from...whatever data type the Pack is going to be. Map?
-        this.size--; 
-      }
-      
-    }
-    */
+*/
 
 
-/**
- * VERSION 2
- */
 public class Player implements LoadImage {
     
     // variables
@@ -159,6 +122,16 @@ public class Player implements LoadImage {
         return this.sprite;
     }
     
+    public int getHeight() {
+        return this.height;
+    }
+    
+    public int getWidth() {
+        return this.width;
+    }
+    
+    
+    
     /*
     public Pack openPack() {
       return this.Pack();
@@ -191,6 +164,5 @@ public class Player implements LoadImage {
       }
       
     }
-    */
-        
+    */        
 }
