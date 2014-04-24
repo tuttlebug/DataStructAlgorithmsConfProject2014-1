@@ -48,7 +48,7 @@ public class MainWindow extends JFrame implements KeyListener {
             y -= 10;
         }
         System.out.printf("x = %d, y = %d\n", x, y);
-        currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
+        caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.repaint();
     }
     
@@ -67,10 +67,11 @@ public class MainWindow extends JFrame implements KeyListener {
     private static final int YLCOORD = 100;
     
     // variables
-    private static int x = -90;
-    private static int y = -860;
+    private static int x = -649; // -90
+    private static int y = -290; // -860
 //    private static JPanel menuPanel = new JPanel();
     private static JLayeredPane window = new JLayeredPane();
+    private static JPanel caPanel = new JPanel();
     private static JLabel currentArea = new JLabel();
     private static JLabel playerLevel = new JLabel();
     
@@ -84,8 +85,10 @@ public class MainWindow extends JFrame implements KeyListener {
         //--------add more code after this line -------//
         add(window);
         window.setBounds(0, 0, W_WIDTH, W_HEIGHT); 
+        caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
-        window.add(currentArea, new Integer(0), 0);
+        caPanel.add(currentArea);
+        window.add(caPanel, new Integer(0), 0);
         window.add(playerLevel, new Integer(1), 0);
         
         //To add: JLayeredPanes on top, and pretty much everything else
@@ -106,6 +109,17 @@ public class MainWindow extends JFrame implements KeyListener {
     public void addPlayer(ImageIcon image, int width, int height) { 
         playerLevel.setBounds(W_WIDTH / 2, W_HEIGHT / 2, width, height);
         playerLevel.setIcon(image);
+    }
+    
+    public void addBoundaries(ArrayList<Line2D.Double> lines) {
+        public void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D pen = (Graphics2D) g;
+            for ( Line2D.Double line : lines) {
+                pen.draw(line);
+            }
+        }
+        
     }
     
 }

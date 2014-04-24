@@ -46,7 +46,7 @@ public class Place implements LoadImage {
     private ImageIcon background;
     private int[][] boundaryPoints;
     private int[][] gatePoints;
-    private ArrayList<Line2D.Double> lines;
+    private ArrayList<Line2D.Double> boundaryLines;
     private JPanel gui; // Menu gui
     
     // constructor
@@ -74,17 +74,32 @@ public class Place implements LoadImage {
     
     // assign boundaries for the player
     public void loadBoundaryPoints(int[][] boundaryPoints) {
+        for (int i = 0; i < boundaryPoints.length; i++) {
+            for (int j = 0; j < boundaryPoints[i].length; j++) {
+                boundaryPoints[i][j] *= 32;
+            }
+        }
         this.boundaryPoints = boundaryPoints;
     }
     
     // create lines from points
     public void loadBoundaryLines() {
-        
+        for (int i = 0; i < this.boundaryPoints.length; i++) {
+            for (int j = 4; j < this.boundaryPoints[i].length; j++) {
+                Line2D.Double newLine = new Line2D.Double(
+                                                          this.boundaryPoints[i][j-4],
+                                                          this.boundaryPoints[i][j-3],
+                                                          this.boundaryPoints[i][j-2],
+                                                          this.boundaryPoints[i][j-1]
+                                                              );
+                this.boundaryLines.add(newLine);
+            }
+        }
     }
     
     // send boundaries to MainWindow
-    public int[][] sendBoundaries() {
-        return this.boundaryPoints;
+    public ArrayList<Line2D.Double> sendBoundaries() {
+        return this.boundaryLines;
     }
     
     // load gate points
