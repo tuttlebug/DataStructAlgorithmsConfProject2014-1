@@ -79,12 +79,12 @@ public class MainWindow extends JFrame implements KeyListener {
     private static final int RECONCILE_Y = 5;
     private static final int PLAYER_X = W_WIDTH / 2;
     private static final int PLAYER_Y = W_HEIGHT / 2;
-    private static final int PLAYER_BOX_X = CA_WIDTH / 2 - W_WIDTH;
-    private static final int PLAYER_BOX_Y = CA_HEIGHT / 2 - W_HEIGHT;
+    private static final int OFFSET_X = 450;
+    private static final int OFFSET_Y = 285;
     
     // variables
-    private static int x = -649; // -90
-    private static int y = -290; // -860
+    private static int x = -649; // -90, -649
+    private static int y = -290; // -860, -290
 //    private static JPanel menuPanel = new JPanel();
     private static JLayeredPane window = new JLayeredPane();
     private static JPanel caPanel = new JPanel();
@@ -131,10 +131,20 @@ public class MainWindow extends JFrame implements KeyListener {
         box.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         window.add(box, new Integer(2), 0);
     }
-    
+
+    /*
     public void addBoundaries(ArrayList<Line2D.Double> lines) {
         boundaryPanel = new BoundaryLines(lines);
-        boundaryPanel.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT);
+//        boundaryPanel.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT);
+        boundaryPanel.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
+        window.add(boundaryPanel, new Integer(1), 0);
+    }
+    */
+    
+    public void addBoundaries(int[][] points) {
+        boundaryPanel = new BoundaryLines(points, OFFSET_X, OFFSET_Y);
+//        boundaryPanel.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT);
+        boundaryPanel.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         window.add(boundaryPanel, new Integer(1), 0);
     }
     

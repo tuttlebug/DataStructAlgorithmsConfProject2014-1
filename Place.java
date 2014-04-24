@@ -85,23 +85,27 @@ public class Place implements LoadImage {
     }
     
     // create lines from points
-    public void loadBoundaryLines() {
-        for (int i = 0; i < this.boundaryPoints.length; i++) {
-            for (int j = 3; j < this.boundaryPoints[i].length; j+=3) {
-                Line2D.Double newLine = new Line2D.Double(
-                                                          this.boundaryPoints[i][j-3],
-                                                          this.boundaryPoints[i][j-2],
-                                                          this.boundaryPoints[i][j-1],
-                                                          this.boundaryPoints[i][j]
-                                                              );
-                this.boundaryLines.add(newLine);
-            }
-        }
-    }
+//    public void loadBoundaryLines() {
+//        for (int i = 0; i < this.boundaryPoints.length; i++) {
+//            for (int j = 3; j < this.boundaryPoints[i].length; j+=3) {
+//                Line2D.Double newLine = new Line2D.Double(
+//                                                          this.boundaryPoints[i][j-3],
+//                                                          this.boundaryPoints[i][j-2],
+//                                                          this.boundaryPoints[i][j-1],
+//                                                          this.boundaryPoints[i][j]
+//                                                              );
+//                this.boundaryLines.add(newLine);
+//            }
+//        }
+//    }
     
     // send boundaries to MainWindow
-    public ArrayList<Line2D.Double> sendBoundaries() {
-        return this.boundaryLines;
+//    public ArrayList<Line2D.Double> sendBoundaries() {
+//        return this.boundaryLines;
+//    }
+    
+    public int[][] sendBoundaryPoints() {
+        return this.boundaryPoints;
     }
     
     // load gate points
