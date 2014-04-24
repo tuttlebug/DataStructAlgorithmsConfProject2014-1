@@ -15,4 +15,6 @@
 
 public interface Colideable {
     
+    public void collided();
+    
 }
