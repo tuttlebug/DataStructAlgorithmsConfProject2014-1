@@ -5,13 +5,13 @@ import java.awt.*;       // Graphics, Graphics2D, Color
 import java.awt.geom.*;  // Ellipse2D
 import java.awt.event.*; // MouseListener, MouseMotionListener, MouseEvent, KeyListener, KeyEvent
 
-public class BoundaryLines extends JPanel {
+public class PlayerBox extends JPanel {
     
-    private ArrayList<Line2D.Double> lines;
+    private Rectangle2D.Double box;
     
-    public BoundaryLines(ArrayList<Line2D.Double> lines) {
-        this.lines = lines;
-        setOpaque(false);
+    public PlayerBox(int x1, int y1, int x2, int y2) {
+        this.box = new Rectangle2D.Double(x1, y1, x2, y2);
+//        setOpaque(false);
     }
     
     // draws a red circle at the current x, y coordinate
@@ -19,21 +19,12 @@ public class BoundaryLines extends JPanel {
         super.paintComponent(g);
         Graphics2D pen = (Graphics2D) g;
         pen.setColor(Color.RED);
-        
-        for ( Line2D.Double line : this.lines) {
-            pen.draw(line);
-        }
+        pen.draw(this.box);
         // makes background transparent
         g.setColor(getBackground());
     }
-
     
-    public boolean crossed(Rectangle2D.Double box) {
-        for (Line2D.Double line : this.lines) {
-            if (box.intersectsLine(line)) {
-                return true;
-            }
-        }
-        return false;
+    public Rectangle2D.Double getBox() {
+        return this.box;
     }
 }

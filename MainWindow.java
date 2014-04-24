@@ -51,7 +51,10 @@ public class MainWindow extends JFrame implements KeyListener {
         }
         System.out.printf("x = %d, y = %d\n", x, y);
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
-        testPanel.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT);
+        boundaryPanel.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT);
+        if (boundaryPanel.crossed(box.getBox()) == true) {
+            System.out.println("crossed");
+        }
         currentArea.repaint();
     }
     
@@ -70,6 +73,8 @@ public class MainWindow extends JFrame implements KeyListener {
     private static final int YLCOORD = 100;
     private static final int RECONCILE_X = 200;
     private static final int RECONCILE_Y = 5;
+    private static final int PLAYER_X = W_WIDTH / 2;
+    private static final int PLAYER_Y = W_HEIGHT / 2;
     
     // variables
     private static int x = -649; // -90
@@ -79,7 +84,8 @@ public class MainWindow extends JFrame implements KeyListener {
     private static JPanel caPanel = new JPanel();
     private static JLabel currentArea = new JLabel();
     private static JLabel playerLevel = new JLabel();
-    private static BoundaryLines testPanel;
+    private static BoundaryLines boundaryPanel;
+    private static PlayerBox box;
     
     // constructor
     public MainWindow() {
@@ -97,9 +103,6 @@ public class MainWindow extends JFrame implements KeyListener {
         window.add(caPanel, new Integer(0), 0);
         window.add(playerLevel, new Integer(2), 0);
         
-        //To add: JLayeredPanes on top, and pretty much everything else
-
-        
         //--------add more code before this line -------//
         
         this.addKeyListener(this);
@@ -113,14 +116,23 @@ public class MainWindow extends JFrame implements KeyListener {
     }
 
     public void addPlayer(ImageIcon image, int width, int height) { 
-        playerLevel.setBounds(W_WIDTH / 2, W_HEIGHT / 2, width, height);
+        playerLevel.setBounds(PLAYER_X, PLAYER_Y, width, height);
         playerLevel.setIcon(image);
     }
     
+    public void addPlayerBox(int width, int height) {
+        box = new PlayerBox(PLAYER_X - width / 2 + x + RECONCILE_X, 
+                                PLAYER_Y - height / 2 + y + RECONCILE_Y,
+                                PLAYER_X + width,
+                                PLAYER_Y + height);
+        box.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT);
+        window.add(boundaryPanel, new Integer(3), 0);
+    }
+    
     public void addBoundaries(ArrayList<Line2D.Double> lines) {
-        testPanel = new BoundaryLines(lines);
-        testPanel.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT); 
-        window.add(testPanel, new Integer(1), 0);
+        boundaryPanel = new BoundaryLines(lines);
+        boundaryPanel.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT);
+        window.add(boundaryPanel, new Integer(1), 0);
     }
     
 }
