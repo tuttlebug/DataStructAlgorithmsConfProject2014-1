@@ -45,6 +45,7 @@ public class Place implements LoadImage {
     private String imageFile;
     private ImageIcon background;
     private int[][] boundaryPoints;
+    private int[][] gatePoints;
     private ArrayList<Line2D.Double> lines;
     private JPanel gui; // Menu gui
     
@@ -84,6 +85,11 @@ public class Place implements LoadImage {
     // send boundaries to MainWindow
     public int[][] sendBoundaries() {
         return this.boundaryPoints;
+    }
+    
+    // load gate points
+    public void loadGatePoints(int[][] gatePoints) {
+        this.gatePoints = gatePoints;
     }
     
     /**
