@@ -13,20 +13,26 @@ public class BoundaryLines extends JPanel {
         this.lines = lines;
         setOpaque(false);
     }
-    
-    // draws a red circle at the current x, y coordinate
+
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D pen = (Graphics2D) g;
         pen.setColor(Color.RED);
         
-        for ( Line2D.Double line : this.lines) {
+        for (Line2D.Double line : this.lines) {
+//            System.out.printf("x1 = %f, y1 = %f, x2 = %f, y2 = %f\n", 
+//                              line.getX1(), line.getY1(), line.getX2(), line.getY2());
             pen.draw(line);
         }
         // makes background transparent
         g.setColor(getBackground());
     }
 
+    public void moveLines(int dx, int dy) {
+        for ( Line2D.Double line : this.lines) {
+            line.setLine(line.getX1() + dx, line.getY1() + dy, line.getX2() + dx, line.getY2() + dy);
+        }
+    }
     
     public boolean crossed(Rectangle2D.Double box) {
         for (Line2D.Double line : this.lines) {

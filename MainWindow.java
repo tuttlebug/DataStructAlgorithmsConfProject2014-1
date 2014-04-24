@@ -39,19 +39,23 @@ public class MainWindow extends JFrame implements KeyListener {
     public void keyPressed(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
             x -= 10;
+            boundaryPanel.moveLines(-10, 0);
         }
         if (event.getKeyCode() == KeyEvent.VK_LEFT) {
             x += 10;
+            boundaryPanel.moveLines(10, 0);
         }
         if (event.getKeyCode() == KeyEvent.VK_UP) {
             y += 10;
+            boundaryPanel.moveLines(0, 10);
         }
         if (event.getKeyCode() == KeyEvent.VK_DOWN) {
             y -= 10;
+            boundaryPanel.moveLines(0, -10);
         }
         System.out.printf("x = %d, y = %d\n", x, y);
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
-        boundaryPanel.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT);
+//        boundaryPanel.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT);
         if (boundaryPanel.crossed(box.getBox()) == true) {
             System.out.println("crossed");
         }
