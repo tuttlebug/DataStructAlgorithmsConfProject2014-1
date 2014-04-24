@@ -64,7 +64,7 @@ public class CreatePlaces {
         wasteland.addPlace(secretPaths);
         secretPaths.addPlace(wasteland);
         secretPaths.addPlace(temple);
-        temple.add(secretPaths);
+        temple.addPlace(secretPaths);
         
         // create items
         Item dummy = new Item("Dummy", "item.png");
@@ -92,7 +92,7 @@ public class CreatePlaces {
         // Add all to World map 
         WorldMap worldMap = new WorldMap();
         worldMap.add(village.getName(), village);
-        worldMap.add(forestPath_Cave.getName(), forestPath);
+        worldMap.add(forestPath_Cave.getName(), forestPath_Cave);
         worldMap.add(clearing_Cave.getName(), clearing_Cave);
         worldMap.add(cave.getName(), cave);
         worldMap.add(bridge.getName(), bridge);
