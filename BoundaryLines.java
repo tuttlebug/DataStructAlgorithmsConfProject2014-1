@@ -5,7 +5,16 @@ import java.awt.*;       // Graphics, Graphics2D, Color
 import java.awt.geom.*;  // Ellipse2D
 import java.awt.event.*; // MouseListener, MouseMotionListener, MouseEvent, KeyListener, KeyEvent
 
-public class BoundaryLines extends JPanel {
+/**
+ * CHECK-LIST:
+ * []
+ * 
+ * To Add/Implement:
+ * [] collided
+ * [] collided handles diagonal lines
+ */
+
+public class BoundaryLines extends JPanel implements Colideable {
     
     private ArrayList<Line2D.Double> lines;
     private int[][] points;
@@ -51,9 +60,44 @@ public class BoundaryLines extends JPanel {
     public boolean crossed(Rectangle2D.Double box) {
         for (Line2D.Double line : this.lines) {
             if (box.intersectsLine(line)) {
+                this.collided(box, line);
                 return true;
             }
         }
         return false;
+    }
+    
+    public void collided(Rectangle2D.Double box, Line2D.Double line) {
+        /**
+         * if ( (box.x  = line.x1) && ( (box.y >= line.y1) && (box.y <= line.y2);
+         */
+        System.out.println("IN COLLIDED");
+        System.out.printf("box: x1 = %f, y1 = %f, x2 = %f, y2 = %f\nline = x1 = %f, y1 = %f, x2 = %f, y2 = %f\n", 
+                          box.getX(), box.getY(), box.getX() + box.getWidth(), box.getHeight(),
+                          line.getX1(), line.getY1(), line.getX2(), line.getY2());
+        // check if line is to the left of box
+        if ( ( (box.getX() >= line.getX1()) && (box.getX() <= line.getX2()) ) 
+                && ( (box.getX() >= line.getY1()) && (box.getX() <= line.getY2()) ) ) {
+            System.out.println("left");
+        }
+        
+        // check if line is to the right of the box
+        if ( ( (box.getX() <= line.getX1()) && (box.getX() >= line.getX2()) ) 
+                && ( (box.getX() >= line.getY1()) && (box.getX() <= line.getY2()) )) {
+            System.out.println("right");
+        }
+        
+        // check if box is on top
+        if ( ( (box.getY() - box.getHeight() <= line.getY1()) && (box.getY() - box.getHeight() >=  line.getY2()) )
+                && ( (box.getY() - box.getHeight() >= line.getX1()) && (box.getY() - box.getHeight() <= line.getX2()) )) {
+            System.out.println("top");
+        }
+        
+        // check id box is at bottom
+        if ( ( (box.getY() >= line.getY1()) && (box.getY() <=  line.getY2()) )
+                && ( (box.getY() >= line.getX1()) 
+                        && (box.getY()  <= line.getX2()) )) {
+            System.out.println("bottom");
+        }
     }
 }

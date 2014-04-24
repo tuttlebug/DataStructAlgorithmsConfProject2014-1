@@ -155,7 +155,6 @@ public class CreatePlaces {
           { 18, 18, 18, 16 }
         };
         village.loadBoundaryPoints(villageBoundaries);
-//        village.loadBoundaryLines();
         
         int[][] villageGates = new int[][]{
           { 11, 28, 11, 30 }, 
@@ -196,7 +195,6 @@ public class CreatePlaces {
           { 41, 19, 41, 21 }
         };
         forestPath_Cave.loadBoundaryPoints(forestPath_CaveBoundaries);
-//        forestPath_Cave.loadBoundaryLines();
         
         int[][] forestPath_CaveGates = new int[][]{
           { 9, 19, 9, 21 }, 
