@@ -36,16 +36,16 @@ public class MainWindow extends JFrame implements KeyListener {
     // Moves currentArea with arrow keys
     public void keyPressed(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
-            x += 10;
-        }
-        if (event.getKeyCode() == KeyEvent.VK_LEFT) {
             x -= 10;
         }
+        if (event.getKeyCode() == KeyEvent.VK_LEFT) {
+            x += 10;
+        }
         if (event.getKeyCode() == KeyEvent.VK_UP) {
-            y -= 10;
+            y += 10;
         }
         if (event.getKeyCode() == KeyEvent.VK_DOWN) {
-            y += 10;
+            y -= 10;
         }
         System.out.printf("x = %d, y = %d\n", x, y);
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
