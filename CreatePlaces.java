@@ -17,43 +17,62 @@ public class CreatePlaces {
     
     /* COMPREHENSIVE LIST OF WORLDS (in order of first appearance):
      * - "Village"
-     * - "ForestPath-Cave"
-     * - "Clearing-Cave"
+     * - "ForestPath_Cave"
+     * - "Clearing_Cave"
      * - "Cave"
      * - "Bridge"
      * - "EndBridge"
-     * - "WildForest-ForeignVillage"
-     * - "Foreign Village"
+     * - "WildForest_ForeignVillage"
+     * - "ForeignVillage"
      * - "Wasteland"
      * - "SecretPaths"
      * - "Temple"
      */ 
     
+<<<<<<< HEAD
     private static Place village = new Place("Village", "VillageSkeleton.png");
+=======
+<<<<<<< HEAD
+    private static Place village = new Place("Village", "village.png");
+    private static Place forestPath_Cave = new Place("ForestPath_Cave", "forestPath_Cave.png");
+    private static Place clearing_Cave = new Place("Clearing_Cave", "clearing_Cave.png");
+=======
+    private static Place village = new Place("Village", "villageSkeleton.bmp");
+>>>>>>> FETCH_HEAD
     private static Place home = new Place("Home", "home.png");
     private static Place bridge = new Place("Bridge", "bridge.png");
+>>>>>>> FETCH_HEAD
     private static Place cave = new Place("Cave", "cave.png");
-    private static Place market = new Place("Market", "inn.png");
-    private static Place firstTown = new Place("First Town", "firstTown.png");
-    private static Place wilds = new Place("Wilds", "wilds.png");
-    private static Place shadowPath = new Place("ShadowPath", "shadowPath.png");
+    private static Place bridge = new Place("Bridge", "bridge.png");
+    private static Place wildForest_ForeignVillage = new Place("WildForest_ForeignVillage", "wildForest_ForeignVillage.png");
+    private static Place foreignVillage = new Place("ForeignVillage", "foreignVillage.png");
+    private static Place wasteland = new Place("Wasteland", "wasteland.png");
+    private static Place secretPaths = new Place("SecretPaths", "secretPaths.png");
     private static Place temple = new Place("Temple", "temple.png");
     
     // create a map of all Places
     public static WorldMap createWorldMap() throws IOException {
         // add accessible areas
+        village.addPlace(forestPath_Cave);
         village.addPlace(bridge);
-        village.addPlace(home);
+        forestPath_Cave.addPlace(village);
+        forestPath_Cave.addPlace(clearing_Cave);
+        clearing_Cave.addPlace(forestPath_Cave);
+        clearing_Cave.addPlace(cave);
+        cave.addPlace(clearing_Cave);
         bridge.addPlace(village);
-        bridge.addPlace(cave);
-        cave.addPlace(bridge);
-        firstTown.addPlace(bridge);
-        firstTown.addPlace(wilds);
-        firstTown.addPlace(market);
-        wilds.addPlace(firstTown);
-        shadowPath.addPlace(wilds);
-        shadowPath.addPlace(temple);
-        temple.addPlace(shadowPath);
+        bridge.addPlace(endBridge);
+        endBridge.addPlace(bridge);
+        endBridge.addPlace(wildForest_ForeignVillage);
+        wildForest_ForeignVillage.addPlace(endBridge);
+        wildForest_ForeignVillage.addPlace(foreignVillage);
+        foreignVillage.addPlace(wildForest_ForeignVillage);
+        foreignVillage.addPlace(wasteland);
+        wasteland.addPlace(foreignVillage);
+        wasteland.addPlace(secretPaths);
+        secretPaths.addPlace(wasteland);
+        secretPaths.addPlace(temple);
+        temple.add(secretPaths);
         
         // create items
         Item dummy = new Item("Dummy", "item.png");
@@ -61,33 +80,35 @@ public class CreatePlaces {
         // Load images
         // places
         village.loadImage();
-        home.loadImage();
-        bridge.loadImage();
+        forestPath_Cave.loadImage();
+        clearing_Cave.loadImage();
         cave.loadImage();
-        firstTown.loadImage();
-        wilds.loadImage();
-        shadowPath.loadImage();
+        bridge.loadImage();
+        endBridge.loadImage();
+        wildForest_ForeignVillage.loadImage();
+        foreignVillage.loadImage();
+        wasteland.loadImage();
+        secretPaths.loadImage();
         temple.loadImage();
+        
         // items
         dummy.loadImage();
         
         // add items to Places
         village.addItem(dummy);
-        bridge.addItem(dummy);
-        cave.addItem(dummy);
-        firstTown.addItem(dummy);
-        wilds.addItem(dummy);
-        shadowPath.addItem(dummy);
-        temple.addItem(dummy);
         
         // Add all to World map 
         WorldMap worldMap = new WorldMap();
         worldMap.add(village.getName(), village);
+        worldMap.add(forestPath_Cave.getName(), forestPath);
+        worldMap.add(clearing_Cave.getName(), clearing_Cave);
         worldMap.add(cave.getName(), cave);
         worldMap.add(bridge.getName(), bridge);
-        worldMap.add(firstTown.getName(), firstTown);
-        worldMap.add(wilds.getName(), wilds);
-        worldMap.add(shadowPath.getName(), shadowPath);
+        worldMap.add(endBridge.getName(), endBridge);
+        worldMap.add(wildForest_ForeignVillage.getName(), wildForest_ForeignVillage);
+        worldMap.add(foreignVillage.getName(), foreignVillage);
+        worldMap.add(wasteland.getName(), wasteland);
+        worldMap.add(secretPaths.getName(), secretPaths);
         worldMap.add(temple.getName(), temple);
         
         return worldMap;
