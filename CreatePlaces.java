@@ -29,9 +29,15 @@ public class CreatePlaces {
      * - "Temple"
      */ 
     
+<<<<<<< HEAD
     private static Place village = new Place("Village", "village.png");
     private static Place forestPath_Cave = new Place("ForestPath_Cave", "forestPath_Cave.png");
     private static Place clearing_Cave = new Place("Clearing_Cave", "clearing_Cave.png");
+=======
+    private static Place village = new Place("Village", "villageSkeleton.bmp");
+    private static Place home = new Place("Home", "home.png");
+    private static Place bridge = new Place("Bridge", "bridge.png");
+>>>>>>> FETCH_HEAD
     private static Place cave = new Place("Cave", "cave.png");
     private static Place bridge = new Place("Bridge", "bridge.png");
     private static Place wildForest_ForeignVillage = new Place("WildForest_ForeignVillage", "wildForest_ForeignVillage.png");

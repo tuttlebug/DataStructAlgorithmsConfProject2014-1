@@ -47,7 +47,7 @@ public class MainWindow extends JFrame implements KeyListener {
         if (event.getKeyCode() == KeyEvent.VK_DOWN) {
             y += 10;
         }
-        System.out.printf("x = %d, y = %d\n", x, y);
+//        System.out.printf("x = %d, y = %d\n", x, y);
         currentArea.setBounds(x, y, W_WIDTH, W_HEIGHT); 
         currentArea.repaint();
     }
