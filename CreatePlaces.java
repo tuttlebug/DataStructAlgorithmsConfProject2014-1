@@ -156,6 +156,12 @@ public class CreatePlaces {
         };
         village.loadBoundaryPoints(villageBoundaries);
         
+        int[][] villageGates = new int[][]{
+          { 11, 28, 11, 30 }, 
+          { 24, 10, 27, 10 },
+        };
+        village.loadGatePoints(villageGates);
+        
         //for future reference:
 //        { 0, 0, 0, 0 },
 //          { 0, 0, 0, 0 },
