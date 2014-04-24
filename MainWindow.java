@@ -47,8 +47,8 @@ public class MainWindow extends JFrame implements KeyListener {
         if (event.getKeyCode() == KeyEvent.VK_DOWN) {
             y += 10;
         }
-//        System.out.printf("x = %d, y = %d\n", x, y);
-        currentArea.setBounds(x, y, W_WIDTH, W_HEIGHT); 
+        System.out.printf("x = %d, y = %d\n", x, y);
+        currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.repaint();
     }
     
@@ -61,12 +61,14 @@ public class MainWindow extends JFrame implements KeyListener {
     // constants
     private static final int W_WIDTH = 700;
     private static final int W_HEIGHT = 600;
+    private static final int CA_WIDTH = 2000;
+    private static final int CA_HEIGHT =  2000;
     private static final int XLCOORD = 370; //sets the spawn point of the game window on the computer screen
     private static final int YLCOORD = 100;
     
     // variables
-    private static int x = 0;
-    private static int y = 0;
+    private static int x = -90;
+    private static int y = -860;
 //    private static JPanel menuPanel = new JPanel();
     private static JLayeredPane window = new JLayeredPane();
     private static JLabel currentArea = new JLabel();
@@ -82,7 +84,7 @@ public class MainWindow extends JFrame implements KeyListener {
         //--------add more code after this line -------//
         add(window);
         window.setBounds(0, 0, W_WIDTH, W_HEIGHT); 
-        currentArea.setBounds(x, y, W_WIDTH, W_HEIGHT); 
+        currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         window.add(currentArea, new Integer(0), 0);
         window.add(playerLevel, new Integer(1), 0);
         

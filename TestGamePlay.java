@@ -82,8 +82,6 @@ public class TestGamePlay {
     public static void main(String[] args) throws IOException {
         wMap = CreatePlaces.createWorldMap();
         mw = new MainWindow();
-        
-//        System.out.println(wMap);
         Place current = wMap.getPlace("Village");
         tome.loadImage();
         mw.shiftWorld(current.sendImage());
