@@ -51,7 +51,7 @@ public class MainWindow extends JFrame implements KeyListener {
         }
         System.out.printf("x = %d, y = %d\n", x, y);
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
-        testPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
+        testPanel.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT);
         currentArea.repaint();
     }
     
@@ -68,6 +68,8 @@ public class MainWindow extends JFrame implements KeyListener {
     private static final int CA_HEIGHT =  2000;
     private static final int XLCOORD = 370; //sets the spawn point of the game window on the computer screen
     private static final int YLCOORD = 100;
+    private static final int RECONCILE_X = 200;
+    private static final int RECONCILE_Y = 5;
     
     // variables
     private static int x = -649; // -90
@@ -117,7 +119,7 @@ public class MainWindow extends JFrame implements KeyListener {
     
     public void addBoundaries(ArrayList<Line2D.Double> lines) {
         testPanel = new BoundaryLines(lines);
-        testPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
+        testPanel.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT); 
         window.add(testPanel, new Integer(1), 0);
     }
     
