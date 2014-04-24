@@ -75,6 +75,8 @@ public class MainWindow extends JFrame implements KeyListener {
     private static final int RECONCILE_Y = 5;
     private static final int PLAYER_X = W_WIDTH / 2;
     private static final int PLAYER_Y = W_HEIGHT / 2;
+    private static final int PLAYER_BOX_X = CA_WIDTH / 2 - W_WIDTH;
+    private static final int PLAYER_BOX_Y = CA_HEIGHT / 2 - W_HEIGHT;
     
     // variables
     private static int x = -649; // -90
@@ -101,7 +103,7 @@ public class MainWindow extends JFrame implements KeyListener {
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.add(currentArea);
         window.add(caPanel, new Integer(0), 0);
-        window.add(playerLevel, new Integer(2), 0);
+        window.add(playerLevel, new Integer(3), 0);
         
         //--------add more code before this line -------//
         
@@ -121,12 +123,9 @@ public class MainWindow extends JFrame implements KeyListener {
     }
     
     public void addPlayerBox(int width, int height) {
-        box = new PlayerBox(PLAYER_X - width / 2 + x + RECONCILE_X, 
-                                PLAYER_Y - height / 2 + y + RECONCILE_Y,
-                                PLAYER_X + width,
-                                PLAYER_Y + height);
-        box.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT);
-        window.add(boundaryPanel, new Integer(3), 0);
+        box = new PlayerBox(PLAYER_X, PLAYER_Y, width, height);
+        box.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
+        window.add(box, new Integer(2), 0);
     }
     
     public void addBoundaries(ArrayList<Line2D.Double> lines) {
