@@ -163,6 +163,47 @@ public class CreatePlaces {
         };
         village.loadGatePoints(villageGates);
         
+        
+        // ForestPath_Cave
+        int[][] forestPath_CaveBoundaries = new int[][]{
+          { 41, 21, 31, 21 }, 
+          { 31, 21, 31, 17 }, 
+          { 31, 17, 28, 17 }, 
+          { 28, 17, 28, 15 },
+          { 28, 15, 27, 15 }, 
+          { 27, 15, 27, 14 },
+          { 27, 14, 22, 14 }, 
+          { 22, 14, 22, 25 }, 
+          { 22, 25, 15, 25 }, 
+          { 15, 25, 15, 23 },
+          { 15, 23, 13, 23 }, 
+          { 13, 23, 13, 21 },
+          { 13, 21, 9, 21 }, 
+          { 9, 21, 9, 19 }, 
+          { 9, 19, 15, 19 }, 
+          { 15, 19, 15, 21 },
+          { 15, 21, 17, 21 }, 
+          { 17, 21, 17, 23 },  
+          { 17, 23, 20, 23 }, 
+          { 20, 23, 20, 12 }, 
+          { 20, 12, 32, 12 }, 
+          { 32, 12, 32, 10 },
+          { 32, 10, 36, 10 }, 
+          { 36, 10, 36, 13 },   
+          { 36, 13, 33, 13 }, 
+          { 33, 13, 33, 19 }, 
+          { 33, 19, 41, 19 },
+          { 41, 19, 41, 21 }
+        };
+        forestPath_Cave.loadBoundaryPoints(forestPath_CaveBoundaries);
+        forestPath_Cave.loadBoundaryLines();
+        
+        int[][] forestPath_CaveGates = new int[][]{
+          { 9, 19, 9, 21 }, 
+          { 40, 19, 40, 21 },
+        };
+        forestPath_Cave.loadGatePoints(forestPath_CaveGates);
+        
         //for future reference:
 //        { 0, 0, 0, 0 },
 //          { 0, 0, 0, 0 },
