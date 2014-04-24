@@ -65,7 +65,7 @@ public class MainWindow extends JFrame implements KeyListener {
     private static final int W_WIDTH = 700;
     private static final int W_HEIGHT = 600;
     private static final int CA_WIDTH = 2000;
-    private static final int CA_HEIGHT =  2000;
+    private static final int CA_HEIGHT = 2000;
     private static final int XLCOORD = 370; //sets the spawn point of the game window on the computer screen
     private static final int YLCOORD = 100;
     private static final int RECONCILE_X = 200;
