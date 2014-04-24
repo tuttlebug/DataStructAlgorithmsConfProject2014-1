@@ -29,7 +29,7 @@ public class CreatePlaces {
      * - "Temple"
      */ 
     
-    private static Place village = new Place("Village", "village.png");
+    private static Place village = new Place("Village", "villageSkeleton.bmp");
     private static Place home = new Place("Home", "home.png");
     private static Place bridge = new Place("Bridge", "bridge.png");
     private static Place cave = new Place("Cave", "cave.png");
