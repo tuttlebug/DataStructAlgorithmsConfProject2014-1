@@ -11,15 +11,15 @@ public class PlayerBox extends JPanel {
     
     public PlayerBox(int x1, int y1, int x2, int y2) {
         this.box = new Rectangle2D.Double(x1, y1, x2, y2);
-        System.out.printf("x1 = %d, y1 = %d, width = %d, height = %d\n", x1, y1, x2, y2);
         setOpaque(false);
+        setVisible(false);
     }
     
     // draws a red circle at the current x, y coordinate
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D pen = (Graphics2D) g;
-        pen.setColor(Color.BLUE);
+        pen.setColor(getBackground());
         pen.draw(this.box);
         // makes background transparent
         g.setColor(getBackground());

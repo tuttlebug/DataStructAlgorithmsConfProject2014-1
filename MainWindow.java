@@ -20,7 +20,10 @@
  * [Ã] JLayeredPanes
  * 
  * Temporary:
- * currentArea.setBounds(x, y, W_WIDTH, W_HEIGHT) in keyPressed
+ * [] currentArea.setBounds(x, y, W_WIDTH, W_HEIGHT) in keyPressed
+ * 
+ * METHODS TO THINK ABOUT:
+ * [] JLayeredPane.paint(Graphics g)
  */
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -37,40 +40,61 @@ public class MainWindow extends JFrame implements KeyListener {
     
     // Moves currentArea with arrow keys
     public void keyPressed(KeyEvent event) {
+        // going left
         if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
-            x -= 10;
-//            if (boundaryPanel.crossed(box.getBox()) == false) {
-                boundaryPanel.moveLines(-10, 0);
-//            }
+            if (boundaryPanel.moveR == true) {
+                x -= MOVE;
+                boundaryPanel.moveLines(-MOVE, 0);
+                caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
+                // if this movement caused a collision:
+                // the movement flag becomes false.
+                // tome can no longer go in this direction 
+                // and will not be able to until the movement flag turns true again.
+                // i.e. tome moves away from the boundary
+                if (boundaryPanel.crossed(box.getBox()) == true) {
+                    boundaryPanel.moveR = false;
+                }
+            }
         }
+        // going right
         if (event.getKeyCode() == KeyEvent.VK_LEFT) {
-            x += 10;
-//            if (boundaryPanel.crossed(box.getBox()) == false) {
-            boundaryPanel.moveLines(10, 0);
-//            }
+            if (boundaryPanel.moveL == true) {
+                x += MOVE;
+                boundaryPanel.moveLines(MOVE, 0);
+                caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
+                if (boundaryPanel.crossed(box.getBox()) == true) {
+                    boundaryPanel.moveL = false;
+                }
+            }
         }
+        // going down
         if (event.getKeyCode() == KeyEvent.VK_UP) {
-            y += 10;
-//            if (boundaryPanel.crossed(box.getBox()) == false) {
-            boundaryPanel.moveLines(0, 10);
-//            }
+            if (boundaryPanel.moveU == true) {
+                y += MOVE;
+                boundaryPanel.moveLines(0, MOVE);
+                caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
+                if (boundaryPanel.crossed(box.getBox()) == true) {
+                    boundaryPanel.moveU = false;
+                }
+            }
         }
-        if (event.getKeyCode() == KeyEvent.VK_DOWN) {
-            y -= 10;
-//            if (boundaryPanel.crossed(box.getBox()) == false) {
-            boundaryPanel.moveLines(0, -10);
-//            }
+        // going right
+        if (event.getKeyCode() == KeyEvent.VK_DOWN) { 
+            if (boundaryPanel.moveD == true) {
+                y -= MOVE;
+                boundaryPanel.moveLines(0, -MOVE);
+                caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
+                if (boundaryPanel.crossed(box.getBox()) == true) {
+                    boundaryPanel.moveD = false;
+                }
+            }
         }
-        System.out.printf("x = %d, y = %d\n", x, y);
-//        if (boundaryPanel.crossed(box.getBox()) == false) {
-        caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
-//        }
-//        else {
-//            System.out.println("crossed");
-//        }
-//        boundaryPanel.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT);
-        if (boundaryPanel.crossed(box.getBox()) == true) {
-            System.out.println("crossed");
+        // this allows tome to move away from the boundary
+        if (boundaryPanel.crossed(box.getBox()) == false) {
+            boundaryPanel.moveL = true;
+            boundaryPanel.moveR = true; 
+            boundaryPanel.moveU = true; 
+            boundaryPanel.moveD = true;
         }
         currentArea.repaint();
     }
@@ -94,6 +118,7 @@ public class MainWindow extends JFrame implements KeyListener {
     private static final int PLAYER_Y = W_HEIGHT / 2;
     private static final int OFFSET_X = 450;
     private static final int OFFSET_Y = 285;
+    private static final int MOVE = 15;
     
     // variables
     private static int x = -649; // -90, -649
@@ -116,6 +141,7 @@ public class MainWindow extends JFrame implements KeyListener {
         //--------add more code after this line -------//
         add(window);
         window.setBounds(0, 0, W_WIDTH, W_HEIGHT); 
+        
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.add(currentArea);
@@ -142,21 +168,11 @@ public class MainWindow extends JFrame implements KeyListener {
     public void addPlayerBox(int width, int height) {
         box = new PlayerBox(PLAYER_X, PLAYER_Y, width, height);
         box.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
-        window.add(box, new Integer(2), 0);
+        window.add(box, new Integer(1), 0);
     }
-
-    /*
-    public void addBoundaries(ArrayList<Line2D.Double> lines) {
-        boundaryPanel = new BoundaryLines(lines);
-//        boundaryPanel.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT);
-        boundaryPanel.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
-        window.add(boundaryPanel, new Integer(1), 0);
-    }
-    */
     
     public void addBoundaries(int[][] points) {
         boundaryPanel = new BoundaryLines(points, OFFSET_X, OFFSET_Y);
-//        boundaryPanel.setBounds(x + RECONCILE_X, y + RECONCILE_Y, CA_WIDTH, CA_HEIGHT);
         boundaryPanel.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         window.add(boundaryPanel, new Integer(1), 0);
     }
