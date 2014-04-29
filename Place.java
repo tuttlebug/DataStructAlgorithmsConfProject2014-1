@@ -16,13 +16,14 @@ import java.util.Arrays;
  * [Ã] A map of the places it's connected to
  * [] A Map of removable items;
  * [Ã] Image depicting full world
- * [] Array of "blocked off" areas
+ * [Ã] Array of "blocked off" areas
  * [] Array of locations for people and items
  * 
  * To Add/Implement:
  * [Ã] movement in a place
  * [] Have constructPlace() create neccessary data to add to the main window
  * [] remove Items and Places from ArrayList when they're removed from the map 
+ * [] Gate Arrays
  * 
  * Parameters:
  * [Ã] Name of Place
@@ -30,9 +31,7 @@ import java.util.Arrays;
  * [Ã] Name of background image
  * 
  * Temporary:
- * [Ã] Color background;
- * [Ã] ArrayList<String> items;
- *   - [Ã] Will be turned into a map
+ * [] int[] spawnPoint;
  */
 public class Place implements LoadImage {
     
@@ -42,11 +41,12 @@ public class Place implements LoadImage {
     private Map<String, Item> items;
     private ArrayList<String> neighborList;  // ONLY HERE FOR SAKE OF TOSTRING 
     private ArrayList<String> itemList;  // ONLY HERE FOR SAKE OF TOSTRING 
-//    private int[] startPoint;
+    private ArrayList<Gate> gateList;
+    private int[] spawnPoint;
     private String imageFile;
     private ImageIcon background;
     private int[][] boundaryPoints;
-    private int[][] gatePoints;
+//    private int[][] gatePoints;
     private ArrayList<Line2D.Double> boundaryLines;
     private JPanel gui; // Menu gui
     
@@ -57,23 +57,25 @@ public class Place implements LoadImage {
         this.items = new HashMap<String, Item>();
         this.neighborList = new ArrayList<String>();
         this.itemList = new ArrayList<String>();
-//        this.startPoint = startPoint; 
-        this.imageFile = imageFile;
         this.boundaryLines = new ArrayList<Line2D.Double>();
+        this.gateList = new ArrayList<Gate>();
+        this.imageFile = imageFile;
         this.gui = new JPanel();
+        this.spawnPoint = new int[2];
     }
-    
+    // ------------ Background Image ------------ \\
     // loads the background image
     public void loadImage() throws IOException {
         BufferedImage image = ImageIO.read(new File(this.imageFile));
         this.background = new ImageIcon(image);
     }
-
+    
     // sends the background over
     public ImageIcon sendImage() {
         return this.background;
     }
     
+    // ------------ Boundaries ------------ \\
     // assign boundaries for the player
     public void loadBoundaryPoints(int[][] boundaryPoints) {
         for (int i = 0; i < boundaryPoints.length; i++) {
@@ -84,52 +86,46 @@ public class Place implements LoadImage {
         this.boundaryPoints = boundaryPoints;
     }
     
-    // create lines from points
-//    public void loadBoundaryLines() {
-//        for (int i = 0; i < this.boundaryPoints.length; i++) {
-//            for (int j = 3; j < this.boundaryPoints[i].length; j+=3) {
-//                Line2D.Double newLine = new Line2D.Double(
-//                                                          this.boundaryPoints[i][j-3],
-//                                                          this.boundaryPoints[i][j-2],
-//                                                          this.boundaryPoints[i][j-1],
-//                                                          this.boundaryPoints[i][j]
-//                                                              );
-//                this.boundaryLines.add(newLine);
-//            }
-//        }
-//    }
-    
-    // send boundaries to MainWindow
-//    public ArrayList<Line2D.Double> sendBoundaries() {
-//        return this.boundaryLines;
-//    }
-    
     public int[][] sendBoundaryPoints() {
         return this.boundaryPoints;
     }
     
+    // ------------ Gates ------------ \\
     // load gate points
-    public void loadGatePoints(int[][] gatePoints) {
-        this.gatePoints = gatePoints;
+//    public void loadGatePoints(int[][] gatePoints) {
+//        this.gatePoints = gatePoints;
+//    }
+    public void loadGates(String name, int[] start, int[] end) {
+        this.gateList.add(new Gate(name, start, end));
     }
     
-    /**
-     * item should have reference to place that it is in;
-     */
-     public void addPlace(Place place) {
+    // ------------ Spawn points ------------ \\
+    // load spawn point
+    public void loadSpawnPoint(int x, int y) {
+        this.spawnPoint[0] = x * 32;
+        this.spawnPoint[1] = y * 32;
+    }
+    
+    public int[] sendSpawnPoint() {
+        return this.spawnPoint;
+    }    
+    
+    // ------------ Places ------------ \\
+    public void addPlace(Place place) {
         this.neighbors.put(place.getName(), place);
         this.neighborList.add(place.getName());
     }
-     
-     
+    
+    
     public void removePlace(String name) {
         this.neighbors.remove(name);
     }
-     
-     public Place getPlace(String name) {
+    
+    public Place getPlace(String name) {
         return this.neighbors.get(name);
     }
-     
+    
+    // ------------ Items ------------ \\
     public void addItem(Item item) {
         this.items.put(item.getName(), item);
         this.itemList.add(item.getName());

@@ -83,7 +83,8 @@ public class CreatePlaces {
         secretPaths.loadImage();
         temple.loadImage();
         
-        // Load boundaries
+        // ------------- Load boundaries, gate points, and spawn points ------------- //
+        // Village
         int[][] villageBoundaries = new int[][]{
           { 24, 10, 27, 10 },
           { 27, 10, 27, 11 },
@@ -156,12 +157,15 @@ public class CreatePlaces {
         };
         village.loadBoundaryPoints(villageBoundaries);
         
+        // gates
         int[][] villageGates = new int[][]{
           { 11, 28, 11, 30 }, 
           { 24, 10, 27, 10 },
         };
         village.loadGatePoints(villageGates);
         
+        // spawnPoints 
+        village.loadSpawnPoint(39, 27);
         
         // ForestPath_Cave
         int[][] forestPath_CaveBoundaries = new int[][]{
@@ -177,9 +181,9 @@ public class CreatePlaces {
           { 15, 25, 15, 23 },
           { 15, 23, 13, 23 }, 
           { 13, 23, 13, 21 },
-          { 13, 21, 9, 21 }, 
-          { 9, 21, 9, 19 }, 
-          { 9, 19, 15, 19 }, 
+          { 13, 21,  9, 21 }, 
+          {  9, 21,  9, 19 }, 
+          {  9, 19, 15, 19 }, 
           { 15, 19, 15, 21 },
           { 15, 21, 17, 21 }, 
           { 17, 21, 17, 23 },  
@@ -196,11 +200,15 @@ public class CreatePlaces {
         };
         forestPath_Cave.loadBoundaryPoints(forestPath_CaveBoundaries);
         
+        // gates
         int[][] forestPath_CaveGates = new int[][]{
           { 9, 19, 9, 21 }, 
           { 40, 19, 40, 21 },
         };
         forestPath_Cave.loadGatePoints(forestPath_CaveGates);
+        
+        // spawn Point
+        forestPath_Cave.loadSpawnPoint(0, 0);
         
         //for future reference:
 //        { 0, 0, 0, 0 },

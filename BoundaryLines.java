@@ -27,7 +27,7 @@ public class BoundaryLines extends JPanel {
         this.lines = new ArrayList<Line2D.Double>();
         // sets the background and lines invisible
         setOpaque(false);    
-        setVisible(false);
+//        setVisible(false);
         // create lines
         for (int i = 0; i < this.points.length; i++) {
             for (int j = 3; j < this.points[i].length; j+=3) {
@@ -59,6 +59,7 @@ public class BoundaryLines extends JPanel {
         }
     }
     
+    // tests if a Rectangle intersected any of the lines
     public boolean crossed(Rectangle2D.Double box) {
         for (Line2D.Double line : this.lines) {
             if (box.intersectsLine(line)) {

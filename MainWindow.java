@@ -7,17 +7,14 @@
  * [Ã] set closing
  * [Ã] set location
  * [] Jpanel for the menu
- * [] Moveable Image
+ * [Ã] Moveable Image
  * [Ã] Player
  * [Ã] Switch over to Layered Panels
  * 
  * To Add/Implement:
- * [] method that accepts new data and update the window
- * [] move map around with arrow keys
- * [Ã] load an image
- *   - [Ã] switch between images
- * [Ã] load a Place
- * [Ã] JLayeredPanes
+ * [] method that handles switching from place to another place
+ *   - [] changing the image
+ *   - [] 
  * 
  * Temporary:
  * [] currentArea.setBounds(x, y, W_WIDTH, W_HEIGHT) in keyPressed
@@ -97,6 +94,7 @@ public class MainWindow extends JFrame implements KeyListener {
             boundaryPanel.moveD = true;
         }
         currentArea.repaint();
+        System.out.printf("x = %d, y = %d\n", x, y);
     }
     
     public void keyReleased(KeyEvent event) {
@@ -140,7 +138,7 @@ public class MainWindow extends JFrame implements KeyListener {
         
         //--------add more code after this line -------//
         add(window);
-        window.setBounds(0, 0, W_WIDTH, W_HEIGHT); 
+        window.setBounds(x, y, W_WIDTH, W_HEIGHT); 
         
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
@@ -160,13 +158,16 @@ public class MainWindow extends JFrame implements KeyListener {
         currentArea.setIcon(image);
     }
 
-    public void addPlayer(ImageIcon image, int width, int height) { 
+    public void addPlayer(ImageIcon image, int width, int height, int[] spawnPoint) { 
+        System.out.printf("spawn X = %d, spawn Y = %d\n", spawnPoint[0], spawnPoint[1]);
+        playerLevel.setBounds(spawnPoint[0], spawnPoint[1], width, height);
         playerLevel.setBounds(PLAYER_X, PLAYER_Y, width, height);
         playerLevel.setIcon(image);
+        addPlayerBox(width, height, spawnPoint);
     }
     
-    public void addPlayerBox(int width, int height) {
-        box = new PlayerBox(PLAYER_X, PLAYER_Y, width, height);
+    public void addPlayerBox(int width, int height, int[] spawnPoint) {
+        box = new PlayerBox(spawnPoint[0], spawnPoint[1], width, height);
         box.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         window.add(box, new Integer(1), 0);
     }
@@ -175,6 +176,10 @@ public class MainWindow extends JFrame implements KeyListener {
         boundaryPanel = new BoundaryLines(points, OFFSET_X, OFFSET_Y);
         boundaryPanel.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         window.add(boundaryPanel, new Integer(1), 0);
+    }
+    
+    public void swapWorlds() {
+        
     }
     
 }

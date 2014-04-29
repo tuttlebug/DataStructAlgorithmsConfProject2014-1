@@ -4,6 +4,7 @@
  * Check List:
  * [] A Map of areas that the gate connects to
  * [] XY coordinates in the area
+ * [] Line object
  * 
  * To Add/Implement:
  * [] method that sends the character to a new screen
