@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="34" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="hyptosis_tile-art-batch-5" tilewidth="32" tileheight="32">
+  <image source="../Sprites/Hyptosis/hyptosis_tile-art-batch-5.png" width="636" height="1219"/>
+ </tileset>
+ <layer name="Tile Layer 1" width="50" height="34">
+  <data encoding="base64" compression="zlib">
+   eJzt1DEKwCAQRNH1Ct7Yk2spEUyyGhyiv3idxXxYTMEsAQAATMh2pd6zW0e7y0u9f6ZDvfmuw9Oo3uzt6LWoN5/cMfqWjip2fNWx6j/bpeOpS3krdLy7C/W2EzsAAPi7AnCQjAM=
+  </data>
+ </layer>
+</map>
