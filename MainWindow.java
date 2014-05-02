@@ -52,9 +52,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 // tome can no longer go in this direction 
                 // and will not be able to until the movement flag turns true again.
                 // i.e. tome moves away from the boundary
-                if (boundaryPanel.crossed(box.getBox()) == true) {
-                    boundaryPanel.moveR = false;
-                }
+//                if (boundaryPanel.crossed(box.getBox()) == true) {
+//                    boundaryPanel.moveR = false;
+//                }
             }
         }
         // going right
@@ -63,9 +63,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 x += MOVE;
                 boundaryPanel.moveLines(MOVE, 0);
                 caPanel.setLocation(x, y);
-                if (boundaryPanel.crossed(box.getBox()) == true) {
-                    boundaryPanel.moveL = false;
-                }
+//                if (boundaryPanel.crossed(box.getBox()) == true) {
+//                    boundaryPanel.moveL = false;
+//                }
             }
         }
         // going down
@@ -74,9 +74,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 y += MOVE;
                 boundaryPanel.moveLines(0, MOVE);
                 caPanel.setLocation(x, y);
-                if (boundaryPanel.crossed(box.getBox()) == true) {
-                    boundaryPanel.moveU = false;
-                }
+//                if (boundaryPanel.crossed(box.getBox()) == true) {
+//                    boundaryPanel.moveU = false;
+//                }
             }
         }
         // going right
@@ -85,9 +85,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 y -= MOVE;
                 boundaryPanel.moveLines(0, -MOVE);
                 caPanel.setLocation(x, y);
-                if (boundaryPanel.crossed(box.getBox()) == true) {
-                    boundaryPanel.moveD = false;
-                }
+//                if (boundaryPanel.crossed(box.getBox()) == true) {
+//                    boundaryPanel.moveD = false;
+//                }
             }
         }
         // this allows tome to move away from the boundary
@@ -107,10 +107,10 @@ public class MainWindow extends JFrame implements KeyListener {
     }
     
     // constants
-    private static final int W_WIDTH = 700;
-    private static final int W_HEIGHT = 600;
-    private static final int CA_WIDTH = 2000;
-    private static final int CA_HEIGHT = 2000;
+    private static final int W_WIDTH = 700;             // width of frame
+    private static final int W_HEIGHT = 600;            // height of window
+    private static final int CA_WIDTH = 5000;           // 
+    private static final int CA_HEIGHT = 5000;
     private static final int XLCOORD = 370;             // sets the spawn point of the game window on the computer screen
     private static final int YLCOORD = 100;             // sets the spawn point of the game window on the computer screen
     private static final int PLAYER_X = W_WIDTH / 2;
@@ -118,17 +118,18 @@ public class MainWindow extends JFrame implements KeyListener {
     private static final int OFFSET_X = 450;
     private static final int OFFSET_Y = 285;
     private static final int MOVE = 15;                 // movement speed
+    public static final int X = -2150;
+    public static final int Y = -290;
     
     // variables
-    private static int x = -649; // -90, -649
-    private static int y = -290; // -860, -290
+    private static int x = -2150; // -90, -649, -2150
+    private static int y = -290; // -860, -290  -290
     private static JLayeredPane window = new JLayeredPane();
     private static JPanel caPanel = new JPanel();
     private static JLabel currentArea = new JLabel();
     private static JLabel playerLevel = new JLabel();
     private static BoundaryLines boundaryPanel;
     private static PlayerBox box;
-//    private static PlayerBox testbox; //(((((
     
     // constructor
     public MainWindow() {
@@ -139,7 +140,7 @@ public class MainWindow extends JFrame implements KeyListener {
         
         //--------add more code after this line -------//
         add(window);
-        window.setBounds(x, y, W_WIDTH, W_HEIGHT); 
+        window.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
@@ -155,8 +156,11 @@ public class MainWindow extends JFrame implements KeyListener {
         setVisible(true);
     }
     
-    public void shiftWorld(ImageIcon image) {
+    public void shiftWorld(ImageIcon image, int dx, int dy) {
+        x += dx;
+        y += dy;
         currentArea.setIcon(image);
+//        caPanel.setLocation(x, y);
     }
 
     public void addPlayer(ImageIcon image, int width, int height) { 
