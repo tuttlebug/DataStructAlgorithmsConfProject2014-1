@@ -52,9 +52,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 // tome can no longer go in this direction 
                 // and will not be able to until the movement flag turns true again.
                 // i.e. tome moves away from the boundary
-//                if (boundaryPanel.crossed(box.getBox()) == true) {
-//                    boundaryPanel.moveR = false;
-//                }
+                if (boundaryPanel.crossed(box.getBox()) == true) {
+                    boundaryPanel.moveR = false;
+                }
             }
         }
         // going right
@@ -63,9 +63,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 x += MOVE;
                 boundaryPanel.moveLines(MOVE, 0);
                 caPanel.setLocation(x, y);
-//                if (boundaryPanel.crossed(box.getBox()) == true) {
-//                    boundaryPanel.moveL = false;
-//                }
+                if (boundaryPanel.crossed(box.getBox()) == true) {
+                    boundaryPanel.moveL = false;
+                }
             }
         }
         // going down
@@ -74,9 +74,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 y += MOVE;
                 boundaryPanel.moveLines(0, MOVE);
                 caPanel.setLocation(x, y);
-//                if (boundaryPanel.crossed(box.getBox()) == true) {
-//                    boundaryPanel.moveU = false;
-//                }
+                if (boundaryPanel.crossed(box.getBox()) == true) {
+                    boundaryPanel.moveU = false;
+                }
             }
         }
         // going right
@@ -85,9 +85,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 y -= MOVE;
                 boundaryPanel.moveLines(0, -MOVE);
                 caPanel.setLocation(x, y);
-//                if (boundaryPanel.crossed(box.getBox()) == true) {
-//                    boundaryPanel.moveD = false;
-//                }
+                if (boundaryPanel.crossed(box.getBox()) == true) {
+                    boundaryPanel.moveD = false;
+                }
             }
         }
         // this allows tome to move away from the boundary
@@ -156,17 +156,13 @@ public class MainWindow extends JFrame implements KeyListener {
         setVisible(true);
     }
     
-    public void shiftWorld(ImageIcon image, int dx, int dy) {
-        x += dx;
-        y += dy;
+    public void shiftWorld(ImageIcon image) {
         currentArea.setIcon(image);
-//        caPanel.setLocation(x, y);
     }
 
     public void addPlayer(ImageIcon image, int width, int height) { 
         playerLevel.setBounds(PLAYER_X, PLAYER_Y, width, height);
         playerLevel.setIcon(image);
-        addPlayerBox(width, height);
     }
     
     public void addPlayerBox(int width, int height) {
@@ -179,7 +175,13 @@ public class MainWindow extends JFrame implements KeyListener {
         boundaryPanel = new BoundaryLines(points, OFFSET_X, OFFSET_Y);
         System.out.printf("X = %d, Y = %d\n", X - spawnPoint[0], Y - spawnPoint[1]);
         boundaryPanel.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
-//        caPanel.setLocation(spawnPoint[0], spawnPoint[1]);
+        int oldX = x;
+        int oldY = y;
+        x -= spawnPoint[0] / 4;
+        y -= spawnPoint[1] / 6;
+        boundaryPanel.moveLines(x - oldX, y - oldY);
+        boundaryPanel.setLocation(x, y); // -2405 - (-2150) = -255, -410 - (-290) = -120
+        caPanel.setLocation(x, y);
         window.add(boundaryPanel, new Integer(1), 0);
     }
     
