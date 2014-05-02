@@ -85,7 +85,7 @@ public class TestGamePlay {
         Place current = wMap.getPlace("ForestPath_Cave");
         tome.loadImage();
         mw.shiftWorld(current.sendImage());
-        mw.addPlayer(tome.sendImage(), tome.getWidth(), tome.getHeight(), current.sendSpawnPoint());
+        mw.addPlayer(tome.sendImage(), tome.getWidth(), tome.getHeight());
         mw.addBoundaries(current.sendBoundaryPoints());
     }
     

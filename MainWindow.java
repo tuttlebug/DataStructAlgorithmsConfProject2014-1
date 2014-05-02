@@ -111,26 +111,24 @@ public class MainWindow extends JFrame implements KeyListener {
     private static final int W_HEIGHT = 600;
     private static final int CA_WIDTH = 2000;
     private static final int CA_HEIGHT = 2000;
-    private static final int XLCOORD = 370; //sets the spawn point of the game window on the computer screen
-    private static final int YLCOORD = 100;
-    private static final int RECONCILE_X = 200;
-    private static final int RECONCILE_Y = 5;
+    private static final int XLCOORD = 370;             // sets the spawn point of the game window on the computer screen
+    private static final int YLCOORD = 100;             // sets the spawn point of the game window on the computer screen
     private static final int PLAYER_X = W_WIDTH / 2;
     private static final int PLAYER_Y = W_HEIGHT / 2;
     private static final int OFFSET_X = 450;
     private static final int OFFSET_Y = 285;
-    private static final int MOVE = 15;
+    private static final int MOVE = 15;                 // movement speed
     
     // variables
     private static int x = -649; // -90, -649
     private static int y = -290; // -860, -290
-//    private static JPanel menuPanel = new JPanel();
     private static JLayeredPane window = new JLayeredPane();
     private static JPanel caPanel = new JPanel();
     private static JLabel currentArea = new JLabel();
     private static JLabel playerLevel = new JLabel();
     private static BoundaryLines boundaryPanel;
     private static PlayerBox box;
+//    private static PlayerBox testbox; //(((((
     
     // constructor
     public MainWindow() {
@@ -141,7 +139,7 @@ public class MainWindow extends JFrame implements KeyListener {
         
         //--------add more code after this line -------//
         add(window);
-        window.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
+        window.setBounds(x, y, W_WIDTH, W_HEIGHT); 
         
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
@@ -161,17 +159,14 @@ public class MainWindow extends JFrame implements KeyListener {
         currentArea.setIcon(image);
     }
 
-    public void addPlayer(ImageIcon image, int width, int height, int[] spawnPoint) { 
-        System.out.printf("spawn X = %d, spawn Y = %d\n", spawnPoint[0], spawnPoint[1]);
-        playerLevel.setBounds(spawnPoint[0], spawnPoint[1], width, height);
-//        playerLevel.setBounds(PLAYER_X, PLAYER_Y, width, height);
+    public void addPlayer(ImageIcon image, int width, int height) { 
+        playerLevel.setBounds(PLAYER_X, PLAYER_Y, width, height);
         playerLevel.setIcon(image);
-        addPlayerBox(width, height, spawnPoint);
+        addPlayerBox(width, height);
     }
     
-    public void addPlayerBox(int width, int height, int[] spawnPoint) {
-        box = new PlayerBox(spawnPoint[0], spawnPoint[1], width, height);
-//        box = new PlayerBox(PLAYER_X, PLAYER_Y, width, height);
+    public void addPlayerBox(int width, int height) {
+        box = new PlayerBox(PLAYER_X, PLAYER_Y, width, height);
         box.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         window.add(box, new Integer(1), 0);
     }

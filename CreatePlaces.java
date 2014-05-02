@@ -208,7 +208,7 @@ public class CreatePlaces {
         forestPath_Cave.loadGatePoints(forestPath_CaveGates);
         
         // spawn Point
-        forestPath_Cave.loadSpawnPoint(0, 0);
+        forestPath_Cave.loadSpawnPoint(10, 13);
         
         //for future reference:
 //        { 0, 0, 0, 0 },
