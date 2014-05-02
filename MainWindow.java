@@ -175,9 +175,11 @@ public class MainWindow extends JFrame implements KeyListener {
         window.add(box, new Integer(1), 0);
     }
     
-    public void addBoundaries(int[][] points) {
+    public void addBoundaries(int[][] points, int[] spawnPoint) {
         boundaryPanel = new BoundaryLines(points, OFFSET_X, OFFSET_Y);
+        System.out.printf("X = %d, Y = %d\n", X - spawnPoint[0], Y - spawnPoint[1]);
         boundaryPanel.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
+//        caPanel.setLocation(spawnPoint[0], spawnPoint[1]);
         window.add(boundaryPanel, new Integer(1), 0);
     }
     

@@ -45,7 +45,7 @@ public class BoundaryLines extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D pen = (Graphics2D) g;
-        pen.setColor(getBackground());
+        pen.setColor(Color.RED);
         for (Line2D.Double line : this.lines) {
             pen.draw(line);
         }

@@ -165,7 +165,7 @@ public class CreatePlaces {
         village.loadGatePoints(villageGates);
         
         // spawnPoints 
-        village.loadSpawnPoint(39, 27);
+        village.loadSpawnPoint(33, 23);
         
         // ForestPath_Cave
         int[][] forestPath_CaveBoundaries = new int[][]{
