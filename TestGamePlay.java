@@ -23,8 +23,9 @@ public class TestGamePlay {
         wMap = CreatePlaces.createWorldMap();
         mw = new MainWindow();
         Place current = wMap.getPlace("Village");
-        mw.swapWorlds(current.sendImage(), current.sendBoundaryPoints(), current.sendGatePoints(), current.sendSpawnPoint());
+//        mw.swapWorlds(current.sendImage(), current.sendBoundaryPoints(), current.sendGatePoints(), current.sendSpawnPoint());
 //        mw.addBoundaries(current.sendBoundaryPoints(), current.sendGatePoints(), current.sendSpawnPoint());
+        mw.swapWorlds(current.sendImage(), current.sendBoundaryPoints(), current.sendGatePoints(), current.sendSpawnPoint());
     }
     
 }

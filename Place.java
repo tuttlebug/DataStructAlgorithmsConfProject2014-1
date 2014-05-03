@@ -114,11 +114,24 @@ public class Place implements LoadImage {
         this.gatePoints = gatePoints;
     }
     
-//    public void loadGates(String name, int[] start, int[] end, int[][] gatePoints) {
-//        this.gateList.add(new Gate(name, start, end, gatePoints));
-//    }
     public int[][] sendGatePoints() {
         return this.gatePoints;
+    }
+    
+    // VERSION 1
+//    public void loadGates(String s, String e, int[] start, int[] end, int[] gatePoints) throws IOException {
+//        this.gateList.add(new Gate(s, e, start, end, gatePoints));
+//    }
+//    
+//    public ArrayList<Gate> sendGates() {
+//        return this.gateList;
+//    }
+    public void loadGates(Place area1, Place area2, int[] start, int[] end, int[] gatePoints) throws IOException {
+        this.gateList.add(new Gate(area1, area2, start, end, gatePoints));  
+    }
+    
+    public ArrayList<Gate> sendGates() {
+        return this.gateList;
     }
     
     // ------------ Spawn points ------------ \\
@@ -133,6 +146,10 @@ public class Place implements LoadImage {
     }    
     
     // ------------ Places ------------ \\
+    public String getName() {
+        return this.name;
+    }
+     
     public void addPlace(Place place) {
         this.neighbors.put(place.getName(), place);
         this.neighborList.add(place.getName());
@@ -157,10 +174,7 @@ public class Place implements LoadImage {
         this.items.remove(name);
     }   
     
-    public String getName() {
-        return this.name;
-    }
-    
+    // ------------ toString() ------------ \\
     public String toString() {
         return String.format("\nNAME: %s\nNEIGHBORING AREAS: %s\nAVAILABLE ITEMS: %s\nBACKGROUND: %s\n",
                              this.name, this.neighborList, this.itemList, this.imageFile);

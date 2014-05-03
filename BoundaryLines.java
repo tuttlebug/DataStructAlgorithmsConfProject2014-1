@@ -12,6 +12,7 @@ import java.awt.event.*; // MouseListener, MouseMotionListener, MouseEvent, KeyL
  * []
  */
 
+// VERSION 1
 public class BoundaryLines extends JPanel {
     
     private ArrayList<Line2D.Double> lines;
@@ -108,3 +109,110 @@ public class BoundaryLines extends JPanel {
         return false;
     }
 }
+
+/*
+public class BoundaryLines extends JPanel {
+    
+    private ArrayList<Line2D.Double> lines;
+    private ArrayList<Gate> gates;
+    private int[][] boundaryPoints;
+//    private int[][] gatePoints;
+    // flags for dictating which directions are blocked off
+    public boolean moveL = true;
+    public boolean moveR = true;
+    public boolean moveU = true;
+    public boolean moveD = true;
+    
+    // only used in the MainWindow constructor
+    public BoundaryLines() {
+        
+    }
+    
+    public BoundaryLines(int[][] boundaryPoints, ArrayList<Gate> gates, int offsetX, int offsetY) {
+        this.boundaryPoints = boundaryPoints;
+        this.gates = gates;
+        this.lines = new ArrayList<Line2D.Double>();
+//        this.gates = new ArrayList<Line2D.Double>();
+        // sets the background and lines invisible
+        setOpaque(false);    
+//        setVisible(false);
+        
+        // create boundary lines
+        for (int i = 0; i < this.boundaryPoints.length; i++) {
+            for (int j = 3; j < this.boundaryPoints[i].length; j+=3) {
+                Line2D.Double newLine = new Line2D.Double(
+                                                          this.boundaryPoints[i][j-3] - offsetX,
+                                                          this.boundaryPoints[i][j-2] - offsetY,
+                                                          this.boundaryPoints[i][j-1] - offsetX,
+                                                          this.boundaryPoints[i][j] - offsetY
+                                                         );
+                this.lines.add(newLine);
+            }
+        }
+//        // create gate lines
+//        for (int i = 0; i < this.gatePoints.length; i++) {
+//            for (int j = 3; j < this.gatePoints[i].length; j+=3) {
+//                Line2D.Double newGate = new Line2D.Double(
+//                                                          this.gatePoints[i][j-3] - offsetX,
+//                                                          this.gatePoints[i][j-2] - offsetY,
+//                                                          this.gatePoints[i][j-1] - offsetX,
+//                                                          this.gatePoints[i][j] - offsetY
+//                                                         );
+//                this.gates.add(newGate);
+//            }
+//        }
+        System.out.println(this.gates);
+        for (Gate gate : this.gates) {
+            System.out.printf("x1 = %f, y1 = %f, x2 = %f, y2 = %f\n",
+                              gate.sendLine().getX1(), 
+                              gate.sendLine().getY1(),
+                              gate.sendLine().getX2(),
+                              gate.sendLine().getY2());
+        }
+    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        Graphics2D pen = (Graphics2D) g;
+        pen.setColor(Color.RED);
+        for (Line2D.Double line : this.lines) {
+            pen.draw(line);
+        }
+        for (Gate gate : this.gates) {
+            pen.draw(gate.sendLine());
+        }
+        // makes background transparent
+        g.setColor(getBackground());
+    }
+
+    public void moveLines(int dx, int dy) {
+        for (Line2D.Double line : this.lines) {
+            line.setLine(line.getX1() + dx, line.getY1() + dy, line.getX2() + dx, line.getY2() + dy);
+        }
+        for (Gate gate : this.gates) {
+            gate.sendLine().setLine(gate.sendLine().getX1() + dx, gate.sendLine().getY1() + dy, 
+                                    gate.sendLine().getX2() + dx, gate.sendLine().getY2() + dy);
+        }
+    }
+    
+    // tests if a Rectangle intersected any of the boundary lines
+    public boolean boundaryCrossed(Rectangle2D.Double box) {
+        for (Line2D.Double line : this.lines) {
+            if (box.intersectsLine(line)) {
+                return true;
+            }
+        }
+        return false;
+    }
+   
+    // tests if a Rectangle intersected any of the gates
+    public boolean gateCrossed(Rectangle2D.Double box) {
+        for (Gate gate : this.gates) {
+            if (box.intersectsLine(gate.sendLine())) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+*/
