@@ -200,7 +200,7 @@ public class CreatePlaces {
         };
         forestPath_Cave.loadGatePoints(forestPath_CaveGates);
         // spawn Point
-        forestPath_Cave.loadSpawnPoint(20, 33);
+        forestPath_Cave.loadSpawnPoint(-1665, -965);
         
         //clearing_Cave
         int[][] clearing_CaveBoundaries = new int[][]{
@@ -230,7 +230,7 @@ public class CreatePlaces {
         };
         clearing_Cave.loadGatePoints(clearing_CaveGates);
         // spawn Point
-        clearing_Cave.loadSpawnPoint(41, 31);
+        clearing_Cave.loadSpawnPoint(-2025, -845);
         
 
         //cave
@@ -265,9 +265,9 @@ public class CreatePlaces {
         int[][] caveGates = new int[][]{
           { 35, 44, 38, 44 }
         };
-        clearing_Cave.loadGatePoints(clearing_CaveGates);
+        cave.loadGatePoints(caveGates);
         // spawn Point
-        clearing_Cave.loadSpawnPoint(36, 42);
+        cave.loadSpawnPoint(-2190, -1070);
         
         
         //for future reference:

@@ -82,9 +82,8 @@ public class TestGamePlay {
     public static void main(String[] args) throws IOException {
         wMap = CreatePlaces.createWorldMap();
         mw = new MainWindow();
-        Place current = wMap.getPlace("Cave");
+        Place current = wMap.getPlace("ForestPath_Cave");
         tome.loadImage();
-//        current.loadSpawnPoint(-2625, -965);
         mw.shiftWorld(current.sendImage());
         mw.addPlayer(tome.sendImage(), tome.getWidth(), tome.getHeight());
         mw.addPlayerBox(tome.getWidth(), tome.getHeight());

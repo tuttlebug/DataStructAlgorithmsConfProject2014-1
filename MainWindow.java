@@ -98,30 +98,6 @@ public class MainWindow extends JFrame implements KeyListener {
             boundaryPanel.moveD = true;
         }
         System.out.printf("x = %d, y = %d\n", x, y);
-//        System.out.printf("BoundaryLabel Location: x = %d, y = %d, width = %d, height = %d, xalign = %f, y align = %f\nbounds = %s\n", 
-//                          boundaryPanel.getX(),
-//                          boundaryPanel.getY(),
-//                          boundaryPanel.getWidth(),
-//                          boundaryPanel.getHeight(),
-//                          boundaryPanel.getAlignmentX(),
-//                          boundaryPanel.getAlignmentY(),
-//                          boundaryPanel.getBounds().toString());
-//        System.out.printf("caPanel Location: x = %d, y = %d, width = %d, height = %d, xalign = %f, y align = %f\nbounds = %s\n", 
-//                          caPanel.getX(),
-//                          caPanel.getY(),
-//                          caPanel.getWidth(),
-//                          caPanel.getHeight(),
-//                          caPanel.getAlignmentX(),
-//                          caPanel.getAlignmentY(),
-//                          caPanel.getBounds().toString());
-//        System.out.printf("window Location: x = %d, y = %d, width = %d, height = %d, xalign = %f, y align = %f\nbounds = %s\n\n", 
-//                          window.getX(),
-//                          window.getY(),
-//                          window.getWidth(),
-//                          window.getHeight(),
-//                          window.getAlignmentX(),
-//                          window.getAlignmentY(),
-//                          window.getBounds().toString());
     }
     
     public void keyReleased(KeyEvent event) {
@@ -197,26 +173,15 @@ public class MainWindow extends JFrame implements KeyListener {
     
     public void addBoundaries(int[][] points, int[] spawnPoint) {
         boundaryPanel = new BoundaryLines(points, OFFSET_X, OFFSET_Y);
-        System.out.printf("X = %d, Y = %d\n", X - spawnPoint[0], Y - spawnPoint[1]);
         boundaryPanel.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
-        int oldX = x; // -1830, -290
+        int oldX = x;
         int oldY = y;
-        x = spawnPoint[0]; // 1376, 1056
-        y = spawnPoint[1]; // These calculations may need to be passed through
-//        boundaryPanel.setLocation(x, y); // x = -2399 - (-1860) = -4229, y = -736 - (-290) = -446, 
-//        caPanel.setLocation(x, y);
+        x = spawnPoint[0];
+        y = spawnPoint[1];
+        caPanel.setLocation(x, y);
+        boundaryPanel.setLocation(x, y);
         boundaryPanel.moveLines(x - oldX, y - oldY);
         window.add(boundaryPanel, new Integer(1), 0);
-//        System.out.printf("BoundaryLabel Location: x = %d, y = %d, width = %d, height = %d\n", 
-//                          boundaryPanel.getX(),
-//                          boundaryPanel.getY(),
-//                          boundaryPanel.getWidth(),
-//                          boundaryPanel.getHeight());
-//        System.out.printf("caPanel Location: x = %d, y = %d, width = %d, height = %d\n", 
-//                          caPanel.getX(),
-//                          caPanel.getY(),
-//                          caPanel.getWidth(),
-//                          caPanel.getHeight());
     }
     
     // Handles all changes
