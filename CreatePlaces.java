@@ -14,8 +14,6 @@ import java.io.*;
 
 public class CreatePlaces {
     
-    public static Player player = new Player();
-    
     /* COMPREHENSIVE LIST OF WORLDS (in order of first appearance):
      * - "Village"
      * - "ForestPath_Cave"

@@ -17,11 +17,13 @@
  *   - [] 
  * [] move the images like we move the lines
  *   - using paint
+ * [] make tome abstract
  * 
  * Temporary:
  * 
  * METHODS TO THINK ABOUT:
  * [] JLayeredPane.paint(Graphics g)
+ * [] player as variable
  * 
  */
 import java.awt.Graphics;
@@ -47,6 +49,7 @@ public class MainWindow extends JFrame implements KeyListener {
                 x -= MOVE;
                 boundaryPanel.moveLines(-MOVE, 0);
                 caPanel.setLocation(x, y);
+                shiftPlayerSprite(tome.sprites[2]);
                 // if this movement caused a collision:
                 // the movement flag becomes false.
                 // tome can no longer go in this direction 
@@ -63,6 +66,7 @@ public class MainWindow extends JFrame implements KeyListener {
                 x += MOVE;
                 boundaryPanel.moveLines(MOVE, 0);
                 caPanel.setLocation(x, y);
+                shiftPlayerSprite(tome.sprites[1]);
                 if (boundaryPanel.crossed(box.getBox()) == true) {
                     boundaryPanel.moveL = false;
                 }
@@ -74,17 +78,19 @@ public class MainWindow extends JFrame implements KeyListener {
                 y += MOVE;
                 boundaryPanel.moveLines(0, MOVE);
                 caPanel.setLocation(x, y);
+                shiftPlayerSprite(tome.sprites[4]);
                 if (boundaryPanel.crossed(box.getBox()) == true) {
                     boundaryPanel.moveU = false;
                 }
             }
         }
-        // going right
+        // going up
         if (event.getKeyCode() == KeyEvent.VK_DOWN) { 
             if (boundaryPanel.moveD == true) {
                 y -= MOVE;
                 boundaryPanel.moveLines(0, -MOVE);
                 caPanel.setLocation(x, y);
+                shiftPlayerSprite(tome.sprites[3]);
                 if (boundaryPanel.crossed(box.getBox()) == true) {
                     boundaryPanel.moveD = false;
                 }
@@ -109,7 +115,7 @@ public class MainWindow extends JFrame implements KeyListener {
     // constants
     private static final int W_WIDTH = 700;             // width of frame
     private static final int W_HEIGHT = 600;            // height of window
-    private static final int CA_WIDTH = 5000;           // 
+    private static final int CA_WIDTH = 5000;            
     private static final int CA_HEIGHT = 5000;
     private static final int XLCOORD = 370;             // sets the spawn point of the game window on the computer screen
     private static final int YLCOORD = 100;             // sets the spawn point of the game window on the computer screen
@@ -117,35 +123,47 @@ public class MainWindow extends JFrame implements KeyListener {
     private static final int PLAYER_Y = W_HEIGHT / 2;
     private static final int OFFSET_X = 450;
     private static final int OFFSET_Y = 285;
-    private static final int MOVE = 15;                 // movement speed
-    public static final int X = -2150;
-    public static final int Y = -290;
+    private static final int MOVE = 25;                 // movement speed
+//    public static final int X = -2150;
+//    public static final int Y = -290;
     
     // variables
-    private static int x = -1830; // -90, -649, -1830
-    private static int y = -290; // -860, -290  -290
+    private static int x = -1830;
+    private static int y = -290;
     private static JLayeredPane window = new JLayeredPane();
     private static JPanel caPanel = new JPanel();
     private static JLabel currentArea = new JLabel();
     private static JLabel playerLevel = new JLabel();
     private static BoundaryLines boundaryPanel;
     private static PlayerBox box;
+    private static Player tome; //
     
     // constructor
-    public MainWindow() {
+    public MainWindow() throws IOException {
         // standard setup
         setTitle("Game name");
         setSize(W_WIDTH, W_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         //--------add more code after this line -------//
+        
+        // ------------ Window ------------ \\
         add(window);
         window.setBounds(x, y, W_WIDTH, W_HEIGHT); 
-        
+        // ------------ Player ------------ \\
+        tome = new Player();
+        playerLevel.setIcon(tome.sprite);
+        playerLevel.setBounds(PLAYER_X, PLAYER_Y, tome.getWidth(), tome.getHeight());
+        box = new PlayerBox(PLAYER_X, PLAYER_Y, tome.getWidth(), tome.getHeight());
+        box.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
+        // ------------ Panels ------------ \\
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.add(currentArea);
+        
+        // add tp window
         window.add(caPanel, new Integer(0), 0);
+        window.add(box, new Integer(1), 0);
         window.add(playerLevel, new Integer(3), 0);
         
         //--------add more code before this line -------//
@@ -159,16 +177,9 @@ public class MainWindow extends JFrame implements KeyListener {
     public void shiftWorld(ImageIcon image) {
         currentArea.setIcon(image);
     }
-
-    public void addPlayer(ImageIcon image, int width, int height) { 
-        playerLevel.setBounds(PLAYER_X, PLAYER_Y, width, height);
-        playerLevel.setIcon(image);
-    }
     
-    public void addPlayerBox(int width, int height) {
-        box = new PlayerBox(PLAYER_X, PLAYER_Y, width, height);
-        box.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
-        window.add(box, new Integer(1), 0);
+    public void shiftPlayerSprite(ImageIcon image) {
+        playerLevel.setIcon(image);
     }
     
     public void addBoundaries(int[][] points, int[] spawnPoint) {

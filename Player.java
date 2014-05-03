@@ -26,60 +26,7 @@ import java.io.IOException;
  *   - [] method that allos Tome to pick up items and choose whether to add to eir's pack
  */
 
-/*
-public class Player extends JPanel {
-   
-    // moves the character around
-    private class ListenerForKeys implements KeyListener {
-        public void keyPressed(KeyEvent event) {
-            if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
-                x += 10;
-            }
-            if (event.getKeyCode() == KeyEvent.VK_LEFT) {
-                x -= 10;
-            }
-            if (event.getKeyCode() == KeyEvent.VK_UP) {
-                y -= 10;
-            }
-            if (event.getKeyCode() == KeyEvent.VK_DOWN) {
-                y += 10;
-            }
-            repaint();
-        }
-        public void keyReleased(KeyEvent event) {
-        }
-        public void keyTyped(KeyEvent event) {
-        }
-    }
-    
-    // instance variables
-    private int x, y;
-    private int radius; // Temporary
-    public Place currentArea;
-    private BufferedImage player;
-    private String currentImage;
-//  private Pack pack; 
-    
-    public Player() {
-        this.x = 200;
-        this.y = 200;
-        this.radius = 5;
-        this.currentArea = null;
-        this.addKeyListener(new ListenerForKeys());
-        this.setFocusable(true);
-        this.currentImage = "Test Tome left 1.png";
-        
-    }
-    
-    public String toString() {
-        return String.format("CURRENTLY IN: %s\nITEMS ON HAND: (Nothing yet)\n", this.currentArea.getName());
-    }
-    
-    public void currentlyIn (Place place) {
-        this.currentArea = place;
-    }
-    
-    
+/*    
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D pen = (Graphics2D) g;
@@ -99,29 +46,127 @@ public class Player extends JPanel {
 }
 */
 
+// VERSION 1
+//public class Player implements LoadImage {
+//    
+//    // variables
+//    private ImageIcon sprite;
+//    private String imageFile;
+//    private int width, height;
+//    
+//    public Player() {
+//        this.imageFile = "Test Tome left 1.png";
+//    }
+//    // ------------ Image ------------ \\
+//    public void loadImage() throws IOException {
+//        BufferedImage image = ImageIO.read(new File(this.imageFile));
+//        this.sprite = new ImageIcon(image);
+//        this.width = this.sprite.getIconWidth();
+//        this.height = this.sprite.getIconHeight();
+//    }
+//    
+//    public ImageIcon sendImage() {
+//        return this.sprite;
+//    }
+//        
+//    // ------------ Height&Width ------------ \\
+//    public int getHeight() {
+//        return this.height;
+//    }
+//    
+//    public int getWidth() {
+//        return this.width;
+//    }
+//    
+//    
+//    // ------------ Pack ------------ \\
+//    /*
+//    public Pack openPack() {
+//      return this.Pack();
+//    }
+//    
+//    public class Pack() {
+//    
+//      //instance variables?
+//      private int size;
+//      Map<String, Carriable> items;
+//      
+//      //constructor
+//      public Pack(Player) {
+//        //what data type should Pack be? Or what data types should it contain?
+//        this.items = new HashMap<String, Carriable>();
+//      }
+//      
+//      public HashMap getMap() { //What is the correct return type?
+//        return this.items; 
+//      }
+//      
+//      public void addItem(Carriable item) { //or have it return a boolean?
+//        //add to ...whatever data type the Pack is going to be. Map?
+//        this.size++;
+//      }
+//      
+//      public void removeItem(Carriable item) { //or return a boolean? 
+//        //remove from...whatever data type the Pack is going to be. Map?
+//        this.size--; 
+//      }
+//      
+//    }
+//    */        
+//}
 
-public class Player implements LoadImage {
+public class Player {
     
     // variables
-    private ImageIcon sprite;
-    private String imageFile;
+    public ImageIcon sprite;
+//    private String imageFile;
+    public ImageIcon[] sprites;
+    private String[] filenames;
     private int width, height;
     
-    public Player() {
-        this.imageFile = "Test Tome left 1.png";
-    }
-    
-    public void loadImage() throws IOException {
-        BufferedImage image = ImageIO.read(new File(this.imageFile));
-        this.sprite = new ImageIcon(image);
+    public Player() throws IOException {
+//        this.imageFile = "Test Tome left 1.png";
+//        this.filenames = new String[] {
+//            "Tome down stand.png",
+//                "Tome left 1.png",
+//                "Tome right 1.png",
+//                "Tome down 1.png",
+//                "Tome up 1.png"
+//        };
+//        
+//        this.sprites = new ImageIcon[5]; 
+//        for (int i = 0; i < sprites.length; i++) {
+//            BufferedImage image = ImageIO.read(new File(this.filenames[i]));
+//            sprites[i] = new ImageIcon(image);
+//        }
+        
+        this.sprites = new ImageIcon[] {
+            new ImageIcon(ImageIO.read(new File("Tome down stand.png"))),
+            new ImageIcon(ImageIO.read(new File("Tome left 1.png"))),
+            new ImageIcon(ImageIO.read(new File("Tome right 1.png"))),
+            new ImageIcon(ImageIO.read(new File("Tome down 1.png"))),
+            new ImageIcon(ImageIO.read(new File("Tome up 1.png")))
+        };
+        
+        this.sprite = sprites[0];
         this.width = this.sprite.getIconWidth();
         this.height = this.sprite.getIconHeight();
+        System.out.println(Arrays.toString(this.sprites));
     }
+    // ------------ Image ------------ \\
+//    private BufferedImage loadImage(String imageFile) throws IOException {
+//        BufferedImage image = ImageIO.read(new File(imageFile));
+//    }
     
     public ImageIcon sendImage() {
         return this.sprite;
     }
     
+//    public void loadImages() throws IOException {
+//        
+//    }
+        
+    // ------------ Height&Width ------------ \\
     public int getHeight() {
         return this.height;
     }
@@ -131,7 +176,7 @@ public class Player implements LoadImage {
     }
     
     
-    
+    // ------------ Pack ------------ \\
     /*
     public Pack openPack() {
       return this.Pack();
@@ -166,3 +211,4 @@ public class Player implements LoadImage {
     }
     */        
 }
+
