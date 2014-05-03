@@ -53,13 +53,18 @@ public class MainWindow extends JFrame implements KeyListener {
                 // ------------ Changing sprites ------------ \\
                 if (!tome.sprite.equals(tome.sprites[3])) shiftPlayerSprite(tome.sprites[3]);
                 else shiftPlayerSprite(tome.sprites[4]);
+                // ------------ Boundary Collision ------------ \\
                 // if this movement caused a collision:
                 // the movement flag becomes false.
                 // tome can no longer go in this direction 
                 // and will not be able to until the movement flag turns true again.
                 // i.e. tome moves away from the boundary
-                if (boundaryPanel.crossed(box.getBox()) == true) {
+                if (boundaryPanel.boundaryCrossed(box.getBox()) == true) {
                     boundaryPanel.moveR = false;
+                }
+                // ------------ Gate Collision ------------ \\
+                if (boundaryPanel.gateCrossed(box.getBox()) == true) {
+                    System.out.println("gate crossed");
                 }
             }
         }
@@ -72,8 +77,13 @@ public class MainWindow extends JFrame implements KeyListener {
                 // ------------ Changing sprites ------------ \\
                 if (!tome.sprite.equals(tome.sprites[1])) shiftPlayerSprite(tome.sprites[1]);
                 else shiftPlayerSprite(tome.sprites[2]);
-                if (boundaryPanel.crossed(box.getBox()) == true) {
+                // ------------ Boundary Collision ------------ \\
+                if (boundaryPanel.boundaryCrossed(box.getBox()) == true) {
                     boundaryPanel.moveL = false;
+                }
+                // ------------ Gate Collision ------------ \\
+                if (boundaryPanel.gateCrossed(box.getBox()) == true) {
+                    System.out.println("gate crossed");
                 }
             }
         }
@@ -86,8 +96,13 @@ public class MainWindow extends JFrame implements KeyListener {
                 // ------------ Changing sprites ------------ \\
                 if (!tome.sprite.equals(tome.sprites[7])) shiftPlayerSprite(tome.sprites[7]);
                 else shiftPlayerSprite(tome.sprites[8]);
-                if (boundaryPanel.crossed(box.getBox()) == true) {
+                // ------------ Boundary Collision ------------ \\
+                if (boundaryPanel.boundaryCrossed(box.getBox()) == true) {
                     boundaryPanel.moveU = false;
+                }
+                // ------------ Gate Collision ------------ \\
+                if (boundaryPanel.gateCrossed(box.getBox()) == true) {
+                    System.out.println("gate crossed");
                 }
             }
         }
@@ -100,8 +115,13 @@ public class MainWindow extends JFrame implements KeyListener {
                 // ------------ Changing sprites ------------ \\
                 if (!tome.sprite.equals(tome.sprites[5])) shiftPlayerSprite(tome.sprites[5]);
                 else shiftPlayerSprite(tome.sprites[6]);
-                if (boundaryPanel.crossed(box.getBox()) == true) {
+                // ------------ Boundary Collision ------------ \\
+                if (boundaryPanel.boundaryCrossed(box.getBox()) == true) {
                     boundaryPanel.moveD = false;
+                }
+                // ------------ Gate Collision ------------ \\
+                if (boundaryPanel.gateCrossed(box.getBox()) == true) {
+                    System.out.println("gate crossed");
                 }
             }
         }
@@ -126,7 +146,7 @@ public class MainWindow extends JFrame implements KeyListener {
                 
         }
         // this allows tome to move away from the boundary
-        if (boundaryPanel.crossed(box.getBox()) == false) {
+        if (boundaryPanel.boundaryCrossed(box.getBox()) == false) {
             boundaryPanel.moveL = true;
             boundaryPanel.moveR = true; 
             boundaryPanel.moveU = true; 
@@ -153,8 +173,6 @@ public class MainWindow extends JFrame implements KeyListener {
     private static final int OFFSET_X = 450;
     private static final int OFFSET_Y = 285;
     private static final int MOVE = 25;                 // movement speed
-//    public static final int X = -2150;
-//    public static final int Y = -290;
     
     // variables
     private static int x = -1830;
@@ -186,6 +204,8 @@ public class MainWindow extends JFrame implements KeyListener {
         box = new PlayerBox(PLAYER_X, PLAYER_Y, tome.getWidth(), tome.getHeight());
         box.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         // ------------ Panels ------------ \\
+        boundaryPanel = new BoundaryLines();
+        boundaryPanel.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.add(currentArea);
@@ -203,17 +223,18 @@ public class MainWindow extends JFrame implements KeyListener {
         setVisible(true);
     }
     
-    public void shiftWorld(ImageIcon image) {
+    private void shiftWorld(ImageIcon image) {
         currentArea.setIcon(image);
     }
     
-    public void shiftPlayerSprite(ImageIcon image) {
+    private void shiftPlayerSprite(ImageIcon image) {
         tome.sprite = image;
         playerLevel.setIcon(image);
     }
     
-    public void addBoundaries(int[][] points, int[] spawnPoint) {
-        boundaryPanel = new BoundaryLines(points, OFFSET_X, OFFSET_Y);
+    private void addBoundaries(int[][] boundaryPoints, int[][] gatePoints, int[] spawnPoint) {
+        window.remove(1);
+        boundaryPanel = new BoundaryLines(boundaryPoints, gatePoints, OFFSET_X, OFFSET_Y);
         boundaryPanel.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         int oldX = x;
         int oldY = y;
@@ -230,169 +251,10 @@ public class MainWindow extends JFrame implements KeyListener {
     // changes the background image;
     // changes the boundaries;
     // changes tome's start positon;
-    public void swapWorlds() {
-        // shiftWorld(ImageIcon image)
-        // addBoundaries(int[][] points)
+    public void swapWorlds(ImageIcon bgImage,
+                           int[][] boundaryPoints, int[][] gatePoints, int[] spawnPoints) {
+        shiftWorld(bgImage);
+        addBoundaries(boundaryPoints, gatePoints, spawnPoints);
     }  
 }
-
-
-//public class MainWindow extends JFrame implements KeyListener {
-//    
-//    // Moves currentArea with arrow keys
-//    public void keyPressed(KeyEvent event) {
-//        // going left
-//        if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
-//            if (boundaryPanel.moveR == true) {
-//                x -= MOVE;
-//                boundaryPanel.moveLines(-MOVE, 0);
-//                caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
-//                // if this movement caused a collision:
-//                // the movement flag becomes false.
-//                // tome can no longer go in this direction 
-//                // and will not be able to until the movement flag turns true again.
-//                // i.e. tome moves away from the boundary
-//                if (boundaryPanel.crossed(box.getBox()) == true) {
-//                    boundaryPanel.moveR = false;
-//                }
-//            }
-//        }
-//        // going right
-//        if (event.getKeyCode() == KeyEvent.VK_LEFT) {
-//            if (boundaryPanel.moveL == true) {
-//                x += MOVE;
-//                boundaryPanel.moveLines(MOVE, 0);
-//                caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
-//                if (boundaryPanel.crossed(box.getBox()) == true) {
-//                    boundaryPanel.moveL = false;
-//                }
-//            }
-//        }
-//        // going down
-//        if (event.getKeyCode() == KeyEvent.VK_UP) {
-//            if (boundaryPanel.moveU == true) {
-//                y += MOVE;
-//                boundaryPanel.moveLines(0, MOVE);
-//                caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
-//                if (boundaryPanel.crossed(box.getBox()) == true) {
-//                    boundaryPanel.moveU = false;
-//                }
-//            }
-//        }
-//        // going right
-//        if (event.getKeyCode() == KeyEvent.VK_DOWN) { 
-//            if (boundaryPanel.moveD == true) {
-//                y -= MOVE;
-//                boundaryPanel.moveLines(0, -MOVE);
-//                caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
-//                if (boundaryPanel.crossed(box.getBox()) == true) {
-//                    boundaryPanel.moveD = false;
-//                }
-//            }
-//        }
-//        // this allows tome to move away from the boundary
-//        if (boundaryPanel.crossed(box.getBox()) == false) {
-//            boundaryPanel.moveL = true;
-//            boundaryPanel.moveR = true; 
-//            boundaryPanel.moveU = true; 
-//            boundaryPanel.moveD = true;
-//        }
-//        currentArea.repaint();
-//        System.out.printf("x = %d, y = %d\n", x, y);
-//    }
-//    
-//    public void keyReleased(KeyEvent event) {
-//    }
-//    
-//    public void keyTyped(KeyEvent event) {
-//    }
-//    
-//    // constants
-//    private static final int W_WIDTH = 700;
-//    private static final int W_HEIGHT = 600;
-//    private static final int CA_WIDTH = 2000;
-//    private static final int CA_HEIGHT = 2000;
-//    private static final int XLCOORD = 370; //sets the spawn point of the game window on the computer screen
-//    private static final int YLCOORD = 100;
-//    private static final int RECONCILE_X = 200;
-//    private static final int RECONCILE_Y = 5;
-//    private static final int PLAYER_X = W_WIDTH / 2;
-//    private static final int PLAYER_Y = W_HEIGHT / 2;
-//    private static final int OFFSET_X = 450;
-//    private static final int OFFSET_Y = 285;
-//    private static final int MOVE = 15;
-//    
-//    // variables
-//    private static int x = -649; // -90, -649
-//    private static int y = -290; // -860, -290
-////    private static JPanel menuPanel = new JPanel();
-//    private static JLayeredPane window = new JLayeredPane();
-//    private static Place caPanel = new Place();
-//    private static JLabel currentArea = new JLabel();
-//    private static JLabel playerLevel = new JLabel();
-//    private static BoundaryLines boundaryPanel;
-//    private static PlayerBox box;
-//    
-//    // constructor
-//    public MainWindow() {
-//        // standard setup
-//        setTitle("Game name");
-//        setSize(W_WIDTH, W_HEIGHT);
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        
-//        //--------add more code after this line -------//
-//        add(window);
-//        window.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
-//        
-//        caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
-//        currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
-//        caPanel.add(currentArea);
-//        window.add(caPanel, new Integer(0), 0);
-//        window.add(playerLevel, new Integer(3), 0);
-//        
-//        //--------add more code before this line -------//
-//        
-//        this.addKeyListener(this);
-//        this.setFocusable(true);
-//        setLocation(XLCOORD, YLCOORD);
-//        setVisible(true);
-//    }
-//    
-//    public void shiftWorld(ImageIcon image) {
-//        currentArea.setIcon(image);
-//    }
-//
-//    public void addPlayer(ImageIcon image, int width, int height, int[] spawnPoint) { 
-//        System.out.printf("spawn X = %d, spawn Y = %d\n", spawnPoint[0], spawnPoint[1]);
-//        playerLevel.setBounds(spawnPoint[0], spawnPoint[1], width, height);
-////        playerLevel.setBounds(PLAYER_X, PLAYER_Y, width, height);
-//        playerLevel.setIcon(image);
-//        addPlayerBox(width, height, spawnPoint);
-//    }
-//    
-//    public void addPlayerBox(int width, int height, int[] spawnPoint) {
-//        box = new PlayerBox(spawnPoint[0], spawnPoint[1], width, height);
-////        box = new PlayerBox(PLAYER_X, PLAYER_Y, width, height);
-//        box.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
-//        window.add(box, new Integer(1), 0);
-//    }
-//    
-//    public void addBoundaries(int[][] points) {
-//        boundaryPanel = new BoundaryLines(points, OFFSET_X, OFFSET_Y);
-//        boundaryPanel.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
-//        window.add(boundaryPanel, new Integer(1), 0);
-//    }
-//    
-//    /*
-//     * Handles all changes
-//     * 
-//     * changes the background image;
-//     * changes the boundaries;
-//     * changes tome's start positon;
-//     */
-//    public void swapWorlds() {
-//        // shiftWorld(ImageIcon image)
-//        // addBoundaries(int[][] points)
-//    }
-//    
-//}
+        
