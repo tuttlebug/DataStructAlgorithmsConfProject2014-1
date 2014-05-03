@@ -119,8 +119,8 @@ public class Place implements LoadImage {
     // ------------ Spawn points ------------ \\
     // load spawn point
     public void loadSpawnPoint(int x, int y) {
-        this.spawnPoint[0] = x * 32;
-        this.spawnPoint[1] = y * 32;
+        this.spawnPoint[0] = x;
+        this.spawnPoint[1] = y;
     }
     
     public int[] sendSpawnPoint() {

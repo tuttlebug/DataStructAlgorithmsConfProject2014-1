@@ -8,6 +8,9 @@
  * 
  * To Add/Implement:
  * [] method that sends the character to a new screen
+ * 
+ * Spawn calculations:
+ * 1. Village (-2399, -736);
  */
 public class Gate {
     

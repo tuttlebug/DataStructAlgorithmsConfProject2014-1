@@ -22,6 +22,7 @@
  * 
  * METHODS TO THINK ABOUT:
  * [] JLayeredPane.paint(Graphics g)
+ * 
  */
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -51,9 +52,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 // tome can no longer go in this direction 
                 // and will not be able to until the movement flag turns true again.
                 // i.e. tome moves away from the boundary
-//                if (boundaryPanel.crossed(box.getBox()) == true) {
-//                    boundaryPanel.moveR = false;
-//                }
+                if (boundaryPanel.crossed(box.getBox()) == true) {
+                    boundaryPanel.moveR = false;
+                }
             }
         }
         // going right
@@ -62,9 +63,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 x += MOVE;
                 boundaryPanel.moveLines(MOVE, 0);
                 caPanel.setLocation(x, y);
-//                if (boundaryPanel.crossed(box.getBox()) == true) {
-//                    boundaryPanel.moveL = false;
-//                }
+                if (boundaryPanel.crossed(box.getBox()) == true) {
+                    boundaryPanel.moveL = false;
+                }
             }
         }
         // going down
@@ -73,9 +74,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 y += MOVE;
                 boundaryPanel.moveLines(0, MOVE);
                 caPanel.setLocation(x, y);
-//                if (boundaryPanel.crossed(box.getBox()) == true) {
-//                    boundaryPanel.moveU = false;
-//                }
+                if (boundaryPanel.crossed(box.getBox()) == true) {
+                    boundaryPanel.moveU = false;
+                }
             }
         }
         // going right
@@ -84,9 +85,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 y -= MOVE;
                 boundaryPanel.moveLines(0, -MOVE);
                 caPanel.setLocation(x, y);
-//                if (boundaryPanel.crossed(box.getBox()) == true) {
-//                    boundaryPanel.moveD = false;
-//                }
+                if (boundaryPanel.crossed(box.getBox()) == true) {
+                    boundaryPanel.moveD = false;
+                }
             }
         }
         // this allows tome to move away from the boundary
@@ -198,11 +199,11 @@ public class MainWindow extends JFrame implements KeyListener {
         boundaryPanel = new BoundaryLines(points, OFFSET_X, OFFSET_Y);
         System.out.printf("X = %d, Y = %d\n", X - spawnPoint[0], Y - spawnPoint[1]);
         boundaryPanel.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
-        int oldX = x;
+        int oldX = x; // -1830, -290
         int oldY = y;
-        x -= spawnPoint[0] / 4;
-        y -= spawnPoint[1] / 6;
-        boundaryPanel.setLocation(x, y); // -2405 - (-2150) = -255, -410 - (-290) = -120
+        x = spawnPoint[0]; // 1376, 1056
+        y = spawnPoint[1]; // These calculations may need to be passed through
+        boundaryPanel.setLocation(x, y); // x = -2399 - (-1860) = -4229, y = -736 - (-290) = -446, 
         caPanel.setLocation(x, y);
 //        boundaryPanel.setAlignmentX(0);
         boundaryPanel.moveLines(x - oldX, y - oldY);
