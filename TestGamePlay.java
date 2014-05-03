@@ -87,7 +87,6 @@ public class TestGamePlay {
         mw.shiftWorld(current.sendImage());
         mw.addPlayer(tome.sendImage(), tome.getWidth(), tome.getHeight());
         mw.addPlayerBox(tome.getWidth(), tome.getHeight());
-        current.loadSpawnPoint(30, 10);
         mw.addBoundaries(current.sendBoundaryPoints(), current.sendSpawnPoint());
     }
     

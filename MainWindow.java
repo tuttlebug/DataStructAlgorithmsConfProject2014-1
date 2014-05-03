@@ -19,7 +19,6 @@
  *   - using paint
  * 
  * Temporary:
- * [] currentArea.setBounds(x, y, W_WIDTH, W_HEIGHT) in keyPressed
  * 
  * METHODS TO THINK ABOUT:
  * [] JLayeredPane.paint(Graphics g)
@@ -52,9 +51,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 // tome can no longer go in this direction 
                 // and will not be able to until the movement flag turns true again.
                 // i.e. tome moves away from the boundary
-                if (boundaryPanel.crossed(box.getBox()) == true) {
-                    boundaryPanel.moveR = false;
-                }
+//                if (boundaryPanel.crossed(box.getBox()) == true) {
+//                    boundaryPanel.moveR = false;
+//                }
             }
         }
         // going right
@@ -63,9 +62,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 x += MOVE;
                 boundaryPanel.moveLines(MOVE, 0);
                 caPanel.setLocation(x, y);
-                if (boundaryPanel.crossed(box.getBox()) == true) {
-                    boundaryPanel.moveL = false;
-                }
+//                if (boundaryPanel.crossed(box.getBox()) == true) {
+//                    boundaryPanel.moveL = false;
+//                }
             }
         }
         // going down
@@ -74,9 +73,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 y += MOVE;
                 boundaryPanel.moveLines(0, MOVE);
                 caPanel.setLocation(x, y);
-                if (boundaryPanel.crossed(box.getBox()) == true) {
-                    boundaryPanel.moveU = false;
-                }
+//                if (boundaryPanel.crossed(box.getBox()) == true) {
+//                    boundaryPanel.moveU = false;
+//                }
             }
         }
         // going right
@@ -85,9 +84,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 y -= MOVE;
                 boundaryPanel.moveLines(0, -MOVE);
                 caPanel.setLocation(x, y);
-                if (boundaryPanel.crossed(box.getBox()) == true) {
-                    boundaryPanel.moveD = false;
-                }
+//                if (boundaryPanel.crossed(box.getBox()) == true) {
+//                    boundaryPanel.moveD = false;
+//                }
             }
         }
         // this allows tome to move away from the boundary
@@ -98,6 +97,30 @@ public class MainWindow extends JFrame implements KeyListener {
             boundaryPanel.moveD = true;
         }
         System.out.printf("x = %d, y = %d\n", x, y);
+//        System.out.printf("BoundaryLabel Location: x = %d, y = %d, width = %d, height = %d, xalign = %f, y align = %f\nbounds = %s\n", 
+//                          boundaryPanel.getX(),
+//                          boundaryPanel.getY(),
+//                          boundaryPanel.getWidth(),
+//                          boundaryPanel.getHeight(),
+//                          boundaryPanel.getAlignmentX(),
+//                          boundaryPanel.getAlignmentY(),
+//                          boundaryPanel.getBounds().toString());
+//        System.out.printf("caPanel Location: x = %d, y = %d, width = %d, height = %d, xalign = %f, y align = %f\nbounds = %s\n", 
+//                          caPanel.getX(),
+//                          caPanel.getY(),
+//                          caPanel.getWidth(),
+//                          caPanel.getHeight(),
+//                          caPanel.getAlignmentX(),
+//                          caPanel.getAlignmentY(),
+//                          caPanel.getBounds().toString());
+//        System.out.printf("window Location: x = %d, y = %d, width = %d, height = %d, xalign = %f, y align = %f\nbounds = %s\n\n", 
+//                          window.getX(),
+//                          window.getY(),
+//                          window.getWidth(),
+//                          window.getHeight(),
+//                          window.getAlignmentX(),
+//                          window.getAlignmentY(),
+//                          window.getBounds().toString());
     }
     
     public void keyReleased(KeyEvent event) {
@@ -122,7 +145,7 @@ public class MainWindow extends JFrame implements KeyListener {
     public static final int Y = -290;
     
     // variables
-    private static int x = -2150; // -90, -649, -2150
+    private static int x = -1830; // -90, -649, -1830
     private static int y = -290; // -860, -290  -290
     private static JLayeredPane window = new JLayeredPane();
     private static JPanel caPanel = new JPanel();
@@ -140,7 +163,7 @@ public class MainWindow extends JFrame implements KeyListener {
         
         //--------add more code after this line -------//
         add(window);
-        window.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
+        window.setBounds(x, y, W_WIDTH, W_HEIGHT); 
         
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
@@ -179,10 +202,21 @@ public class MainWindow extends JFrame implements KeyListener {
         int oldY = y;
         x -= spawnPoint[0] / 4;
         y -= spawnPoint[1] / 6;
-        boundaryPanel.moveLines(x - oldX, y - oldY);
         boundaryPanel.setLocation(x, y); // -2405 - (-2150) = -255, -410 - (-290) = -120
         caPanel.setLocation(x, y);
+//        boundaryPanel.setAlignmentX(0);
+        boundaryPanel.moveLines(x - oldX, y - oldY);
         window.add(boundaryPanel, new Integer(1), 0);
+//        System.out.printf("BoundaryLabel Location: x = %d, y = %d, width = %d, height = %d\n", 
+//                          boundaryPanel.getX(),
+//                          boundaryPanel.getY(),
+//                          boundaryPanel.getWidth(),
+//                          boundaryPanel.getHeight());
+//        System.out.printf("caPanel Location: x = %d, y = %d, width = %d, height = %d\n", 
+//                          caPanel.getX(),
+//                          caPanel.getY(),
+//                          caPanel.getWidth(),
+//                          caPanel.getHeight());
     }
     
     // Handles all changes

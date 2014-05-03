@@ -24,7 +24,7 @@ public class PlayerBox extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D pen = (Graphics2D) g;
-        pen.setColor(getBackground());
+        pen.setColor(Color.BLUE);
         pen.draw(this.box);
         // makes background transparent
         g.setColor(getBackground());

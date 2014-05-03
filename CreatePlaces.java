@@ -225,7 +225,7 @@ public class CreatePlaces {
           { 40, 27, 42, 29 }, 
           { 42, 29, 42, 30 },
           { 42, 30, 43, 30 }
-        }
+        };
         clearing_Cave.loadBoundaryPoints(clearing_CaveBoundaries);
         // gates
         int[][] clearing_CaveGates = new int[][]{
