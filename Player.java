@@ -119,53 +119,36 @@ public class Player {
     
     // variables
     public ImageIcon sprite;
-//    private String imageFile;
     public ImageIcon[] sprites;
     private String[] filenames;
     private int width, height;
     
     public Player() throws IOException {
-//        this.imageFile = "Test Tome left 1.png";
-//        this.filenames = new String[] {
-//            "Tome down stand.png",
-//                "Tome left 1.png",
-//                "Tome right 1.png",
-//                "Tome down 1.png",
-//                "Tome up 1.png"
-//        };
-//        
-//        this.sprites = new ImageIcon[5]; 
-//        for (int i = 0; i < sprites.length; i++) {
-//            BufferedImage image = ImageIO.read(new File(this.filenames[i]));
-//            sprites[i] = new ImageIcon(image);
-//        }
-        
         this.sprites = new ImageIcon[] {
-            new ImageIcon(ImageIO.read(new File("Tome down stand.png"))),
-            new ImageIcon(ImageIO.read(new File("Tome left 1.png"))),
-            new ImageIcon(ImageIO.read(new File("Tome right 1.png"))),
-            new ImageIcon(ImageIO.read(new File("Tome down 1.png"))),
-            new ImageIcon(ImageIO.read(new File("Tome up 1.png")))
+            new ImageIcon(ImageIO.read(new File("Tome down stand.png"))), // 0
+            new ImageIcon(ImageIO.read(new File("Tome left 1.png"))),     // 1
+            new ImageIcon(ImageIO.read(new File("Tome left 2.png"))),     // 2
+            new ImageIcon(ImageIO.read(new File("Tome right 1.png"))),    // 3
+            new ImageIcon(ImageIO.read(new File("Tome right 2.png"))),    // 4
+            new ImageIcon(ImageIO.read(new File("Tome down 1.png"))),     // 5
+            new ImageIcon(ImageIO.read(new File("Tome down 2.png"))),     // 6
+            new ImageIcon(ImageIO.read(new File("Tome up 1.png"))),       // 7
+            new ImageIcon(ImageIO.read(new File("Tome up 2.png"))),       // 8
+            new ImageIcon(ImageIO.read(new File("Tome atk down.png"))),   // 9
+            new ImageIcon(ImageIO.read(new File("Tome atk left.png"))),   // 10
+            new ImageIcon(ImageIO.read(new File("Tome atk right.png"))),  // 11
+            new ImageIcon(ImageIO.read(new File("Tome atk up.png")))      // 12
         };
         
         this.sprite = sprites[0];
         this.width = this.sprite.getIconWidth();
         this.height = this.sprite.getIconHeight();
-        System.out.println(Arrays.toString(this.sprites));
     }
     // ------------ Image ------------ \\
-//    private BufferedImage loadImage(String imageFile) throws IOException {
-//        BufferedImage image = ImageIO.read(new File(imageFile));
-//    }
-    
     public ImageIcon sendImage() {
         return this.sprite;
     }
     
-//    public void loadImages() throws IOException {
-//        
-//    }
-        
     // ------------ Height&Width ------------ \\
     public int getHeight() {
         return this.height;

@@ -35,7 +35,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import java.util.ArrayList;
+import java.util.*;
 
 // VERSION 1
 
@@ -43,13 +43,16 @@ public class MainWindow extends JFrame implements KeyListener {
     
     // Moves currentArea with arrow keys
     public void keyPressed(KeyEvent event) {
+        // ------------ Movement ------------ \\
         // going left
         if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
             if (boundaryPanel.moveR == true) {
                 x -= MOVE;
                 boundaryPanel.moveLines(-MOVE, 0);
                 caPanel.setLocation(x, y);
-                shiftPlayerSprite(tome.sprites[2]);
+                // ------------ Changing sprites ------------ \\
+                if (!tome.sprite.equals(tome.sprites[3])) shiftPlayerSprite(tome.sprites[3]);
+                else shiftPlayerSprite(tome.sprites[4]);
                 // if this movement caused a collision:
                 // the movement flag becomes false.
                 // tome can no longer go in this direction 
@@ -66,7 +69,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 x += MOVE;
                 boundaryPanel.moveLines(MOVE, 0);
                 caPanel.setLocation(x, y);
-                shiftPlayerSprite(tome.sprites[1]);
+                // ------------ Changing sprites ------------ \\
+                if (!tome.sprite.equals(tome.sprites[1])) shiftPlayerSprite(tome.sprites[1]);
+                else shiftPlayerSprite(tome.sprites[2]);
                 if (boundaryPanel.crossed(box.getBox()) == true) {
                     boundaryPanel.moveL = false;
                 }
@@ -78,7 +83,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 y += MOVE;
                 boundaryPanel.moveLines(0, MOVE);
                 caPanel.setLocation(x, y);
-                shiftPlayerSprite(tome.sprites[4]);
+                // ------------ Changing sprites ------------ \\
+                if (!tome.sprite.equals(tome.sprites[7])) shiftPlayerSprite(tome.sprites[7]);
+                else shiftPlayerSprite(tome.sprites[8]);
                 if (boundaryPanel.crossed(box.getBox()) == true) {
                     boundaryPanel.moveU = false;
                 }
@@ -90,11 +97,33 @@ public class MainWindow extends JFrame implements KeyListener {
                 y -= MOVE;
                 boundaryPanel.moveLines(0, -MOVE);
                 caPanel.setLocation(x, y);
-                shiftPlayerSprite(tome.sprites[3]);
+                // ------------ Changing sprites ------------ \\
+                if (!tome.sprite.equals(tome.sprites[5])) shiftPlayerSprite(tome.sprites[5]);
+                else shiftPlayerSprite(tome.sprites[6]);
                 if (boundaryPanel.crossed(box.getBox()) == true) {
                     boundaryPanel.moveD = false;
                 }
             }
+        }
+        // ------------ Attacking ------------ \\
+        if (event.getKeyCode() == KeyEvent.VK_SHIFT) {
+            // attack left
+            if (tome.sprite.equals(tome.sprites[3]) || tome.sprite.equals(tome.sprites[4])) {
+                shiftPlayerSprite(tome.sprites[11]);
+            }
+            // attack right
+            if (tome.sprite.equals(tome.sprites[1]) || tome.sprite.equals(tome.sprites[2])) {
+                shiftPlayerSprite(tome.sprites[10]);
+            }
+            // attack down
+            if (tome.sprite.equals(tome.sprites[7]) || tome.sprite.equals(tome.sprites[8])) {
+                shiftPlayerSprite(tome.sprites[12]);
+            }
+            // attack up
+            if (tome.sprite.equals(tome.sprites[5]) || tome.sprite.equals(tome.sprites[6])) {
+                shiftPlayerSprite(tome.sprites[9]);
+            }
+                
         }
         // this allows tome to move away from the boundary
         if (boundaryPanel.crossed(box.getBox()) == false) {
@@ -179,6 +208,7 @@ public class MainWindow extends JFrame implements KeyListener {
     }
     
     public void shiftPlayerSprite(ImageIcon image) {
+        tome.sprite = image;
         playerLevel.setIcon(image);
     }
     
