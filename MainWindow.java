@@ -203,9 +203,8 @@ public class MainWindow extends JFrame implements KeyListener {
         int oldY = y;
         x = spawnPoint[0]; // 1376, 1056
         y = spawnPoint[1]; // These calculations may need to be passed through
-        boundaryPanel.setLocation(x, y); // x = -2399 - (-1860) = -4229, y = -736 - (-290) = -446, 
-        caPanel.setLocation(x, y);
-//        boundaryPanel.setAlignmentX(0);
+//        boundaryPanel.setLocation(x, y); // x = -2399 - (-1860) = -4229, y = -736 - (-290) = -446, 
+//        caPanel.setLocation(x, y);
         boundaryPanel.moveLines(x - oldX, y - oldY);
         window.add(boundaryPanel, new Integer(1), 0);
 //        System.out.printf("BoundaryLabel Location: x = %d, y = %d, width = %d, height = %d\n", 
