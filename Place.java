@@ -126,8 +126,17 @@ public class Place implements LoadImage {
 //    public ArrayList<Gate> sendGates() {
 //        return this.gateList;
 //    }
-    public void loadGates(Place area1, Place area2, int[] start, int[] end, int[] gatePoints) throws IOException {
-        this.gateList.add(new Gate(area1, area2, start, end, gatePoints));  
+    // VERSION 2
+//    public void loadGates(Place area1, Place area2, int[] start, int[] end, int[] gatePoints) throws IOException {
+//        this.gateList.add(new Gate(area1, area2, start, end, gatePoints));  
+//    }
+//    
+//    public ArrayList<Gate> sendGates() {
+//        return this.gateList;
+//    }
+    // VERSION 3
+    public void loadGates(Place area1, Place area2, int[] start, int[] end) throws IOException {
+        this.gateList.add(new Gate(area1, area2, start, end));  
     }
     
     public ArrayList<Gate> sendGates() {
@@ -176,8 +185,13 @@ public class Place implements LoadImage {
     
     // ------------ toString() ------------ \\
     public String toString() {
-        return String.format("\nNAME: %s\nNEIGHBORING AREAS: %s\nAVAILABLE ITEMS: %s\nBACKGROUND: %s\n",
-                             this.name, this.neighborList, this.itemList, this.imageFile);
+        return String.format("\nNAME: %s\nNEIGHBORING AREAS: %s\nAVAILABLE ITEMS: %s\nBACKGROUND: %s, SPAWNPOINTS: %d,%d \nGATES: %s\n",
+                             this.name, 
+                             this.neighborList, 
+                             this.itemList, 
+                             this.imageFile, 
+                             this.spawnPoint[0], this.spawnPoint[1], 
+                             this.gateList);
     }
     
 }

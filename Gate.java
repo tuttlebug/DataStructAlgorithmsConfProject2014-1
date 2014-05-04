@@ -84,23 +84,34 @@ public class Gate {
 }
 */
 
-
-public class Gate {
+// VERSION 2
+/*
+public class Gate extends Line2D.Double {
+    
+    private static final int OFFSET_X = 450;
+    private static final int OFFSET_Y = 285;
     
     // instance variables
     public int[] startPoint;
     public int[] endPoint;
-    private Line2D.Double gate;
     private Place area1;
     private Place area2;
+//    private int x1, x2, y1, y2;
+    private Line2D.Double gate;
     
     public Gate(Place area1, Place area2, int[] startSpawnPoint, int[] endSpawnPoint, int[] gatePoints) throws IOException {
         this.area1 = area1;
         this.area2 = area2;
         this.startPoint = startSpawnPoint;
         this.endPoint = endSpawnPoint;
-        this.gate = new Line2D.Double(gatePoints[0] * 32, gatePoints[1] * 32, 
-                                      gatePoints[2] * 32, gatePoints[3] * 32);
+        this.gate = new Line2D.Double(gatePoints[0] * 32 - OFFSET_X, 
+                                      gatePoints[1] * 32 - OFFSET_Y, 
+                                      gatePoints[2] * 32 - OFFSET_X,
+                                      gatePoints[3] * 32 - OFFSET_Y);
+//        this.x1 = gatePoints[0] * 32;
+//        this.y1 = gatePoints[1] * 32;
+//        this.x2 = gatePoints[2] * 32;
+//        this.y2 = gatePoints[3] * 32;
     }
     
     // ------------ Background Image ------------ \\
@@ -111,9 +122,9 @@ public class Gate {
 //        this.backgrounds[1] = new ImageIcon(endImage);
 //    }
     
-//    public Line2D.Double sendLine() {
-//        return this.gate;
-//    }
+    public Line2D.Double sendLine() {
+        return this.gate;
+    }
 //    
 //    public int[] sendStart() {
 //        return this.startPoint;
@@ -132,4 +143,69 @@ public class Gate {
         
     }
 }
+*/
+
+public class Gate extends Line2D.Double {    
+    // instance variables
+    public int[] startPoint;
+    public int[] endPoint;
+    private Place area1;
+    private Place area2;
+    private Place currentArea, nextArea;
+    private Line2D.Double gate;
+    
+    public Gate(Place area1, Place area2, int[] startSpawnPoint, int[] endSpawnPoint) throws IOException {
+        this.area1 = area1;
+        this.area2 = area2;
+        this.currentArea = area1;
+        this.nextArea = area2;
+        this.startPoint = startSpawnPoint;
+        this.endPoint = endSpawnPoint;
+        this.gate = new Line2D.Double();
+    }
+    
+    // ------------ Line ------------ \\
+    public void loadLine(int x1, int y1, int x2, int y2) {
+        this.gate = new Line2D.Double(x1, y1, x2, y2);
+    }
+    
+    public Line2D.Double sendLine() {
+        return this.gate;
+    }
+//    
+//    public int[] sendStart() {
+//        return this.startPoint;
+//    }
+//    
+//    public int[] sendEnd() {
+//        return this.endPoint;
+//    }
+    
+    // ------------ Swapping areas ------------ \\
+    public Place toNextWorld() {
+        if (this.currentArea.equals(area1)) {
+            this.nextArea = this.area1;
+            this.currentArea = this.area2;
+        }
+        else {
+            this.nextArea = this.area2;
+            this.currentArea = this.area1;
+        }
+        this.currentArea.loadSpawnPoint(this.endPoint[0], this.endPoint[1]);
+        return this.currentArea;
+        
+    }
+    
+    // ------------ toString ------------ \\
+    public String toString() {
+        return String.format("current area is %s, next area is %s\nx1 = %f, y1 = %f, x2 =  %f, y2 = %f\n", 
+                             this.currentArea.getName(), 
+                             this.nextArea.getName(), 
+                             this.gate.getX1(),
+                             this.gate.getY1(),
+                             this.gate.getX2(),
+                             this.gate.getY2());
+    }
+}
+
 

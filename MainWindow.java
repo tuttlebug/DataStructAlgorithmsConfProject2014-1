@@ -38,6 +38,7 @@ import javax.swing.*;
 import java.util.*;
 
 // VERSION 1
+/*
 public class MainWindow extends JFrame implements KeyListener {
     
     // Moves currentArea with arrow keys
@@ -83,6 +84,7 @@ public class MainWindow extends JFrame implements KeyListener {
                 // ------------ Gate Collision ------------ \\
                 if (boundaryPanel.gateCrossed(box.getBox()) == true) {
                     System.out.println("gate crossed");
+                    // swapWorlds(boundaryPanel.gate);
                 }
             }
         }
@@ -242,8 +244,7 @@ public class MainWindow extends JFrame implements KeyListener {
         caPanel.setLocation(x, y);
         boundaryPanel.setLocation(x, y);
         boundaryPanel.moveLines(x - oldX, y - oldY);
-        caPanel.add(boundaryPanel);
-//        window.add(boundaryPanel, new Integer(1), 0);
+        window.add(boundaryPanel, new Integer(1), 0);
     }
     
     // Handles all changes
@@ -253,8 +254,9 @@ public class MainWindow extends JFrame implements KeyListener {
         addBoundaries(boundaryPoints, gatePoints, spawnPoints);
     }  
 }
-       
-/*
+*/
+    
+
 public class MainWindow extends JFrame implements KeyListener {
     
     // Moves currentArea with arrow keys
@@ -267,8 +269,8 @@ public class MainWindow extends JFrame implements KeyListener {
                 boundaryPanel.moveLines(-MOVE, 0);
                 caPanel.setLocation(x, y);
                 // ------------ Changing sprites ------------ \\
-                if (!tome.sprite.equals(tome.sprites[3])) shiftPlayerSprite(tome.sprites[3]);
-                else shiftPlayerSprite(tome.sprites[4]);
+                if (!tome.sprite.equals(tome.sprites[4])) shiftPlayerSprite(tome.sprites[4]);
+                else shiftPlayerSprite(tome.sprites[5]);  
                 // ------------ Boundary Collision ------------ \\
                 // if this movement caused a collision:
                 // the movement flag becomes false.
@@ -281,6 +283,8 @@ public class MainWindow extends JFrame implements KeyListener {
                 // ------------ Gate Collision ------------ \\
                 if (boundaryPanel.gateCrossed(box.getBox()) == true) {
                     System.out.println("gate crossed");
+                    Gate g = boundaryPanel.getCrossedGate();
+                    swapWorlds(g);
                 }
             }
         }
@@ -300,6 +304,8 @@ public class MainWindow extends JFrame implements KeyListener {
                 // ------------ Gate Collision ------------ \\
                 if (boundaryPanel.gateCrossed(box.getBox()) == true) {
                     System.out.println("gate crossed");
+                    Gate g = boundaryPanel.getCrossedGate();
+                    swapWorlds(g);
                 }
             }
         }
@@ -310,8 +316,8 @@ public class MainWindow extends JFrame implements KeyListener {
                 boundaryPanel.moveLines(0, MOVE);
                 caPanel.setLocation(x, y);
                 // ------------ Changing sprites ------------ \\
-                if (!tome.sprite.equals(tome.sprites[7])) shiftPlayerSprite(tome.sprites[7]);
-                else shiftPlayerSprite(tome.sprites[8]);
+                if (!tome.sprite.equals(tome.sprites[10])) shiftPlayerSprite(tome.sprites[10]);
+                else shiftPlayerSprite(tome.sprites[11]);
                 // ------------ Boundary Collision ------------ \\
                 if (boundaryPanel.boundaryCrossed(box.getBox()) == true) {
                     boundaryPanel.moveU = false;
@@ -319,6 +325,8 @@ public class MainWindow extends JFrame implements KeyListener {
                 // ------------ Gate Collision ------------ \\
                 if (boundaryPanel.gateCrossed(box.getBox()) == true) {
                     System.out.println("gate crossed");
+                    Gate g = boundaryPanel.getCrossedGate();
+                    swapWorlds(g);
                 }
             }
         }
@@ -329,8 +337,8 @@ public class MainWindow extends JFrame implements KeyListener {
                 boundaryPanel.moveLines(0, -MOVE);
                 caPanel.setLocation(x, y);
                 // ------------ Changing sprites ------------ \\
-                if (!tome.sprite.equals(tome.sprites[5])) shiftPlayerSprite(tome.sprites[5]);
-                else shiftPlayerSprite(tome.sprites[6]);
+                if (!tome.sprite.equals(tome.sprites[7])) shiftPlayerSprite(tome.sprites[7]);
+                else shiftPlayerSprite(tome.sprites[8]);
                 // ------------ Boundary Collision ------------ \\
                 if (boundaryPanel.boundaryCrossed(box.getBox()) == true) {
                     boundaryPanel.moveD = false;
@@ -338,26 +346,28 @@ public class MainWindow extends JFrame implements KeyListener {
                 // ------------ Gate Collision ------------ \\
                 if (boundaryPanel.gateCrossed(box.getBox()) == true) {
                     System.out.println("gate crossed");
+                    Gate g = boundaryPanel.getCrossedGate();
+                    swapWorlds(g);
                 }
             }
         }
         // ------------ Attacking ------------ \\
         if (event.getKeyCode() == KeyEvent.VK_SHIFT) {
             // attack left
-            if (tome.sprite.equals(tome.sprites[3]) || tome.sprite.equals(tome.sprites[4])) {
-                shiftPlayerSprite(tome.sprites[11]);
+            if (tome.sprite.equals(tome.sprites[4]) || tome.sprite.equals(tome.sprites[5]) || tome.sprite.equals(tome.sprites[3])) {
+                shiftPlayerSprite(tome.sprites[14]);
             }
             // attack right
-            if (tome.sprite.equals(tome.sprites[1]) || tome.sprite.equals(tome.sprites[2])) {
-                shiftPlayerSprite(tome.sprites[10]);
-            }
-            // attack down
-            if (tome.sprite.equals(tome.sprites[7]) || tome.sprite.equals(tome.sprites[8])) {
-                shiftPlayerSprite(tome.sprites[12]);
+            if (tome.sprite.equals(tome.sprites[1]) || tome.sprite.equals(tome.sprites[2]) || tome.sprite.equals(tome.sprites[0])) {
+                shiftPlayerSprite(tome.sprites[13]);
             }
             // attack up
-            if (tome.sprite.equals(tome.sprites[5]) || tome.sprite.equals(tome.sprites[6])) {
-                shiftPlayerSprite(tome.sprites[9]);
+            if (tome.sprite.equals(tome.sprites[10]) || tome.sprite.equals(tome.sprites[11]) || tome.sprite.equals(tome.sprites[9])) {
+                shiftPlayerSprite(tome.sprites[15]);
+            }
+            // attack down
+            if (tome.sprite.equals(tome.sprites[7]) || tome.sprite.equals(tome.sprites[8]) || tome.sprite.equals(tome.sprites[6])) {
+                shiftPlayerSprite(tome.sprites[12]);
             }
                 
         }
@@ -368,10 +378,26 @@ public class MainWindow extends JFrame implements KeyListener {
             boundaryPanel.moveU = true; 
             boundaryPanel.moveD = true;
         }
-        System.out.printf("x = %d, y = %d\n", x, y);
+//        System.out.printf("x = %d, y = %d\n", x, y);
     }
     
     public void keyReleased(KeyEvent event) {
+        // left
+        if (event.getKeyCode() == KeyEvent.VK_RIGHT) { 
+            shiftPlayerSprite(tome.sprites[3]);
+        }
+        // right
+        if (event.getKeyCode() == KeyEvent.VK_LEFT) { 
+            shiftPlayerSprite(tome.sprites[0]);
+        }
+        // down
+        if (event.getKeyCode() == KeyEvent.VK_UP) { 
+            shiftPlayerSprite(tome.sprites[9]);
+        }
+        // up
+        if (event.getKeyCode() == KeyEvent.VK_DOWN) { 
+            shiftPlayerSprite(tome.sprites[6]);
+        }
     }
     
     public void keyTyped(KeyEvent event) {
@@ -417,7 +443,7 @@ public class MainWindow extends JFrame implements KeyListener {
         tome = new Player();
         playerLevel.setIcon(tome.sprite);
         playerLevel.setBounds(PLAYER_X, PLAYER_Y, tome.getWidth(), tome.getHeight());
-        box = new PlayerBox(PLAYER_X, PLAYER_Y, tome.getWidth(), tome.getHeight());
+        box = new PlayerBox(PLAYER_X, PLAYER_Y, tome.getWidth() + 5, tome.getHeight() + 5);
         box.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         // ------------ Panels ------------ \\
         boundaryPanel = new BoundaryLines();
@@ -448,9 +474,9 @@ public class MainWindow extends JFrame implements KeyListener {
         playerLevel.setIcon(image);
     }
     
-    private void addBoundaries(int[][] boundaryPoints, ArrayList<Gate> gates, int[] spawnPoint) {
+    private void addBoundaries(int[][] boundaryPoints, int[][] gatePoints, ArrayList<Gate> gates, int[] spawnPoint) {
         window.remove(1);
-        boundaryPanel = new BoundaryLines(boundaryPoints, gates, OFFSET_X, OFFSET_Y);
+        boundaryPanel = new BoundaryLines(boundaryPoints, gatePoints, gates, OFFSET_X, OFFSET_Y);
         boundaryPanel.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         int oldX = x;
         int oldY = y;
@@ -463,10 +489,19 @@ public class MainWindow extends JFrame implements KeyListener {
     }
     
     // Handles all changes
-    public void swapWorlds(ImageIcon bgImage,
-                           int[][] boundaryPoints, ArrayList<Gate> gates, int[] spawnPoints) {
+    // to start program off
+    public void swapWorlds(ImageIcon bgImage,int[][] boundaryPoints, 
+                           int[][] gatePoints, ArrayList<Gate> gates, int[] spawnPoints) {
         shiftWorld(bgImage);
-        addBoundaries(boundaryPoints, gates, spawnPoints);
+        addBoundaries(boundaryPoints, gatePoints, gates, spawnPoints);
     }  
+    
+    // used when tome crosses a gate
+    public void swapWorlds(Gate g) {
+        Place current = g.toNextWorld();
+        shiftWorld(current.sendImage());
+        addBoundaries(current.sendBoundaryPoints(), current.sendGatePoints(), 
+                      current.sendGates(), current.sendSpawnPoint());
+        System.out.println(current);
+    }
 }
-*/

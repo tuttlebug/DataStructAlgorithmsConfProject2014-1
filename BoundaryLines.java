@@ -11,7 +11,7 @@ import java.awt.event.*; // MouseListener, MouseMotionListener, MouseEvent, KeyL
  * To Add/Implement:
  * []
  */
-
+/*
 // VERSION 1
 public class BoundaryLines extends JPanel {
     
@@ -109,14 +109,15 @@ public class BoundaryLines extends JPanel {
         return false;
     }
 }
+*/
 
-/*
 public class BoundaryLines extends JPanel {
     
     private ArrayList<Line2D.Double> lines;
     private ArrayList<Gate> gates;
     private int[][] boundaryPoints;
-//    private int[][] gatePoints;
+    private int[][] gatePoints;
+    public Gate crossedGate;
     // flags for dictating which directions are blocked off
     public boolean moveL = true;
     public boolean moveR = true;
@@ -128,11 +129,12 @@ public class BoundaryLines extends JPanel {
         
     }
     
-    public BoundaryLines(int[][] boundaryPoints, ArrayList<Gate> gates, int offsetX, int offsetY) {
+    public BoundaryLines(int[][] boundaryPoints, int[][] gatePoints, ArrayList<Gate> gates, int offsetX, int offsetY) {
         this.boundaryPoints = boundaryPoints;
+        this.gatePoints = gatePoints;
         this.gates = gates;
         this.lines = new ArrayList<Line2D.Double>();
-//        this.gates = new ArrayList<Line2D.Double>();
+        this.crossedGate = null;
         // sets the background and lines invisible
         setOpaque(false);    
 //        setVisible(false);
@@ -149,26 +151,26 @@ public class BoundaryLines extends JPanel {
                 this.lines.add(newLine);
             }
         }
-//        // create gate lines
-//        for (int i = 0; i < this.gatePoints.length; i++) {
-//            for (int j = 3; j < this.gatePoints[i].length; j+=3) {
-//                Line2D.Double newGate = new Line2D.Double(
-//                                                          this.gatePoints[i][j-3] - offsetX,
-//                                                          this.gatePoints[i][j-2] - offsetY,
-//                                                          this.gatePoints[i][j-1] - offsetX,
-//                                                          this.gatePoints[i][j] - offsetY
-//                                                         );
-//                this.gates.add(newGate);
-//            }
-//        }
-        System.out.println(this.gates);
-        for (Gate gate : this.gates) {
-            System.out.printf("x1 = %f, y1 = %f, x2 = %f, y2 = %f\n",
-                              gate.sendLine().getX1(), 
-                              gate.sendLine().getY1(),
-                              gate.sendLine().getX2(),
-                              gate.sendLine().getY2());
+        // create gate lines
+        int gateIterator = 0;
+        for (int i = 0; i < this.gatePoints.length; i++) {
+            for (int j = 3; j < this.gatePoints[i].length; j+=3) {
+                this.gates.get(gateIterator).loadLine(
+                                                  this.gatePoints[i][j-3] - offsetX,
+                                                  this.gatePoints[i][j-2] - offsetY,
+                                                  this.gatePoints[i][j-1] - offsetX,
+                                                  this.gatePoints[i][j] - offsetY
+                                                 );
+            }
+            gateIterator++;
         }
+//        for (Gate gate : this.gates) {
+//            System.out.printf("x1 = %f, y1 = %f, x2 = %f, y2 = %f\n",
+//                              gate.sendLine().getX1(), 
+//                              gate.sendLine().getY1(),
+//                              gate.sendLine().getX2(),
+//                              gate.sendLine().getY2());
+//        }
     }
 
     public void paintComponent(Graphics g) {
@@ -209,10 +211,16 @@ public class BoundaryLines extends JPanel {
     public boolean gateCrossed(Rectangle2D.Double box) {
         for (Gate gate : this.gates) {
             if (box.intersectsLine(gate.sendLine())) {
+                this.crossedGate = gate;
                 return true;
             }
         }
         return false;
     }
+    
+    public Gate getCrossedGate() {
+        return this.crossedGate;
+    }
+    
+    
 }
-*/

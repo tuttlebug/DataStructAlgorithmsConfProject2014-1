@@ -125,22 +125,30 @@ public class Player {
     
     public Player() throws IOException {
         this.sprites = new ImageIcon[] {
-            new ImageIcon(ImageIO.read(new File("Tome down stand.png"))), // 0
+            // left
+            new ImageIcon(ImageIO.read(new File("Tome left stand.png"))), // 0
             new ImageIcon(ImageIO.read(new File("Tome left 1.png"))),     // 1
             new ImageIcon(ImageIO.read(new File("Tome left 2.png"))),     // 2
-            new ImageIcon(ImageIO.read(new File("Tome right 1.png"))),    // 3
-            new ImageIcon(ImageIO.read(new File("Tome right 2.png"))),    // 4
-            new ImageIcon(ImageIO.read(new File("Tome down 1.png"))),     // 5
-            new ImageIcon(ImageIO.read(new File("Tome down 2.png"))),     // 6
-            new ImageIcon(ImageIO.read(new File("Tome up 1.png"))),       // 7
-            new ImageIcon(ImageIO.read(new File("Tome up 2.png"))),       // 8
-            new ImageIcon(ImageIO.read(new File("Tome atk down.png"))),   // 9
-            new ImageIcon(ImageIO.read(new File("Tome atk left.png"))),   // 10
-            new ImageIcon(ImageIO.read(new File("Tome atk right.png"))),  // 11
-            new ImageIcon(ImageIO.read(new File("Tome atk up.png")))      // 12
+            // right    
+            new ImageIcon(ImageIO.read(new File("Tome right stand.png"))),// 3   
+            new ImageIcon(ImageIO.read(new File("Tome right 1.png"))),    // 4
+            new ImageIcon(ImageIO.read(new File("Tome right 2.png"))),    // 5
+            // down
+            new ImageIcon(ImageIO.read(new File("Tome down stand.png"))), // 6
+            new ImageIcon(ImageIO.read(new File("Tome down 1.png"))),     // 7
+            new ImageIcon(ImageIO.read(new File("Tome down 2.png"))),     // 8
+            // up
+            new ImageIcon(ImageIO.read(new File("Tome up stand.png"))),   // 9
+            new ImageIcon(ImageIO.read(new File("Tome up 1.png"))),       // 10
+            new ImageIcon(ImageIO.read(new File("Tome up 2.png"))),       // 11
+            // attack
+            new ImageIcon(ImageIO.read(new File("Tome atk down.png"))),   // 12
+            new ImageIcon(ImageIO.read(new File("Tome atk left.png"))),   // 13
+            new ImageIcon(ImageIO.read(new File("Tome atk right.png"))),  // 14
+            new ImageIcon(ImageIO.read(new File("Tome atk up.png")))      // 15
         };
         
-        this.sprite = sprites[0];
+        this.sprite = sprites[6];
         this.width = this.sprite.getIconWidth();
         this.height = this.sprite.getIconHeight();
     }
