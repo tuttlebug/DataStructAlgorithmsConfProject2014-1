@@ -24,9 +24,12 @@ public class BoundaryLines extends JPanel {
     public boolean moveR = true;
     public boolean moveU = true;
     public boolean moveD = true;
+//    private int x1 = 51142; ///
+//    private int y1 = 40028; ///
     
     // only used in the MainWindow constructor
     public BoundaryLines() {
+        setOpaque(false);
         this.lines = new ArrayList<Line2D.Double>();
         this.gates = new ArrayList<Gate>();
     }
@@ -42,25 +45,32 @@ public class BoundaryLines extends JPanel {
         for (Line2D.Double line : this.lines) {
             pen.draw(line);
         }
+        pen.setColor(Color.BLUE);
         for (Gate gate : this.gates) {
             pen.draw(gate.line);
         }
         // makes background transparent
         g.setColor(getBackground());
     }
-
+ 
     public void moveLines(int dx, int dy) {
         for (Line2D.Double line : this.lines) {
             line.setLine(line.getX1() + dx, 
                          line.getY1() + dy, 
                          line.getX2() + dx, 
                          line.getY2() + dy);
+            repaint();
         }
         for (Gate gate : this.gates) {
             gate.loadLine(gate.line.getX1() + dx, 
                           gate.line.getY1() + dy, 
                           gate.line.getX2() + dx, 
                           gate.line.getY2() + dy);
+            repaint();
+//            x1 -= dx;
+//            y1 -= dy;
+//            System.out.printf("fake x1 = %d, fake y1 = %d\n", x1, y1);
+//            System.out.println(gate);
         }
     }
     
@@ -68,11 +78,11 @@ public class BoundaryLines extends JPanel {
     public boolean boundaryCrossed(Rectangle2D.Double box) {
         for (Line2D.Double line : this.lines) {
             if (box.intersectsLine(line)) {
-                System.out.printf("boundary hit: %f, %f, %f, %f\n",
-                                  this.lines.get(0).getX1(),
-                                  this.lines.get(0).getY1(),
-                                  this.lines.get(0).getX2(),
-                                  this.lines.get(0).getY2());
+//                System.out.printf("boundary hit: %f, %f, %f, %f\n",
+//                                  this.lines.get(0).getX1(),
+//                                  this.lines.get(0).getY1(),
+//                                  this.lines.get(0).getX2(),
+//                                  this.lines.get(0).getY2());
                 return true;
             }
         }
@@ -84,11 +94,11 @@ public class BoundaryLines extends JPanel {
         for (Gate gate : this.gates) {
             if (box.intersectsLine(gate.line)) {
                 this.crossedGate = gate;
-                System.out.printf("gate hit: %f, %f, %f, %f\n",
-                                  this.gates.get(0).line.getX1(),
-                                  this.gates.get(0).line.getY1(),
-                                  this.gates.get(0).line.getX2(),
-                                  this.gates.get(0).line.getY2());
+//                System.out.printf("gate hit: %f, %f, %f, %f\n",
+//                                  this.gates.get(0).line.getX1(),
+//                                  this.gates.get(0).line.getY1(),
+//                                  this.gates.get(0).line.getX2(),
+//                                  this.gates.get(0).line.getY2());
                 return true;
             }
         }
@@ -125,12 +135,24 @@ public class BoundaryLines extends JPanel {
         int gateIterator = 0;
         for (int i = 0; i < this.gatePoints.length; i++) {
             for (int j = 3; j < this.gatePoints[i].length; j+=3) {
+//                System.out.printf("%d = %s\n", gateIterator, this.gates.get(gateIterator));
                 this.gates.get(gateIterator).loadLine(
                                                   this.gatePoints[i][j-3] - offsetX,
                                                   this.gatePoints[i][j-2] - offsetY,
                                                   this.gatePoints[i][j-1] - offsetX,
                                                   this.gatePoints[i][j] - offsetY
                                                  );
+//                System.out.printf("Points without offset:\nx1 = %d, y1 = %d, x2 = %d, y2 = %d\n",
+//                                  this.gatePoints[i][j-3],
+//                                  this.gatePoints[i][j-2],
+//                                  this.gatePoints[i][j-1],
+//                                  this.gatePoints[i][j]);
+//                System.out.printf("Points with offset:\nx1 = %d, y1 = %d, x2 = %d, y2 = %d\n",
+//                                  this.gatePoints[i][j-3] - offsetX,
+//                                  this.gatePoints[i][j-2] - offsetY,
+//                                  this.gatePoints[i][j-1] - offsetX,
+//                                  this.gatePoints[i][j] - offsetY);
+//                System.out.printf("%d = %s\n", gateIterator, this.gates.get(gateIterator));
             }
             gateIterator++;
         }

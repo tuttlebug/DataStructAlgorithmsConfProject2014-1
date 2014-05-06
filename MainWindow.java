@@ -25,6 +25,8 @@
  * [] JLayeredPane.paint(Graphics g)
  * [] player as variable
  * 
+ * THINGS TO CONSIDER:
+ * Graphs
  */
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -36,6 +38,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.*;
+
 
 public class MainWindow extends JFrame implements KeyListener {
     
@@ -158,7 +161,7 @@ public class MainWindow extends JFrame implements KeyListener {
             boundaryPanel.moveU = true; 
             boundaryPanel.moveD = true;
         }
-        System.out.printf("x = %d, y = %d\n", x, y);
+//        System.out.printf("x = %d, y = %d\n", x, y);
     }
     
     public void keyReleased(KeyEvent event) {
@@ -233,7 +236,6 @@ public class MainWindow extends JFrame implements KeyListener {
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.add(currentArea);
-        
         // add tp window
         window.add(caPanel, new Integer(0), 0);
         window.add(boundaryPanel, new Integer(1), 0);
@@ -263,7 +265,6 @@ public class MainWindow extends JFrame implements KeyListener {
         x = spawnPoint[0];
         y = spawnPoint[1];
         caPanel.setLocation(x, y);
-        boundaryPanel.setLocation(x, y);
         boundaryPanel.moveLines(x - START_X, y - START_Y);
     }
     
@@ -277,12 +278,11 @@ public class MainWindow extends JFrame implements KeyListener {
     
     // used when tome crosses a gate
     public void swapWorlds(Gate g) {
-        System.out.println(g);
         Place current = g.toNextWorld();
-        System.out.println(g);
         shiftWorld(current.sendImage());
         addBoundaries(current.sendBoundaryPoints(), current.sendGatePoints(), 
                       current.sendGates(), current.sendSpawnPoint());
-        System.out.println(current);
     }
 }
+
+

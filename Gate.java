@@ -7,7 +7,8 @@
  * [] Line object
  * 
  * To Add/Implement:
- * [] method that sends the character to a new screen
+ * [Ã] method that sends the character to a new screen
+ * [] Only holds one destinaion point; not start point
  * 
  * Temp:
  * [] String name
@@ -36,19 +37,12 @@ import javax.swing.ImageIcon;
 
 public class Gate extends Line2D.Double {    
     // instance variables
-    public int[] startPoint;
     public int[] endPoint;
-    private Place area1;
-    private Place area2;
-    private Place currentArea, nextArea;
+    private Place nextArea;
     public Line2D.Double line;
     
-    public Gate(Place area1, Place area2, int[] startSpawnPoint, int[] endSpawnPoint) throws IOException {
-        this.area1 = area1;
-        this.area2 = area2;
-        this.currentArea = area1;
-        this.nextArea = area2;
-        this.startPoint = startSpawnPoint;
+    public Gate(Place nextArea, int[] endSpawnPoint) throws IOException {
+        this.nextArea = nextArea;
         this.endPoint = endSpawnPoint;
         this.line = new Line2D.Double();
     }
@@ -61,29 +55,27 @@ public class Gate extends Line2D.Double {
     
     // ------------ Swapping areas ------------ \\
     public Place toNextWorld() {
-        if (this.currentArea.equals(area1)) {
-            this.nextArea = this.area1;
-            this.currentArea = this.area2;
-        }
-        else {
-            this.nextArea = this.area2;
-            this.currentArea = this.area1;
-        }
-        this.currentArea.loadSpawnPoint(this.endPoint[0], this.endPoint[1]);
-        return this.currentArea;
+//        if (this.currentArea.equals(area1)) {
+//            this.nextArea = this.area1;
+//            this.currentArea = this.area2;
+//        }
+//        else {
+//            this.nextArea = this.area2;
+//            this.currentArea = this.area1;
+//        }
+        this.nextArea.loadSpawnPoint(this.endPoint[0] + 5, this.endPoint[1]);
+        return this.nextArea;
         
     }
     
     // ------------ toString ------------ \\
     public String toString() {
-        return String.format("current area is %s, next area is %s\nx1 = %f, y1 = %f, x2 =  %f, y2 = %f\nstart point = %s, endpoint = %s\n", 
-                             this.currentArea.getName(), 
+        return String.format("next area is %s\nx1 = %f, y1 = %f, x2 =  %f, y2 = %f\nendpoint = %s\n", 
                              this.nextArea.getName(), 
                              this.line.getX1(),
                              this.line.getY1(),
                              this.line.getX2(),
                              this.line.getY2(),
-                             Arrays.toString(this.startPoint),
                              Arrays.toString(this.endPoint));
     }
 }
