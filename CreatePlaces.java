@@ -162,16 +162,16 @@ public class CreatePlaces {
         village.loadSpawnPoint(-2399, -736);
         
         // Gate fiddling
-        int[] villageSpawng1StartPoint = new int[]{
-            -2399, -736
+        int[] villageToForestStartPoint = new int[]{
+            -1724, -911
         };
 //        int[] villageSpawng2StartPoint = new int[]{
 //            -2160, -350
 //        };
-        int[] villageSpawng1EndPoint = new int[] {
-            -2625, -965 
+        int[] villageToForestEndPoint = new int[] {
+            -2620, -965 
         };  
-        village.loadGates(village, forestPath_Cave, villageSpawng1StartPoint, villageSpawng1EndPoint);
+        village.loadGates(village, forestPath_Cave, villageToForestStartPoint, villageToForestEndPoint);
 //        village.loadGates(village, forestPath_Cave, villageSpawng2StartPoint, villageSpawng2EndPoint); 
         
         // ForestPath_Cave
@@ -206,31 +206,31 @@ public class CreatePlaces {
         forestPath_Cave.loadBoundaryPoints(forestPath_CaveBoundaries);
         // gates
         int[][] forestPath_CaveGates = new int[][]{
-          { 19, 39, 19, 41 }, 
+//          { 19, 39, 19, 41 }, 
           { 50, 39, 50, 41 },
         };
         forestPath_Cave.loadGatePoints(forestPath_CaveGates);
         // spawn Point
-//        forestPath_Cave.loadSpawnPoint(-2625, -965);
+        forestPath_Cave.loadSpawnPoint(-2620, -965);
         
           // Gate fiddling
-        int[] forestPath_Caveg1StartPoint = new int[]{
-            -2625, -965 
+        int[] forestToVillageStartPoint = new int[]{
+            -2620, -965 
         };
-        int[] forestPath_Caveg1EndPoint = new int[] {
-            -2025, -845 
+        int[] forestToVillageEndPoint = new int[] {
+            -1724, -911 // -2025, -845 
         };
-        int[] forestPath_Caveg2StartPoint = new int[]{
+        int[] forestToCaveStartPoint = new int[]{
             -1665, -965
         };
-        int[] forestPath_Caveg2EndPoint = new int[] {
+        int[] forestToCaveEndPoint = new int[] {
             -2399, -736
         };
         forestPath_Cave.loadGatePoints(forestPath_CaveGates);
+//        forestPath_Cave.loadGates(forestPath_Cave, clearing_Cave, 
+//                                  forestToCaveStartPoint, forestToCaveEndPoint); 
         forestPath_Cave.loadGates(forestPath_Cave, village, 
-                                  forestPath_Caveg1StartPoint, forestPath_Caveg1EndPoint);   
-        forestPath_Cave.loadGates(forestPath_Cave, clearing_Cave, 
-                                  forestPath_Caveg2StartPoint, forestPath_Caveg2EndPoint); 
+                                  forestToVillageStartPoint, forestToVillageEndPoint);   
         
         //clearing_Cave
         int[][] clearing_CaveBoundaries = new int[][]{

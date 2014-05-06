@@ -58,10 +58,10 @@ public class Place implements LoadImage {
     private ArrayList<String> itemList;  // ONLY HERE FOR SAKE OF TOSTRING 
     private ArrayList<Gate> gateList;
     private int[] spawnPoint;
-    private String imageFile;
-    private ImageIcon background;
     private int[][] boundaryPoints;
     private int[][] gatePoints;
+    private String imageFile;
+    private ImageIcon background;
 //    private JPanel gui; // Menu gui
     
     // constructor

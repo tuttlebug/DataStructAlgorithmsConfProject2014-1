@@ -194,8 +194,8 @@ public class MainWindow extends JFrame implements KeyListener {
     private static final int PLAYER_Y = W_HEIGHT / 2;
     private static final int OFFSET_X = 450;
     private static final int OFFSET_Y = 285;
-    private static final int X = -1830;
-    private static final int Y = -290;
+    private static final int START_X = -1830;
+    private static final int START_Y = -290;
     private static final int MOVE = 25;                 // movement speed
     
     // variables
@@ -236,6 +236,7 @@ public class MainWindow extends JFrame implements KeyListener {
         
         // add tp window
         window.add(caPanel, new Integer(0), 0);
+        window.add(boundaryPanel, new Integer(1), 0);
         window.add(box, new Integer(1), 0);
         window.add(playerLevel, new Integer(2), 0);
         
@@ -258,15 +259,12 @@ public class MainWindow extends JFrame implements KeyListener {
     
     // Creates the boundary line for the level
     private void addBoundaries(int[][] boundaryPoints, int[][] gatePoints, ArrayList<Gate> gates, int[] spawnPoint) {
-//        window.remove(1);
-        boundaryPanel = new BoundaryLines(boundaryPoints, gatePoints, gates, OFFSET_X, OFFSET_Y);
-        boundaryPanel.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
+        boundaryPanel.createLines(boundaryPoints, gatePoints, gates, OFFSET_X, OFFSET_Y);
         x = spawnPoint[0];
         y = spawnPoint[1];
         caPanel.setLocation(x, y);
         boundaryPanel.setLocation(x, y);
-        boundaryPanel.moveLines(x - X, y - Y);
-        window.add(boundaryPanel, new Integer(1), 0);
+        boundaryPanel.moveLines(x - START_X, y - START_Y);
     }
     
     // Handles all changes
@@ -279,7 +277,9 @@ public class MainWindow extends JFrame implements KeyListener {
     
     // used when tome crosses a gate
     public void swapWorlds(Gate g) {
+        System.out.println(g);
         Place current = g.toNextWorld();
+        System.out.println(g);
         shiftWorld(current.sendImage());
         addBoundaries(current.sendBoundaryPoints(), current.sendGatePoints(), 
                       current.sendGates(), current.sendSpawnPoint());
