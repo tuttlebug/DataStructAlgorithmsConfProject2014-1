@@ -331,8 +331,6 @@ public class CreatePlaces {
         worldMap.add(secretPaths.getName(), secretPaths);
         worldMap.add(temple.getName(), temple);
         
-        System.out.println(worldMap);
-        
         return worldMap;
     }
 }
