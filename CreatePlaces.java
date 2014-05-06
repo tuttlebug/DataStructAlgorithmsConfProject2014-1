@@ -154,7 +154,7 @@ public class CreatePlaces {
         village.loadBoundaryPoints(villageBoundaries);
         // gates
         int[][] villageGates = new int[][]{
-          { 21, 38, 21, 40 }, 
+          { 21, 38, 21, 40 }, // (672, 1216, 672, 1280);
 //          { 34, 20, 37, 20 },
         };
         village.loadGatePoints(villageGates); 
@@ -211,7 +211,7 @@ public class CreatePlaces {
         };
         forestPath_Cave.loadGatePoints(forestPath_CaveGates);
         // spawn Point
-        forestPath_Cave.loadSpawnPoint(-2625, -965);
+//        forestPath_Cave.loadSpawnPoint(-2625, -965);
         
           // Gate fiddling
         int[] forestPath_Caveg1StartPoint = new int[]{
@@ -260,7 +260,7 @@ public class CreatePlaces {
         };
         clearing_Cave.loadGatePoints(clearing_CaveGates);
         // spawn Point
-        clearing_Cave.loadSpawnPoint(-2025, -845);
+//        clearing_Cave.loadSpawnPoint(-2025, -845);
         
 
         //cave

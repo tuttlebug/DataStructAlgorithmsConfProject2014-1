@@ -23,10 +23,18 @@ public class TestGamePlay {
         wMap = CreatePlaces.createWorldMap();
         mw = new MainWindow();
         Place current = wMap.getPlace("Village");     
-//        mw.swapWorlds(current.sendImage(), current.sendBoundaryPoints(), current.sendGatePoints(), current.sendSpawnPoint());
         mw.swapWorlds(current.sendImage(), current.sendBoundaryPoints(), current.sendGatePoints(), 
                       current.sendGates(), current.sendSpawnPoint());
         System.out.println(current);
     }
     
 }
+
+/*
+ * xy coords:
+ *   x = -1724, y = -911
+ * start coords:
+ *   x1 = -347.000000, y1 = 485.000000, x2 =  -347.000000, y2 = 549.000000
+ * gate coords:
+ *   { 21, 38, 21, 40 }, // (672, 1216, 672, 1280);
+ */

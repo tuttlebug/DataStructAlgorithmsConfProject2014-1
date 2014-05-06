@@ -152,7 +152,7 @@ public class Gate extends Line2D.Double {
     private Place area1;
     private Place area2;
     private Place currentArea, nextArea;
-    private Line2D.Double gate;
+    public Line2D.Double line;
     
     public Gate(Place area1, Place area2, int[] startSpawnPoint, int[] endSpawnPoint) throws IOException {
         this.area1 = area1;
@@ -161,16 +161,12 @@ public class Gate extends Line2D.Double {
         this.nextArea = area2;
         this.startPoint = startSpawnPoint;
         this.endPoint = endSpawnPoint;
-        this.gate = new Line2D.Double();
+        this.line = new Line2D.Double();
     }
     
     // ------------ Line ------------ \\
     public void loadLine(int x1, int y1, int x2, int y2) {
-        this.gate = new Line2D.Double(x1, y1, x2, y2);
-    }
-    
-    public Line2D.Double sendLine() {
-        return this.gate;
+        this.line = new Line2D.Double(x1, y1, x2, y2);
     }
 //    
 //    public int[] sendStart() {
@@ -201,10 +197,10 @@ public class Gate extends Line2D.Double {
         return String.format("current area is %s, next area is %s\nx1 = %f, y1 = %f, x2 =  %f, y2 = %f\n", 
                              this.currentArea.getName(), 
                              this.nextArea.getName(), 
-                             this.gate.getX1(),
-                             this.gate.getY1(),
-                             this.gate.getX2(),
-                             this.gate.getY2());
+                             this.line.getX1(),
+                             this.line.getY1(),
+                             this.line.getX2(),
+                             this.line.getY2());
     }
 }
 

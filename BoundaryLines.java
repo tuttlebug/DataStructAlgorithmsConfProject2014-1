@@ -164,13 +164,6 @@ public class BoundaryLines extends JPanel {
             }
             gateIterator++;
         }
-//        for (Gate gate : this.gates) {
-//            System.out.printf("x1 = %f, y1 = %f, x2 = %f, y2 = %f\n",
-//                              gate.sendLine().getX1(), 
-//                              gate.sendLine().getY1(),
-//                              gate.sendLine().getX2(),
-//                              gate.sendLine().getY2());
-//        }
     }
 
     public void paintComponent(Graphics g) {
@@ -181,7 +174,7 @@ public class BoundaryLines extends JPanel {
             pen.draw(line);
         }
         for (Gate gate : this.gates) {
-            pen.draw(gate.sendLine());
+            pen.draw(gate.line);
         }
         // makes background transparent
         g.setColor(getBackground());
@@ -192,9 +185,14 @@ public class BoundaryLines extends JPanel {
             line.setLine(line.getX1() + dx, line.getY1() + dy, line.getX2() + dx, line.getY2() + dy);
         }
         for (Gate gate : this.gates) {
-            gate.sendLine().setLine(gate.sendLine().getX1() + dx, gate.sendLine().getY1() + dy, 
-                                    gate.sendLine().getX2() + dx, gate.sendLine().getY2() + dy);
+            System.out.println(gate);
+            gate.line.setLine(gate.line.getX1() + dx, gate.line.getY1() + dy, 
+                                    gate.line.getX2() + dx, gate.line.getY2() + dy);
+            System.out.println(gate);
         }
+        System.out.printf("boundary = %f, %f\n", 
+                          this.lines.get(0).getX1(),
+                          this.lines.get(0).getY1());
     }
     
     // tests if a Rectangle intersected any of the boundary lines
@@ -210,7 +208,7 @@ public class BoundaryLines extends JPanel {
     // tests if a Rectangle intersected any of the gates
     public boolean gateCrossed(Rectangle2D.Double box) {
         for (Gate gate : this.gates) {
-            if (box.intersectsLine(gate.sendLine())) {
+            if (box.intersectsLine(gate.line)) {
                 this.crossedGate = gate;
                 return true;
             }
