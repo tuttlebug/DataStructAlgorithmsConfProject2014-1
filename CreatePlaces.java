@@ -317,6 +317,7 @@ public class CreatePlaces {
         
         // ------------ Items ------------ \\
         forestFood.loadImage();
+        forestFood.loadBox();
         
         // add items to Places
         forestPath_Cave.addItem(forestFood);

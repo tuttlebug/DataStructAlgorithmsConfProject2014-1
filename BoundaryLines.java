@@ -24,8 +24,6 @@ public class BoundaryLines extends JPanel {
     public boolean moveR = true;
     public boolean moveU = true;
     public boolean moveD = true;
-//    private int x1 = 51142; ///
-//    private int y1 = 40028; ///
     
     // only used in the MainWindow constructor
     public BoundaryLines() {
@@ -59,14 +57,12 @@ public class BoundaryLines extends JPanel {
                          line.getY1() + dy, 
                          line.getX2() + dx, 
                          line.getY2() + dy);
-            repaint();
         }
         for (Gate gate : this.gates) {
             gate.loadLine(gate.line.getX1() + dx, 
                           gate.line.getY1() + dy, 
                           gate.line.getX2() + dx, 
                           gate.line.getY2() + dy);
-            repaint();
 //            x1 -= dx;
 //            y1 -= dy;
 //            System.out.printf("fake x1 = %d, fake y1 = %d\n", x1, y1);

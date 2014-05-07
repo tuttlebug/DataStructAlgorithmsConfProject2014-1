@@ -186,6 +186,11 @@ public class MainWindow extends JFrame implements KeyListener {
     public void keyTyped(KeyEvent event) {
     }
     
+    // ------------------------------------------------------------------------------------------ \\
+    // ------------------------------------------------------------------------------------------ \\
+    // ---------------------------------------- Main Program ------------------------------------ \\
+    // ------------------------------------------------------------------------------------------ \\
+    // ------------------------------------------------------------------------------------------ \\
     // constants
     private static final int W_WIDTH = 700;             // width of frame
     private static final int W_HEIGHT = 600;            // height of window
@@ -209,6 +214,7 @@ public class MainWindow extends JFrame implements KeyListener {
     private static JLabel currentArea = new JLabel();
     private static JLabel playerLevel = new JLabel();
     private static BoundaryLines boundaryPanel;
+    private static JPanel itemPanel = new JPanel();  // possibly make it it's own class
     private static CollisionBox playerBox;
     private static Player tome; //
     
