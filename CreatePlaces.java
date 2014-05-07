@@ -65,7 +65,10 @@ public class CreatePlaces {
         temple.addPlace(secretPaths);
         
         // ------------ Create Items ------------ \\
-        Item dummy = new Item("Dummy", "item.png");
+        int [] forestFoodCoords = new int[] {
+            1408, 992
+        };
+        Item forestFood = new Item("ForestFood", "item.png", forestFoodCoords); // 1408, 992
         
         // ------------ Background Image ------------ \\
         // places
@@ -210,7 +213,7 @@ public class CreatePlaces {
           { 50, 39, 50, 41 },
         };
         // spawn Point
-        forestPath_Cave.loadSpawnPoint(-2620, -965);
+//        forestPath_Cave.loadSpawnPoint(-2620, -965);
         
           // Gate fiddling
 //        int[] forestToVillageStartPoint = new int[]{
@@ -313,10 +316,10 @@ public class CreatePlaces {
         
         
         // ------------ Items ------------ \\
-        dummy.loadImage();
+        forestFood.loadImage();
         
         // add items to Places
-        village.addItem(dummy);
+        forestPath_Cave.addItem(forestFood);
         
         // ------------ World Map ------------ \\
         WorldMap worldMap = new WorldMap();

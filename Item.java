@@ -33,13 +33,13 @@ public class Item implements LoadImage {
     private String imageFile;
     private ImageIcon sprite;
     private int width, height;
-    private int[] coordinates;
+    private int[] coords;      // coordinates
     
     // constructor
     public Item(String name, String imageFile, int[] coords) {
         this.name = name;
         this.imageFile = imageFile; 
-        this.coordinates = coords;
+        this.coords = coords;
     }
     
     // methods
@@ -59,6 +59,6 @@ public class Item implements LoadImage {
     }
     
     public String toString() {
-        return this.name;
+        return String.format("NAME: %s, X: %d, Y: %d\n", this.name, this.coords[0], this.coords[1]);
     }
 }

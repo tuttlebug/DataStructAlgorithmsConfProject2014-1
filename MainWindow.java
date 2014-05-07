@@ -209,7 +209,7 @@ public class MainWindow extends JFrame implements KeyListener {
     private static JLabel currentArea = new JLabel();
     private static JLabel playerLevel = new JLabel();
     private static BoundaryLines boundaryPanel;
-    private static PlayerBox box;
+    private static CollisionBox box;
     private static Player tome; //
     
     // constructor
@@ -228,7 +228,7 @@ public class MainWindow extends JFrame implements KeyListener {
         tome = new Player();
         playerLevel.setIcon(tome.sprite);
         playerLevel.setBounds(PLAYER_X, PLAYER_Y, tome.getWidth(), tome.getHeight());
-        box = new PlayerBox(PLAYER_X, PLAYER_Y, tome.getWidth() + 5, tome.getHeight() + 5);
+        box = new CollisionBox(PLAYER_X, PLAYER_Y, tome.getWidth() + 5, tome.getHeight() + 5);
         box.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         // ------------ Panels ------------ \\
         boundaryPanel = new BoundaryLines();

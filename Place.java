@@ -329,11 +329,6 @@ public class Place implements LoadImage {
         this.itemList.add(item.getName());
     }
     
-    public void addItem(Item item) {
-        this.items.put(item.getName(), item);
-        this.itemList.add(item.getName());
-    }
-    
     public void removeItem(String name) {
         this.items.remove(name);
     }   
