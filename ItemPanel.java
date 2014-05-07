@@ -16,7 +16,6 @@ public class ItemPanel extends JPanel {
     
     private ArrayList<Rectangle2D.Double> boxes;
     private ArrayList<Item> items;
-    public Item itemTouched;
     
     // only used in the MainWindow constructor
     public ItemPanel() {
@@ -24,7 +23,7 @@ public class ItemPanel extends JPanel {
         this.boxes = new ArrayList<Rectangle2D.Double>();
     }
     
-    public ItemPanel(int[] coords, int offsetX, int offsetY) {
+    public ItemPanel(int[] coords, ArrayList<Item> items, int offsetX, int offsetY) {
         this.createBoxes(coords, offsetX, offsetY);
     }
 
@@ -32,8 +31,8 @@ public class ItemPanel extends JPanel {
         super.paintComponent(g);
         Graphics2D pen = (Graphics2D) g;
         pen.setColor(Color.GREEN);
-        for (Rectangle2D.Double box : this.boxes) {
-            pen.draw(box);
+        for (Item item : this.items) {
+            pen.drawImage(item.image, x1, y1, null);
         }
         // makes background transparent
         g.setColor(getBackground());
@@ -41,6 +40,8 @@ public class ItemPanel extends JPanel {
  
     // move boxes
     public void moveLines(int dx, int dy) {
+        for (Item item : this.items) {
+        }
 //        for (Rectangle2D.Double box : this.boxes) {
 //            line.setLine(line.getX1() + dx, 
 //                         line.getY1() + dy, 
@@ -48,6 +49,13 @@ public class ItemPanel extends JPanel {
 //                         line.getY2() + dy);
 //        }
     }
+    
+//    public void loadImage() {
+//        try {
+//           player = ImageIO.read(new File(this.currentImage));
+//       } catch (IOException e) {
+//       }
+//    }
     
     // tests if a Rectangle intersected any of the boundary lines
     public boolean boundaryCrossed(Rectangle2D.Double box) {
@@ -60,13 +68,8 @@ public class ItemPanel extends JPanel {
         return false;
     }
     
-    public Item getitemTouched() {
-        return this.itemTouched;
-    }
-    
     public void createBoxes(int[] coords, int offsetX, int offsetY) {
         this.boxes = new ArrayList<Rectangle2D.Double>();
-        this.boxTouched = null;
         // sets the background and lines invisible
         setOpaque(false);    
 //        setVisible(false);

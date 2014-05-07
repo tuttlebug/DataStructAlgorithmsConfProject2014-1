@@ -20,15 +20,14 @@ import java.util.Arrays;
  * 
  * To Add/Implement:
  * [Ã] movement in a place
- * [] Have constructPlace() create neccessary data to add to the main window
  * [] remove Items and Places from ArrayList when they're removed from the map 
- * [] Gate Arrays
+ * [Ã] Gate Arrays
  * [] becomes a JPanel
  *   [] that loads an imge (paint)
+ * [] add BoundaryLines
  * 
  * Parameters:
  * [Ã] Name of Place
- * [] Spawn point for character
  * [Ã] Name of background image
  * 
  * Temporary:
@@ -64,9 +63,10 @@ public class Place implements LoadImage {
     private String gatePointsStringBefore;   // ONLY HERE FOR SAKE OF TOSTRING
     private ImageIcon background;
     public boolean hasItems;
+//    public BoundaryLines boundaryPanel;
 //    private JPanel gui; // Menu gui
     
-    // constructor
+    // ------------ Constructor ------------ \\
     public Place(String name, String imageFile) {
         this.name = name;
         this.neighbors = new HashMap<String, Place>();

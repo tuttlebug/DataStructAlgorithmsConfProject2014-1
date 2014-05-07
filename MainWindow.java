@@ -69,6 +69,10 @@ public class MainWindow extends JFrame implements KeyListener {
                     Gate g = boundaryPanel.getCrossedGate();
                     swapWorlds(g);
                 }
+                // ------------ Item Collision ------------ \\
+                if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
+                    System.out.println("item touched");
+                }
             }
         }
         // going right
@@ -89,6 +93,10 @@ public class MainWindow extends JFrame implements KeyListener {
                     System.out.println("gate crossed");
                     Gate g = boundaryPanel.getCrossedGate();
                     swapWorlds(g);
+                }
+                // ------------ Item Collision ------------ \\
+                if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
+                    System.out.println("item touched");
                 }
             }
         }
@@ -111,6 +119,10 @@ public class MainWindow extends JFrame implements KeyListener {
                     Gate g = boundaryPanel.getCrossedGate();
                     swapWorlds(g);
                 }
+                // ------------ Item Collision ------------ \\
+                if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
+                    System.out.println("item touched");
+                }
             }
         }
         // going up
@@ -131,6 +143,10 @@ public class MainWindow extends JFrame implements KeyListener {
                     System.out.println("gate crossed");
                     Gate g = boundaryPanel.getCrossedGate();
                     swapWorlds(g);
+                }
+                // ------------ Item Collision ------------ \\
+                if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
+                    System.out.println("item touched");
                 }
             }
         }
@@ -218,7 +234,7 @@ public class MainWindow extends JFrame implements KeyListener {
     private static CollisionBox playerBox;
     private static Player tome; //
     
-    // constructor
+    // ------------ Constructor ------------ \\
     public MainWindow() throws IOException {
         // standard setup
         setTitle("Game name");
@@ -260,6 +276,7 @@ public class MainWindow extends JFrame implements KeyListener {
         setVisible(true);
     }
     
+    // ------------ Sprites ------------ \\
     private void shiftWorld(ImageIcon image) {
         currentArea.setIcon(image);
     }
@@ -269,46 +286,32 @@ public class MainWindow extends JFrame implements KeyListener {
         playerLevel.setIcon(image);
     }
     
+//    private void 
+    
+    // ------------ Boundaries ------------ \\
     // Creates the boundary, gate, and item lines for the level
-    // for places WITHOUT items
-    private void addBoundaries(int[][] boundaryPoints, int[][] gatePoints, ArrayList<Gate> gates, int[] spawnPoint) {
-        boundaryPanel.createLines(boundaryPoints, gatePoints, gates, OFFSET_X, OFFSET_Y);
-        x = spawnPoint[0];
-        y = spawnPoint[1];
-        caPanel.setLocation(x, y);
-        boundaryPanel.moveLines(x - START_X, y - START_Y);
-    }
-    // for places with items
-    private void addBoundaries(int[][] boundaryPoints, int[][] gatePoints, int[][] itemPoints, 
-                               ArrayList<Gate> gates, ArrayList<Item> items, int[] spawnPoint) {
-        boundaryPanel.createLines(boundaryPoints, gatePoints, itemPoints, gates, items, OFFSET_X, OFFSET_Y);
+    private void addBoundaries(Place place) {
+        boundaryPanel.createLines(place, OFFSET_X, OFFSET_Y);
+        int[] spawnPoint = place.sendSpawnPoint();
         x = spawnPoint[0];
         y = spawnPoint[1];
         caPanel.setLocation(x, y);
         boundaryPanel.moveLines(x - START_X, y - START_Y);
     }
     
-    // Handles all changes
-    // to start program off
-    public void swapWorlds(ImageIcon bgImage,int[][] boundaryPoints, 
-                           int[][] gatePoints, ArrayList<Gate> gates, int[] spawnPoints) {
-        shiftWorld(bgImage);
-        addBoundaries(boundaryPoints, gatePoints, gates, spawnPoints);
-    }  
-    
+    // ------------ Changing Worlds ------------ \\
+    // Handles all changes    
     // used when tome crosses a gate
     public void swapWorlds(Gate g) {
         Place current = g.toNextWorld();
         shiftWorld(current.sendImage());
-        if (current.hasItems == true) {
-            addBoundaries(current.sendBoundaryPoints(), current.sendGatePoints(), current.sendItemPoints(), 
-                      current.sendGates(), current.sendItems(), current.sendSpawnPoint());
-        }
-        else {
-            addBoundaries(current.sendBoundaryPoints(), current.sendGatePoints(), 
-                          current.sendGates(), current.sendSpawnPoint());
-        }
-        System.out.println(current);
+        addBoundaries(current);
+    }
+    
+    // With Place parameter
+    public void swapWorlds(Place place) {
+        shiftWorld(place.sendImage());
+        addBoundaries(place);
     }
 }
 

@@ -26,6 +26,7 @@ import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.awt.geom.*;
+import java.awt.Image;
 
 public class Item implements LoadImage {
     
@@ -33,8 +34,10 @@ public class Item implements LoadImage {
     private String name;
     private String imageFile;
     private ImageIcon sprite;
+    public Image image;
     private double width, height;
     public Rectangle2D.Double box;
+    private int[] coords;
     
     // constructor
     public Item(String name, String imageFile) {
@@ -45,7 +48,7 @@ public class Item implements LoadImage {
     
     // ------------ Image ------------ \\
     public void loadImage() throws IOException {
-        BufferedImage image = ImageIO.read(new File(this.imageFile));
+        image = ImageIO.read(new File(this.imageFile));
         this.sprite = new ImageIcon(image);
         this.width = this.sprite.getIconWidth();
         this.height = this.sprite.getIconHeight();
@@ -58,15 +61,26 @@ public class Item implements LoadImage {
     // ------------ Box ------------ \\
     public void loadBox(double x, double y) {
         this.box.setRect(x,  y, this.width, this.height);
+        this.coords = new int[] {
+            (int) x, (int) y
+        };
     }
     
-    // ------------ Width & Height ------------ \\
+    // ------------ Width & Height & Coords ------------ \\
     public double getWidth() {
         return this.width;
     }
     
     public double getHeight() {
         return this.height;
+    }
+    
+    public int getX() {
+        return this.coords[0];
+    }
+    
+    public int getY() {
+        return this.coords[1];
     }
     
     // ------------ Name ------------ \\

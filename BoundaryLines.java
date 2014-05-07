@@ -9,7 +9,7 @@ import java.awt.event.*; // MouseListener, MouseMotionListener, MouseEvent, KeyL
  * CHECK-LIST:
  * []
  * To Add/Implement:
- * []
+ * [] Move as a subclass to / put in Place
  */
 
 public class BoundaryLines extends JPanel {
@@ -22,6 +22,7 @@ public class BoundaryLines extends JPanel {
     private int[][] itemPoints;
     public Gate crossedGate;
     public Item touchedItem;
+    private Place currentPlace;
     // flags for dictating which directions are blocked off
     public boolean moveL = true;
     public boolean moveR = true;
@@ -31,20 +32,14 @@ public class BoundaryLines extends JPanel {
     // ------------ Constructors ------------ \\
     // only used in the MainWindow constructor
     public BoundaryLines() {
-        setOpaque(false);
         this.lines = new ArrayList<Line2D.Double>();
         this.gates = new ArrayList<Gate>();
         this.items = new ArrayList<Item>();
     }
-    // constructor for place WITHOUT items
-    public BoundaryLines(int[][] boundaryPoints, int[][] gatePoints, ArrayList<Gate> gates, int offsetX, int offsetY) {
-        this.createLines(boundaryPoints, gatePoints, gates, offsetX, offsetY);
-    }
     
     // constructor for places with items
-     public BoundaryLines(int[][] boundaryPoints, int[][] gatePoints, int [][] itemPoints, 
-                   ArrayList<Gate> gates, ArrayList<Item> items, int offsetX, int offsetY) {
-        this.createLines(boundaryPoints, gatePoints, itemPoints, gates, items, offsetX, offsetY);
+     public BoundaryLines(Place place, int offsetX, int offsetY) {
+        this.createLines(place, offsetX, offsetY);
     }
 
     // ------------ Paint ------------ \\
@@ -66,6 +61,7 @@ public class BoundaryLines extends JPanel {
             pen.setColor(Color.GREEN);
             for (Item item : this.items) {
                 pen.draw(item.box);
+                pen.drawImage(item.image, item.getX(), item.getY(), null);
             }
         }
         // makes background transparent
@@ -75,18 +71,21 @@ public class BoundaryLines extends JPanel {
     // ------------ Movement ------------ \\
     // move shapes across screen
     public void moveLines(int dx, int dy) {
+        // move lines
         for (Line2D.Double line : this.lines) {
             line.setLine(line.getX1() + dx, 
                          line.getY1() + dy, 
                          line.getX2() + dx, 
                          line.getY2() + dy);
         }
+        // move gates
         for (Gate gate : this.gates) {
             gate.loadLine(gate.line.getX1() + dx, 
                           gate.line.getY1() + dy, 
                           gate.line.getX2() + dx, 
                           gate.line.getY2() + dy);
         }
+        // move items
         if (this.items.size() > 0) {
             for (Item item : this.items) {
                 item.loadBox(item.box.getX() + dx, 
@@ -119,15 +118,18 @@ public class BoundaryLines extends JPanel {
     
     // tests if a Rectangle intersected an item's box
     public boolean itemTouched(Rectangle2D.Double box) {
-        for (Item item : this.items) {
+//        for (Item item : this.items) {
+        for (int i = 0; i < this.items.size(); i++) {
+            Item item = this.items.get(i);
             if (box.intersects(item.box.getX(),
                                item.box.getY(),
                                item.box.getWidth(),
                                item.box.getHeight())) {
-                this.touchedItem= item;
+                this.touchedItem = item;
+                this.items.remove(i);
                 return true;
             }
-        }
+        }    
         return false;
     }
     
@@ -139,61 +141,23 @@ public class BoundaryLines extends JPanel {
         return this.touchedItem;
     }
     
-    // ------------ Build Shapes ------------ \\
-    // method for places WITHOUT Items
-    public void createLines(int[][] boundaryPoints, int[][] gatePoints, ArrayList<Gate> gates, int offsetX, int offsetY) {
-        this.boundaryPoints = boundaryPoints;
-        this.gatePoints = gatePoints;
-        this.gates = gates;
-        this.lines = new ArrayList<Line2D.Double>();
-        this.crossedGate = null;
-        // sets the background and lines invisible
-        setOpaque(false);    
-//        setVisible(false);
+    // ------------ Remove Shapes ------------ \\
+    public void removeLines() {
         
-        // create boundary lines
-        for (int i = 0; i < this.boundaryPoints.length; i++) {
-            for (int j = 3; j < this.boundaryPoints[i].length; j+=3) {
-                Line2D.Double newLine = new Line2D.Double(
-                                                          this.boundaryPoints[i][j-3] - offsetX,
-                                                          this.boundaryPoints[i][j-2] - offsetY,
-                                                          this.boundaryPoints[i][j-1] - offsetX,
-                                                          this.boundaryPoints[i][j] - offsetY
-                                                         );
-                this.lines.add(newLine);
-            }
-        }
-        // create gate lines
-        int gateIterator = 0;
-        for (int i = 0; i < this.gatePoints.length; i++) {
-            for (int j = 3; j < this.gatePoints[i].length; j+=3) {
-                this.gates.get(gateIterator).loadLine(
-                                                  this.gatePoints[i][j-3] - offsetX,
-                                                  this.gatePoints[i][j-2] - offsetY,
-                                                  this.gatePoints[i][j-1] - offsetX,
-                                                  this.gatePoints[i][j] - offsetY
-                                                 );
-            }
-            gateIterator++;
-        }
     }
     
-    // method for place with items
-    public void createLines(int[][] boundaryPoints, int[][] gatePoints, int[][] itemPoints, 
-                            ArrayList<Gate> gates, ArrayList<Item> items, int offsetX, int offsetY) {
-        this.boundaryPoints = boundaryPoints;
-        this.gatePoints = gatePoints;
-        this.itemPoints = itemPoints;
-        this.gates = gates;
-        this.items = items;
-        this.lines = new ArrayList<Line2D.Double>();
-        this.crossedGate = null;
-        this.touchedItem = null;
+    // ------------ Build Shapes ------------ \\    
+    // method for place as parameter
+    public void createLines(Place place, int offsetX, int offsetY) {
         // sets the background and lines invisible
         setOpaque(false);    
 //        setVisible(false);
         
+        currentPlace = place;
+        
         // create boundary lines
+        this.boundaryPoints = currentPlace.sendBoundaryPoints();
+        this.lines = new ArrayList<Line2D.Double>();
         for (int i = 0; i < this.boundaryPoints.length; i++) {
             for (int j = 3; j < this.boundaryPoints[i].length; j+=3) {
                 Line2D.Double newLine = new Line2D.Double(
@@ -206,6 +170,9 @@ public class BoundaryLines extends JPanel {
             }
         }
         // create gate lines
+        this.gatePoints = currentPlace.sendGatePoints();
+        this.gates = currentPlace.sendGates();
+        this.crossedGate = null;
         int gateIterator = 0;
         for (int i = 0; i < this.gatePoints.length; i++) {
             for (int j = 3; j < this.gatePoints[i].length; j+=3) {
@@ -220,19 +187,30 @@ public class BoundaryLines extends JPanel {
         }
         
         // create item boxes
-        int itemIterator = 0;
-        for (int i = 0; i < this.itemPoints.length; i++) {
-            for (int j = 1; j < this.itemPoints[i].length; j+=1) {
-                this.items.get(itemIterator).loadBox(
-                                                     this.itemPoints[i][j-1] - offsetX,
-                                                     this.itemPoints[i][j] - offsetY
-                                                    );
+        if (currentPlace.hasItems == true) {
+            this.itemPoints = currentPlace.sendItemPoints();
+            this.items = currentPlace.sendItems();
+            this.touchedItem = null;
+            int itemIterator = 0;
+            for (int i = 0; i < this.itemPoints.length; i++) {
+                for (int j = 1; j < this.itemPoints[i].length; j+=1) {
+                    this.items.get(itemIterator).loadBox(
+                                                         this.itemPoints[i][j-1] - offsetX,
+                                                         this.itemPoints[i][j] - offsetY
+                                                        );
+                }
+                itemIterator++;
             }
-            itemIterator++;
         }
+        else this.items = new ArrayList<Item>();
     }
   
 }
+
+
+
+
+
 
 // PRINT STATEMENTS
 //            x1 -= dx;
