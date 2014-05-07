@@ -34,15 +34,16 @@ public class Item implements LoadImage {
     private ImageIcon sprite;
     private int width, height;
     private int[] coords;      // coordinates
+    public CollisionBox box;
     
     // constructor
     public Item(String name, String imageFile, int[] coords) {
         this.name = name;
         this.imageFile = imageFile; 
-        this.coords = coords;
+        this.coords = coords; 
     }
     
-    // methods
+    // ------------ Image ------------ \\
     public void loadImage() throws IOException {
         BufferedImage image = ImageIO.read(new File(this.imageFile));
         this.sprite = new ImageIcon(image);
@@ -54,10 +55,17 @@ public class Item implements LoadImage {
         return this.sprite;
     }
     
+    // ------------ Collision Box ------------ \\
+    public void loadBox() {
+        this.box = new CollisionBox(coords[0], coords[1], this.width, this.height);
+    }
+    
+    // ------------ Name ------------ \\
     public String getName() {
         return this.name;
     }
     
+    // ------------ toString ------------ \\
     public String toString() {
         return String.format("NAME: %s, X: %d, Y: %d\n", this.name, this.coords[0], this.coords[1]);
     }

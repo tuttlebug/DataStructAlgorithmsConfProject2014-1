@@ -13,8 +13,8 @@ public class CollisionBox extends JPanel {
     
     private Rectangle2D.Double box;
     
-    public CollisionBox(int x1, int y1, int x2, int y2) {
-        this.box = new Rectangle2D.Double(x1, y1, x2, y2);
+    public CollisionBox(int x1, int y1, int width, int height) {
+        this.box = new Rectangle2D.Double(x1, y1, width, height);
         // makes background and lines invisible
         setOpaque(false);
 //        setVisible(false);
