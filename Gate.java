@@ -49,20 +49,11 @@ public class Gate extends Line2D.Double {
     
     // ------------ Line ------------ \\
     public void loadLine(double x1, double y1, double x2, double y2) {
-//        this.line = new Line2D.Double(x1, y1, x2, y2);
         this.line.setLine(x1, y1, x2, y2);
     }
     
     // ------------ Swapping areas ------------ \\
     public Place toNextWorld() {
-//        if (this.currentArea.equals(area1)) {
-//            this.nextArea = this.area1;
-//            this.currentArea = this.area2;
-//        }
-//        else {
-//            this.nextArea = this.area2;
-//            this.currentArea = this.area1;
-//        }
         this.nextArea.loadSpawnPoint(this.endPoint[0] + 5, this.endPoint[1]);
         return this.nextArea;
         

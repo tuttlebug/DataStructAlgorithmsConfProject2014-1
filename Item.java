@@ -25,6 +25,7 @@ import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.awt.geom.*;
 
 public class Item implements LoadImage {
     
@@ -32,15 +33,14 @@ public class Item implements LoadImage {
     private String name;
     private String imageFile;
     private ImageIcon sprite;
-    private int width, height;
-    private int[] coords;      // coordinates
-    public CollisionBox box;
+    private double width, height;
+    public Rectangle2D.Double box;
     
     // constructor
-    public Item(String name, String imageFile, int[] coords) {
+    public Item(String name, String imageFile) {
         this.name = name;
         this.imageFile = imageFile; 
-        this.coords = coords; 
+        this.box = new Rectangle2D.Double();
     }
     
     // ------------ Image ------------ \\
@@ -55,9 +55,18 @@ public class Item implements LoadImage {
         return this.sprite;
     }
     
-    // ------------ Collision Box ------------ \\
-    public void loadBox() {
-        this.box = new CollisionBox(coords[0], coords[1], this.width, this.height);
+    // ------------ Box ------------ \\
+    public void loadBox(double x, double y) {
+        this.box.setRect(x,  y, this.width, this.height);
+    }
+    
+    // ------------ Width & Height ------------ \\
+    public double getWidth() {
+        return this.width;
+    }
+    
+    public double getHeight() {
+        return this.height;
     }
     
     // ------------ Name ------------ \\
@@ -67,6 +76,6 @@ public class Item implements LoadImage {
     
     // ------------ toString ------------ \\
     public String toString() {
-        return String.format("NAME: %s, X: %d, Y: %d\n", this.name, this.coords[0], this.coords[1]);
+        return String.format("NAME: %s, WIDTH: %f, HEIGHT: %f\n", this.name, this.width, this.height);
     }
 }

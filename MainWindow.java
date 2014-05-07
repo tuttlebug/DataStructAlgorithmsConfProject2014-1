@@ -214,7 +214,7 @@ public class MainWindow extends JFrame implements KeyListener {
     private static JLabel currentArea = new JLabel();
     private static JLabel playerLevel = new JLabel();
     private static BoundaryLines boundaryPanel;
-    private static JPanel itemPanel = new JPanel();  // possibly make it it's own class
+    private static JPanel itemPanel = new JPanel(); 
     private static CollisionBox playerBox;
     private static Player tome; //
     
@@ -242,11 +242,15 @@ public class MainWindow extends JFrame implements KeyListener {
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.add(currentArea);
-        // add tp window
+        itemPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
+        itemPanel.setOpaque(true);
+        itemPanel.setVisible(false);
+        // add to window
         window.add(caPanel, new Integer(0), 0);
         window.add(boundaryPanel, new Integer(1), 0);
         window.add(playerBox, new Integer(1), 0);
-        window.add(playerLevel, new Integer(2), 0);
+        window.add(itemPanel, new Integer(2), 0);
+        window.add(playerLevel, new Integer(3), 0);
         
         //--------add more code before this line -------//
         
@@ -265,9 +269,19 @@ public class MainWindow extends JFrame implements KeyListener {
         playerLevel.setIcon(image);
     }
     
-    // Creates the boundary line for the level
+    // Creates the boundary, gate, and item lines for the level
+    // for places WITHOUT items
     private void addBoundaries(int[][] boundaryPoints, int[][] gatePoints, ArrayList<Gate> gates, int[] spawnPoint) {
         boundaryPanel.createLines(boundaryPoints, gatePoints, gates, OFFSET_X, OFFSET_Y);
+        x = spawnPoint[0];
+        y = spawnPoint[1];
+        caPanel.setLocation(x, y);
+        boundaryPanel.moveLines(x - START_X, y - START_Y);
+    }
+    // for places with items
+    private void addBoundaries(int[][] boundaryPoints, int[][] gatePoints, int[][] itemPoints, 
+                               ArrayList<Gate> gates, ArrayList<Item> items, int[] spawnPoint) {
+        boundaryPanel.createLines(boundaryPoints, gatePoints, itemPoints, gates, items, OFFSET_X, OFFSET_Y);
         x = spawnPoint[0];
         y = spawnPoint[1];
         caPanel.setLocation(x, y);
@@ -286,8 +300,15 @@ public class MainWindow extends JFrame implements KeyListener {
     public void swapWorlds(Gate g) {
         Place current = g.toNextWorld();
         shiftWorld(current.sendImage());
-        addBoundaries(current.sendBoundaryPoints(), current.sendGatePoints(), 
-                      current.sendGates(), current.sendSpawnPoint());
+        if (current.hasItems == true) {
+            addBoundaries(current.sendBoundaryPoints(), current.sendGatePoints(), current.sendItemPoints(), 
+                      current.sendGates(), current.sendItems(), current.sendSpawnPoint());
+        }
+        else {
+            addBoundaries(current.sendBoundaryPoints(), current.sendGatePoints(), 
+                          current.sendGates(), current.sendSpawnPoint());
+        }
+        System.out.println(current);
     }
 }
 

@@ -65,10 +65,7 @@ public class CreatePlaces {
         temple.addPlace(secretPaths);
         
         // ------------ Create Items ------------ \\
-        int [] forestFoodCoords = new int[] {
-            1408, 992
-        };
-        Item forestFood = new Item("ForestFood", "item.png", forestFoodCoords); // 1408, 992
+        Item forestFood = new Item("ForestFood", "item.png"); // 1408, 992
         
         // ------------ Background Image ------------ \\
         // places
@@ -317,7 +314,10 @@ public class CreatePlaces {
         
         // ------------ Items ------------ \\
         forestFood.loadImage();
-        forestFood.loadBox();
+        int [][] forestFoodCoords = new int[][] {
+            {44, 31}
+        };
+        forestPath_Cave.loadItemPoints(forestFoodCoords);
         
         // add items to Places
         forestPath_Cave.addItem(forestFood);
