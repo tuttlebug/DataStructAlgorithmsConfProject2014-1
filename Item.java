@@ -33,7 +33,7 @@ public class Item implements LoadImage {
     // instance variables
     private String name;
     private String imageFile;
-    private ImageIcon sprite;
+//    private ImageIcon sprite;
     public Image image;
     private double width, height;
     public Rectangle2D.Double box;
@@ -48,15 +48,17 @@ public class Item implements LoadImage {
     
     // ------------ Image ------------ \\
     public void loadImage() throws IOException {
-        image = ImageIO.read(new File(this.imageFile));
-        this.sprite = new ImageIcon(image);
-        this.width = this.sprite.getIconWidth();
-        this.height = this.sprite.getIconHeight();
+        this.image = ImageIO.read(new File(this.imageFile));
+//        this.sprite = new ImageIcon(image);
+//        this.width = this.sprite.getIconWidth();
+//        this.height = this.sprite.getIconHeight();
+        this.width = this.image.getWidth(null);
+        this.height = this.image.getHeight(null);
     }
     
-    public ImageIcon sendImage() {
-        return this.sprite;
-    }
+//    public ImageIcon sendImage() {
+//        return this.sprite;
+//    }
     
     // ------------ Box ------------ \\
     public void loadBox(double x, double y) {

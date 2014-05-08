@@ -510,7 +510,7 @@ public class MainWindow extends JFrame implements KeyListener {
     private static final int OFFSET_Y = 285;
     private static final int START_X = -1830;
     private static final int START_Y = -290;
-    private static final int MOVE = 10;                 // movement speed
+    private static final int MOVE = 25;                 // movement speed 10
     
     // variables
     private static int x = -1830;
@@ -550,7 +550,7 @@ public class MainWindow extends JFrame implements KeyListener {
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.add(currentArea);
-        itemPanel = new ItemPanel();
+        itemPanel = new ItemPanel(this.place);
         itemPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
         // add to window
         window.add(caPanel, new Integer(0), 0);
@@ -575,17 +575,12 @@ public class MainWindow extends JFrame implements KeyListener {
     private void shiftPlayerSprite(ImageIcon image) {
         tome.sprite = image;
         playerLevel.setIcon(image);
-    }
-    
-    private void addItems(ArrayList<Item> items) {
-        itemPanel = new ItemPanel(items);
-        itemPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
-        window.add(itemPanel, new Integer(2), 0);
-    }
+    }  
     
     // ------------ Boundaries ------------ \\
     // Creates the boundary, gate, and item lines for the level
     private void addBoundaries() {
+        this.place.buildGates();
         boundaryPanel.createLines(this.place, OFFSET_X, OFFSET_Y);
         int[] spawnPoint = place.sendSpawnPoint();
         x = spawnPoint[0];
@@ -595,28 +590,27 @@ public class MainWindow extends JFrame implements KeyListener {
     }
     
     // ------------ Changing Worlds ------------ \\
-    // Handles all changes    
+    // Handles all changes 
+    
     // used when tome crosses a gate
     public void swapWorlds(Gate g) {
         this.place = g.toNextWorld();
         shiftWorld(this.place.sendImage());
+        itemPanel.changePlace(this.place);
+        if (this.place.hasItems()) { 
+            this.place.buildItems();
+        }
         addBoundaries();
-//        if (this.place.hasItems == true) addItems(boundaryPanel.sendItems());
-//        if (current.hasItems == true) { 
-//            boundaryPanel.itemPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
-//            window.add(boundaryPanel.itemPanel, new Integer(2), 0);
-//        }
     }
     
     // With Place parameter
     public void swapWorlds() {
         shiftWorld(place.sendImage());
+        itemPanel.changePlace(this.place);
+        if (this.place.hasItems()) { 
+            this.place.buildItems();
+        }
         addBoundaries();
-//        if (this.place.hasItems == true) addItems(boundaryPanel.sendItems());
-//        if (this.place.hasItems == true) { 
-//            boundaryPanel.itemPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
-//            window.add(boundaryPanel.itemPanel, new Integer(2), 0);
-//        }
     }
 }
 //*/

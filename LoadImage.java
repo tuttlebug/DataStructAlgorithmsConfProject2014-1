@@ -5,6 +5,4 @@ public interface LoadImage {
     
     public void loadImage() throws IOException;
     
-    public ImageIcon sendImage();
-    
 }

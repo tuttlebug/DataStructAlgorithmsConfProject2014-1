@@ -28,6 +28,29 @@ public class CreatePlaces {
      * - "Temple"
      */ 
     
+    
+    /*************************************************************************************
+     * 1) Write out all the boundary points
+     * 
+     * Method for adding Gates:
+     * 1) Write the GATE POINTS:
+     *    - int[][] villageGates = new int[][]{
+            { 21, 38, 21, 40 },
+            { 34, 20, 37, 20 },
+            };
+     * 2) Write the SPAWNPOINT for where this gate will send tome
+     *    - int[] villageToForestEndPoint = new int[] {
+            -2620, -965 
+            };  
+     * 3) Write out the LOADGATES method. 
+     *    Parameters:
+     *     - PLACE for where this gate will send tome
+     *     - SPAWNPOINT for where e will spawn in the world.
+     *          - village.loadGates(forestPath_Cave, villageToForestEndPoint);
+     * 4) Finally, use BUILDGATES to completely build the gates
+     *     - village.buildGates
+     *************************************************************************************/
+    
     private static Place village = new Place("Village", "village.png");
     private static Place forestPath_Cave = new Place("ForestPath_Cave", "forestPath_Cave.png");
     private static Place clearing_Cave = new Place("Clearing_Cave", "clearing_Cave.png");
@@ -155,25 +178,23 @@ public class CreatePlaces {
         // gates
         int[][] villageGates = new int[][]{
           { 21, 38, 21, 40 },
-//          { 34, 20, 37, 20 },
+          { 34, 20, 37, 20 },
         };
         village.loadGatePoints(villageGates); 
         // spawnPoints 
         village.loadSpawnPoint(-2399, -736);
         
-        // Gate fiddling
-//        int[] villageToForestStartPoint = new int[]{
-//            -1724, -911
-//        };
-//        int[] villageSpawng2StartPoint = new int[]{
-//            -2160, -350
-//        };
         int[] villageToForestEndPoint = new int[] {
             -2620, -965 
         };  
+        int[] villageToBridgeEndPoint = new int[] {
+            -2190, -1070
+        };
         village.loadGates(forestPath_Cave, villageToForestEndPoint);
+        village.loadGates(bridge, villageToBridgeEndPoint);
 //        village.loadGates(village, village, villageSpawng2StartPoint, villageToForestStartPoint); 
-//        
+        village.buildGates();
+            
         // ForestPath_Cave
         int[][] forestPath_CaveBoundaries = new int[][]{
           { 51, 41, 41, 41 }, 
@@ -213,21 +234,16 @@ public class CreatePlaces {
 //        forestPath_Cave.loadSpawnPoint(-2620, -965);
         
           // Gate fiddling
-//        int[] forestToVillageStartPoint = new int[]{
-//            -2620, -965 
-//        };
         int[] forestToVillageEndPoint = new int[] {
             -1724, -911 
         };
-//        int[] forestToCaveStartPoint = new int[]{
-//            -1665, -965
-//        };
         int[] forestToCaveEndPoint = new int[] {
             -2385, -680
         };
         forestPath_Cave.loadGatePoints(forestPath_CaveGates);
         forestPath_Cave.loadGates(clearing_Cave, forestToCaveEndPoint); 
-        forestPath_Cave.loadGates(village, forestToVillageEndPoint);   
+        forestPath_Cave.loadGates(village, forestToVillageEndPoint); 
+        forestPath_Cave.buildGates();
         
         //clearing_Cave
         int[][] clearing_CaveBoundaries = new int[][]{
@@ -260,8 +276,9 @@ public class CreatePlaces {
             -1665, -965
         };
         clearing_Cave.loadGates(forestPath_Cave, clearingToForestEndPoint);
+        clearing_Cave.buildGates();
         // spawn Point
-//        clearing_Cave.loadSpawnPoint(-2025, -845);
+        clearing_Cave.loadSpawnPoint(-2025, -845);
         
 
         //cave
@@ -373,11 +390,16 @@ public class CreatePlaces {
         // gates
         int[][] bridgeGates = new int[][]{
           { 34, 17, 36, 17 },
-          { 35, 53, 33, 53 }
+//          { 35, 53, 33, 53 }
+        };
+        int[] bridgeToVillageEndPoint = new int[] {
+            -1665, -965
         };
         bridge.loadGatePoints(bridgeGates);
         // spawn Point
         bridge.loadSpawnPoint(-2190, -1070);
+        bridge.loadGates(village, bridgeToVillageEndPoint);
+        bridge.buildGates();
         
         
         //for future reference:
@@ -400,6 +422,7 @@ public class CreatePlaces {
         
         // add items to Places
         forestPath_Cave.addItem(forestFood);
+        forestPath_Cave.buildItems();
         
         // ------------ World Map ------------ \\
         WorldMap worldMap = new WorldMap();

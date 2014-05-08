@@ -59,42 +59,40 @@ public class ItemPanel extends JPanel {
 
 public class ItemPanel extends JPanel {
     
-    private ArrayList<Item> items;
+    private Place place;
     
-    // only used in the MainWindow constructor
-    public ItemPanel() {
+    public ItemPanel(Place place) {
         setOpaque(false);
-        this.items = new ArrayList<Item>();
-    }
-    
-    public ItemPanel(ArrayList<Item> items) {
-        setOpaque(false);
-        this.items = new ArrayList<Item>();
+        this.place = place;
     }
     
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D pen = (Graphics2D) g;
-        pen.setColor(Color.GREEN);
-        if (this.items.size() > 0) {
-            for (Item item : this.items) {
+        pen.setColor(Color.GRAY);
+        if (this.place.hasItems()) {
+            for (Item item : this.place.sendItems()) {
+//                pen.draw(item.box);
+                System.out.println("DRAWING");
                 pen.drawImage(item.image, item.getX(), item.getY(), null);
+                System.out.printf("image x1 = %d, box y1 = %d\n", item.getX(), item.getY());
             }
 //            this.drawImages(pen);
         }
         // makes background transparent
         g.setColor(getBackground());
-        for (Item item : this.items) {
-            System.out.println(item);
-        }
     }
     
-    public void drawImages(Graphics2D pen) {
-//        pen.setColor(Color.GREEN);
-        for (Item item : this.items) {
-            pen.drawImage(item.image, item.getX(), item.getY(), null);
-        }
+    public void changePlace(Place place) {
+        this.place = place;
     }
+    
+//    public void drawImages(Graphics2D pen) {
+////        pen.setColor(Color.GREEN);
+//        for (Item item : this.items) {
+//            pen.drawImage(item.image, item.getX(), item.getY(), null);
+//        }
+//    }
     
     // move boxes
 //    public void moveLines(int dx, int dy) {
