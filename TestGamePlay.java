@@ -21,9 +21,10 @@ public class TestGamePlay {
     
     public static void main(String[] args) throws IOException {
         wMap = CreatePlaces.createWorldMap();
-        mw = new MainWindow();
-        Place current = wMap.getPlace("Village");     
-        mw.swapWorlds(current);
+        Place current = wMap.getPlace("Village");  
+        mw = new MainWindow(current);
+//        mw = new MainWindow();
+        mw.swapWorlds();
     }
     
 }

@@ -377,7 +377,7 @@ public class CreatePlaces {
         };
         bridge.loadGatePoints(bridgeGates);
         // spawn Point
-//        bridge.loadSpawnPoint(-2190, -1070);
+        bridge.loadSpawnPoint(-2190, -1070);
         
         
         //for future reference:
