@@ -2,8 +2,8 @@
  * TESTING CLASS
  * 
  * Check List:
- * [âˆš] creates all Places
- * [âˆš] loads all Place backgrounds
+ * [Ã] creates all Places
+ * [Ã] loads all Place backgrounds
  * [] loads all Place boundaries
  * [] creates all Items
  * [] loads all Item images
@@ -337,8 +337,8 @@ public class CreatePlaces {
           { 30, 42, 30, 43 },
           { 30, 43, 35, 43 }, 
           { 35, 43, 35, 42 },
-          { 35, 42, 37, 32 }, 
-          { 37, 32, 37, 41 },
+          { 35, 42, 37, 42 }, 
+          { 37, 42, 37, 41 },
           { 37, 41, 39, 41 }, 
           { 39, 41, 39, 39 }, 
           { 39, 39, 38, 38 }, 
