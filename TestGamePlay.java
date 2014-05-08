@@ -30,34 +30,6 @@ public class TestGamePlay {
 }
 
 /**
- * 353 - 222 = 131
- * 310 - 931 = -621
- * 353 - 222 = 131
- * 374 - 995 = -621
- * 
-NAME: Village
-NEIGHBORING AREAS: [ForestPath_Cave, Bridge]
-AVAILABLE ITEMS: []
-BACKGROUND: village.png, SPAWNPOINTS: -2399,-736 
-GATES: [next area is ForestPath_Cave
-x1 = 222.000000, y1 = 931.000000, x2 =  222.000000, y2 = 995.000000
-endpoint = [-2620, -965]
-]
-GATEPOINTS BEFORE: i = [21, 38, 21, 40], j =  21 38 21 40 
-GATEPOINTS: 672 1216 672 1280 672 1216 672 1280  
-
-
-
---------2
-NAME: Village
-NEIGHBORING AREAS: [ForestPath_Cave, Bridge]
-AVAILABLE ITEMS: []
-BACKGROUND: village.png, SPAWNPOINTS: -1719,-911 
-GATES: [next area is ForestPath_Cave
-x1 = 353.000000, y1 = 310.000000, x2 =  353.000000, y2 = 374.000000
-endpoint = [-2620, -965]
-]
-GATEPOINTS BEFORE: i = [21, 38, 21, 40], j =  21 38 21 40 
-GATEPOINTS: 672 1216 672 1280 672 1216 672 1280 672 1216 672 1280 
-
- */    
+ * -2415 - (-590) = -1825
+ * -665 - (-390) = -275
+ */   

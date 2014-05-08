@@ -350,9 +350,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 // tome can no longer go in this direction 
                 // and will not be able to until the movement flag turns true again.
                 // i.e. tome moves away from the boundary
-                if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
-                    boundaryPanel.moveR = false;
-                }
+//                if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
+//                    boundaryPanel.moveR = false;
+//                }
                 // ------------ Gate Collision ------------ \\
                 if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
                     System.out.println("gate crossed");
@@ -375,9 +375,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 if (!tome.sprite.equals(tome.sprites[1])) shiftPlayerSprite(tome.sprites[1]);
                 else shiftPlayerSprite(tome.sprites[2]);
                 // ------------ Boundary Collision ------------ \\
-                if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
-                    boundaryPanel.moveL = false;
-                }
+//                if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
+//                    boundaryPanel.moveL = false;
+//                }
                 // ------------ Gate Collision ------------ \\
                 if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
                     System.out.println("gate crossed");
@@ -400,9 +400,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 if (!tome.sprite.equals(tome.sprites[10])) shiftPlayerSprite(tome.sprites[10]);
                 else shiftPlayerSprite(tome.sprites[11]);
                 // ------------ Boundary Collision ------------ \\
-                if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
-                    boundaryPanel.moveU = false;
-                }
+//                if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
+//                    boundaryPanel.moveU = false;
+//                }
                 // ------------ Gate Collision ------------ \\
                 if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
                     System.out.println("gate crossed");
@@ -425,9 +425,9 @@ public class MainWindow extends JFrame implements KeyListener {
                 if (!tome.sprite.equals(tome.sprites[7])) shiftPlayerSprite(tome.sprites[7]);
                 else shiftPlayerSprite(tome.sprites[8]);
                 // ------------ Boundary Collision ------------ \\
-                if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
-                    boundaryPanel.moveD = false;
-                }
+//                if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
+//                    boundaryPanel.moveD = false;
+//                }
                 // ------------ Gate Collision ------------ \\
                 if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
                     System.out.println("gate crossed");
@@ -467,7 +467,7 @@ public class MainWindow extends JFrame implements KeyListener {
             boundaryPanel.moveU = true; 
             boundaryPanel.moveD = true;
         }
-//        System.out.printf("x = %d, y = %d\n", x, y);
+        System.out.printf("x = %d, y = %d\n", x, y);
     }
     
     public void keyReleased(KeyEvent event) {
@@ -520,7 +520,6 @@ public class MainWindow extends JFrame implements KeyListener {
     private static JLabel currentArea = new JLabel();
     private static JLabel playerLevel = new JLabel();
     private static BoundaryLines boundaryPanel;
-    private static ItemPanel itemPanel;
     private static CollisionBox playerBox;
     private static Player tome; //
     private static Place place;
@@ -550,14 +549,11 @@ public class MainWindow extends JFrame implements KeyListener {
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.add(currentArea);
-        itemPanel = new ItemPanel(this.place);
-        itemPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT);
         // add to window
         window.add(caPanel, new Integer(0), 0);
         window.add(boundaryPanel, new Integer(1), 0);
         window.add(playerBox, new Integer(1), 0);
-        window.add(itemPanel, new Integer(2), 0);
-        window.add(playerLevel, new Integer(3), 0);
+        window.add(playerLevel, new Integer(2), 0);
         
         //--------add more code before this line -------//
         
@@ -596,7 +592,6 @@ public class MainWindow extends JFrame implements KeyListener {
     public void swapWorlds(Gate g) {
         this.place = g.toNextWorld();
         shiftWorld(this.place.sendImage());
-        itemPanel.changePlace(this.place);
         if (this.place.hasItems()) { 
             this.place.buildItems();
         }
@@ -606,7 +601,6 @@ public class MainWindow extends JFrame implements KeyListener {
     // With Place parameter
     public void swapWorlds() {
         shiftWorld(place.sendImage());
-        itemPanel.changePlace(this.place);
         if (this.place.hasItems()) { 
             this.place.buildItems();
         }

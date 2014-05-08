@@ -426,6 +426,10 @@ public class BoundaryLines extends JPanel {
 public class BoundaryLines extends JPanel {
     
     private ArrayList<Line2D.Double> lines;
+    private Color r;
+    private Color b;
+    private Color g;
+    private Color img;
 //    private ArrayList<Gate> gates;
 //    private ArrayList<Item> items;
 //    private int[][] boundaryPoints;
@@ -456,29 +460,34 @@ public class BoundaryLines extends JPanel {
      public BoundaryLines(Place place, int offsetX, int offsetY) {
          this.place = place;
          this.createLines(place, offsetX, offsetY);
+         this.r = new Color(255, 0, 0, 0);
+         this.b = new Color(0, 0, 255, 0);
+         this.g = new Color(0, 255, 0, 0);
+         this.img = new Color(0, 0, 0, 255);
     }
 
     // ------------ Paint ------------ \\
     public void paintComponent(Graphics g) {
+        
         super.paintComponent(g);
         Graphics2D pen = (Graphics2D) g;
-        pen.setColor(Color.RED);
+        pen.setColor(this.r);
         // draw lines
         for (Line2D.Double line : this.lines) {
             pen.draw(line);
         }
         // draw gates
-        pen.setColor(Color.BLUE);
+        pen.setColor(this.b);
         for (Gate gate : this.place.sendGates()) {
             pen.draw(gate.line);
         }
         // draw items
         if (this.place.hasItems()) {
-            pen.setColor(Color.GREEN);
+            pen.setColor(this.g);
             for (Item item : this.place.sendItems()) {
                 pen.draw(item.box);
-//                pen.drawImage(item.image, item.getX(), item.getY(), null);
-                System.out.printf("box x1 = %d, box y1 = %d\n", item.getX(), item.getY());
+                pen.setColor(this.img);
+                pen.drawImage(item.image, item.getX(), item.getY(), null); 
             }
         }
         // makes background transparent
@@ -572,7 +581,6 @@ public class BoundaryLines extends JPanel {
         this.place = place;
         
         // create boundary lines
-//        this.boundaryPoints = this.place.sendBoundaryPoints();
         this.lines = new ArrayList<Line2D.Double>();
         for (int i = 0; i < this.place.sendBoundaryPoints().length; i++) {
             for (int j = 3; j < this.place.sendBoundaryPoints()[i].length; j+=3) {
@@ -585,40 +593,6 @@ public class BoundaryLines extends JPanel {
                 this.lines.add(newLine);
             }
         }
-        // create gate lines
-//        this.gatePoints = this.currentPlace.sendGatePoints();
-//        this.gates = this.currentPlace.sendGates();
-//        this.crossedGate = null;
-//        int gateIterator = 0;
-//        for (int i = 0; i < this.place.sendGatePoints().length; i++) {
-//            for (int j = 3; j < this.place.sendGatePoints()[i].length; j+=3) {
-//                this.place.sendGates().get(gateIterator).loadLine(
-//                                                      this.place.sendGatePoints()[i][j-3] - offsetX,
-//                                                      this.place.sendGatePoints()[i][j-2] - offsetY,
-//                                                      this.place.sendGatePoints()[i][j-1] - offsetX,
-//                                                      this.place.sendGatePoints()[i][j] - offsetY
-//                                                     );
-//            }
-//            gateIterator++;
-//        }
-        
-        // create item boxes
-//        if (this.place.hasItems == true) {
-////            this.itemPoints = this.place.sendItemPoints();
-////            this.items = this.currentPlace.sendItems();
-//            this.touchedItem = null;
-//            int itemIterator = 0;
-//            for (int i = 0; i < this.place.sendItemPoints().length; i++) {
-//                for (int j = 1; j < this.place.sendItemPoints()[i].length; j+=1) {
-//                    this.place.sendItems().get(itemIterator).loadBox(
-//                                                         this.place.sendItemPoints()[i][j-1] - offsetX,
-//                                                         this.place.sendItemPoints()[i][j] - offsetY
-//                                                        );
-//                }
-//                itemIterator++;
-//            }
-//        }
-//        else this.items = new ArrayList<Item>();
     }
     
   
