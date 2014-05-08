@@ -184,8 +184,9 @@ public class Place implements LoadImage {
         this.hasItems = true;
     }
     
-    public void removeItem(String name) {
-        this.items.remove(name);
+    public void removeItem(Item item) {
+//        int index = this.items.indexOf(item);
+        this.items.remove(item);
         if (this.items.size() <= 0) this.hasItems = false;
     }   
     
