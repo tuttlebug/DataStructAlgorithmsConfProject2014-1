@@ -49,9 +49,9 @@ public class BoundaryLines extends JPanel {
      public BoundaryLines(Place place, int offsetX, int offsetY) {
          this.place = place;
          this.createLines(place, offsetX, offsetY);
-         this.r = new Color(255, 0, 0, 0);
-         this.b = new Color(0, 0, 255, 0);
-         this.g = new Color(0, 255, 0, 0);
+         this.r = new Color(255, 0, 0, 255);
+         this.b = new Color(0, 0, 255, 255);
+         this.g = new Color(0, 255, 0, 255);
          this.img = new Color(0, 0, 0, 255);
     }
 
