@@ -88,7 +88,7 @@ public class CreatePlaces {
         temple.addPlace(secretPaths);
         
         // ------------ Create Items ------------ \\
-        Item forestFood = new Item("ForestFood", "item.png"); // 1408, 992
+        Item forestFood = new Item("ForestFood", "potion.png"); // 1408, 992
         
         // ------------ Background Image ------------ \\
         // places
