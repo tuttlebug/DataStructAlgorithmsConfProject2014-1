@@ -39,7 +39,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.*;
 
-/*
+///*
 public class MainWindow extends JFrame implements KeyListener {
     
     // Moves currentArea with arrow keys
@@ -327,7 +327,9 @@ public class MainWindow extends JFrame implements KeyListener {
 //        }
     }
 }
-*/
+//*/
+
+/*
 public class MainWindow extends JFrame implements KeyListener {
     
     // Moves currentArea with arrow keys
@@ -616,7 +618,7 @@ public class MainWindow extends JFrame implements KeyListener {
 //        }
     }
 }
-
+*/
 
 
 

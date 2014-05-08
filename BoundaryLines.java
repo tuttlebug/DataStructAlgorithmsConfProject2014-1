@@ -12,7 +12,7 @@ import java.awt.event.*; // MouseListener, MouseMotionListener, MouseEvent, KeyL
  * [] Move as a subclass to / put in Place
  */
 
-/*
+///*
 public class BoundaryLines extends JPanel {
     
     private ArrayList<Line2D.Double> lines;
@@ -213,9 +213,9 @@ public class BoundaryLines extends JPanel {
     
   
 }
-*/
+//*/
 
-
+/*
 public class BoundaryLines extends JPanel {
     
 //    private ArrayList<Line2D.Double> lines;
@@ -451,3 +451,4 @@ public class BoundaryLines extends JPanel {
 //                                  this.gatePoints[i][j-1] - offsetX,
 //                                  this.gatePoints[i][j] - offsetY);
 //                System.out.printf("%d = %s\n", gateIterator, this.gates.get(gateIterator));
+*/
