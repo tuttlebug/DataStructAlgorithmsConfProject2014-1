@@ -122,8 +122,10 @@ public class Player {
     public ImageIcon[] sprites;
     private String[] filenames;
     private int width, height;
+    public int health;
     
     public Player() throws IOException {
+        // ------------ Sprites ------------ \\
         this.sprites = new ImageIcon[] {
             // left
             new ImageIcon(ImageIO.read(new File("Tome left stand.png"))), // 0
@@ -151,6 +153,7 @@ public class Player {
         this.sprite = sprites[6];
         this.width = this.sprite.getIconWidth();
         this.height = this.sprite.getIconHeight();
+        this.health = 20;
     }
     // ------------ Image ------------ \\
     public ImageIcon sendImage() {

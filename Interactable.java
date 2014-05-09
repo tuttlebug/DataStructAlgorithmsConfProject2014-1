@@ -15,9 +15,9 @@ public class Interactable implements LoadImage {
     // instance variables
     protected String name;
     protected String imageFile;
-    public Image image;
+    protected Image image;
     protected double width, height;
-    public Rectangle2D.Double box;
+    protected Rectangle2D.Double box;
     protected int[] coords;
     
     // constructor
@@ -34,6 +34,10 @@ public class Interactable implements LoadImage {
         this.height = this.image.getHeight(null);
     }
     
+    public Image sendImage() {
+        return this.image;
+    }
+    
     
     // ------------ Box ------------ \\
     public void loadBox(double x, double y) {
@@ -41,6 +45,10 @@ public class Interactable implements LoadImage {
         this.coords = new int[] {
             (int) x, (int) y
         };
+    }
+    
+    public Rectangle2D.Double sendBox() {
+        return this.box;
     }
     
     // ------------ Width & Height & Coords ------------ \\
