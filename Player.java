@@ -1,3 +1,7 @@
+/**
+ * To add/Implement:
+ * [] switch to painting the image
+ */
 import java.util.*;
 import javax.swing.*;
 import java.awt.event.*; // MouseListener, MouseMotionListener, MouseEvent, KeyListener, KeyEvent
@@ -8,119 +12,11 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 
-/**
- * The Player Character;
- * 
- * Check List:
- * [] Array of character sprites
- * [] Pack 
- * [Ã] Dimensions
- * [Ã] Should NOT extend JPanel anymore
- * 
- * To Add/Implement:
- * [Ã] Movement
- * [Ã] method that loads character sprite
- *   - [] method that changes Tome's sprites when e moves
- * [] method that allows Tome to go through eir's pack and use items
- * [] method that allows Tome to interact with people and objects
- *   - [] method that allos Tome to pick up items and choose whether to add to eir's pack
- */
-
-/*    
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        Graphics2D pen = (Graphics2D) g;
-        int x1 = this.x - this.radius;
-        int y1 = this.y - this.radius;
-        int diameter = this.radius * 2;
-        pen.drawImage(player, x1, y1, null);
-        this.loadImage();
-    }
-    
-    public void loadImage() {
-        try {
-           player = ImageIO.read(new File(this.currentImage));
-       } catch (IOException e) {
-       }
-    }
-}
-*/
-
-// VERSION 1
-//public class Player implements LoadImage {
-//    
-//    // variables
-//    private ImageIcon sprite;
-//    private String imageFile;
-//    private int width, height;
-//    
-//    public Player() {
-//        this.imageFile = "Test Tome left 1.png";
-//    }
-//    // ------------ Image ------------ \\
-//    public void loadImage() throws IOException {
-//        BufferedImage image = ImageIO.read(new File(this.imageFile));
-//        this.sprite = new ImageIcon(image);
-//        this.width = this.sprite.getIconWidth();
-//        this.height = this.sprite.getIconHeight();
-//    }
-//    
-//    public ImageIcon sendImage() {
-//        return this.sprite;
-//    }
-//        
-//    // ------------ Height&Width ------------ \\
-//    public int getHeight() {
-//        return this.height;
-//    }
-//    
-//    public int getWidth() {
-//        return this.width;
-//    }
-//    
-//    
-//    // ------------ Pack ------------ \\
-//    /*
-//    public Pack openPack() {
-//      return this.Pack();
-//    }
-//    
-//    public class Pack() {
-//    
-//      //instance variables?
-//      private int size;
-//      Map<String, Carriable> items;
-//      
-//      //constructor
-//      public Pack(Player) {
-//        //what data type should Pack be? Or what data types should it contain?
-//        this.items = new HashMap<String, Carriable>();
-//      }
-//      
-//      public HashMap getMap() { //What is the correct return type?
-//        return this.items; 
-//      }
-//      
-//      public void addItem(Carriable item) { //or have it return a boolean?
-//        //add to ...whatever data type the Pack is going to be. Map?
-//        this.size++;
-//      }
-//      
-//      public void removeItem(Carriable item) { //or return a boolean? 
-//        //remove from...whatever data type the Pack is going to be. Map?
-//        this.size--; 
-//      }
-//      
-//    }
-//    */        
-//}
-
 public class Player {
     
     // variables
     public ImageIcon sprite;
     public ImageIcon[] sprites;
-    private String[] filenames;
     private int width, height;
     private int health;
     

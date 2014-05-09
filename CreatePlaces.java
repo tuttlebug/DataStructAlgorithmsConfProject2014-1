@@ -92,7 +92,11 @@ public class CreatePlaces {
         Enemy bridgeHellSpwn = new Enemy("Bridge Hell Spawn", "HellSpawn.png", 5);
         
         // ------------ Create NPCs ------------ \\
+        // village
         NPC brother = new NPC("Brother", "warrior down stand.png");
+        NPC ranger = new NPC("Ranger", "ranger down.png");
+        NPC twnfolk = new NPC("Town Person", "twnfolk 1.png");
+        // cave
         NPC sage = new NPC("Sage", "mage down stand.png");
         
         // ------------ Background Image ------------ \\
@@ -464,11 +468,15 @@ public class CreatePlaces {
         // ------------ NPCs ------------ \\
         // load images
         brother.loadImage();
+        ranger.loadImage();
+        twnfolk.loadImage();
         sage.loadImage();
         
         // create spawn points
         int[][] villageNPCCoords = new int[][] {
-            {35, 20}  // brother
+            {35, 20},  // brother
+            {28, 32},  // ranger
+            {43, 38},  // townFolk    
         };
         int [][] caveNPCCoords = new int[][] {
             {36, 32}  // sage
@@ -478,6 +486,8 @@ public class CreatePlaces {
         
         // add npcs to places
         village.addNPC(brother);
+        village.addNPC(ranger);
+        village.addNPC(twnfolk);
         cave.addNPC(sage);
         
         village.buildNPCs();
