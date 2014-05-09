@@ -21,11 +21,6 @@ public class BoundaryLines extends JPanel {
     private Color p;
     private Color o;
     private Color img;
-//    private ArrayList<Gate> gates;
-//    private ArrayList<Item> items;
-//    private int[][] boundaryPoints;
-//    private int[][] gatePoints;
-//    private int[][] itemPoints;
     private Gate crossedGate;
     private Item touchedItem;
     private Enemy touchedEnemy;
@@ -36,6 +31,8 @@ public class BoundaryLines extends JPanel {
     public boolean moveR = true;
     public boolean moveU = true;
     public boolean moveD = true;
+//    // flag for dictating whether an NPC turns around
+//    public boolean isSpeaking = false;
 
     // ------------ Constructor ------------ \\
     

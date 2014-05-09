@@ -85,20 +85,6 @@ public class CreatePlaces {
         secretPaths.addPlace(temple);
         temple.addPlace(secretPaths);
         
-        // ------------ Create Items ------------ \\
-        Item forestFood = new Item("ForestFood", "potion.png"); // 1408, 992
-        
-        // ------------ Create Enemies ------------ \\
-        Enemy bridgeHellSpwn = new Enemy("Bridge Hell Spawn", "HellSpawn.png", 5);
-        
-        // ------------ Create NPCs ------------ \\
-        // village
-        NPC brother = new NPC("Brother", "warrior down stand.png");
-        NPC ranger = new NPC("Ranger", "ranger down.png");
-        NPC twnfolk = new NPC("Town Person", "twnfolk 1.png");
-        // cave
-        NPC sage = new NPC("Sage", "mage down stand.png");
-        
         // ------------ Background Image ------------ \\
         // places
         village.loadImage();
@@ -436,6 +422,55 @@ public class CreatePlaces {
 //          { 320, 352, 320, 224 }, 
 //          { 320, 352, 320, 224 },
         
+        // ------------ Create Items ------------ \\
+        Item forestFood = new Item("ForestFood", "potion.png"); // 1408, 992
+        
+        // ------------ Create Enemies ------------ \\
+        Enemy bridgeHellSpwn = new Enemy("Bridge Hell Spawn", "HellSpawn.png", 5);
+        
+        // ------------ Create NPCs ------------ \\
+        // village
+        NPC brother = new NPC("Brother", "warrior down stand.png");
+        String[] brotherSprites = new String[] {
+            // left
+            "warrior left stand.png",
+            "warrior left 1.png",
+            "warrior left 2.png",
+            // right
+            "warrior right stand.png",
+            "warrior right 1.png",
+            "warrior right 2.png",
+            // down
+            "warrior down stand.png",
+            "warrior down 1.png",
+            "warrior down 2.png",
+            // up
+            "warrior up stand.png",
+            "warrior up 1.png",
+            "warrior up 2.png"
+        };
+        NPC ranger = new NPC("Ranger", "ranger down.png");
+        NPC twnfolk = new NPC("Town Person", "twnfolk 1.png");
+        // cave
+        NPC sage = new NPC("Sage", "mage down stand.png");
+        String[] sageSprites = new String[] {
+            // left
+            "mage left stand.png",
+            "mage left 1.png",
+            "mage left 2.png",
+            // right
+            "mage right stand.png",
+            "mage right 1.png",
+            "mage right 2.png",
+            // down
+            "mage down stand.png",
+            "mage down 1.png",
+            "mage down 2.png",
+            // up
+            "mage up stand.png",
+            "mage up 1.png",
+            "mage up 2.png"
+        };
         
         // ------------ Items ------------ \\
         // load images
@@ -471,6 +506,9 @@ public class CreatePlaces {
         ranger.loadImage();
         twnfolk.loadImage();
         sage.loadImage();
+        // load sprites
+        brother.loadSprites(brotherSprites);
+        sage.loadSprites(sageSprites);
         
         // create spawn points
         int[][] villageNPCCoords = new int[][] {

@@ -84,7 +84,11 @@ public class MainWindow extends JFrame implements KeyListener {
                 // ------------ NPC Collision ------------ \\
                 if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
                     NPC npc = boundaryPanel.getSpeakingNPC();
+                    if (!npc.isSpeaking()) {
+                    npc.turn(npc.sprites[0]);
+                    npc.noTurn(true);
                     System.out.println("NPC speaking");
+                    }
                 }
             }
         }
@@ -121,7 +125,11 @@ public class MainWindow extends JFrame implements KeyListener {
                 // ------------ NPC Collision ------------ \\
                 if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
                     NPC npc = boundaryPanel.getSpeakingNPC();
+                    if (!npc.isSpeaking()) {
+                    npc.turn(npc.sprites[3]);
+                    npc.noTurn(true);
                     System.out.println("NPC speaking");
+                }
                 }
             }
         }
@@ -158,8 +166,12 @@ public class MainWindow extends JFrame implements KeyListener {
                 // ------------ NPC Collision ------------ \\
                 if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
                     NPC npc = boundaryPanel.getSpeakingNPC();
+                    if (!npc.isSpeaking()) {
+                    npc.turn(npc.sprites[6]);
+                    npc.noTurn(true);
                     System.out.println("NPC speaking");
                 }
+            }
             }
         }
         // going up
@@ -195,7 +207,11 @@ public class MainWindow extends JFrame implements KeyListener {
                 // ------------ NPC Collision ------------ \\
                 if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
                     NPC npc = boundaryPanel.getSpeakingNPC();
+                    if (!npc.isSpeaking()) {
+                    npc.turn(npc.sprites[11]);
+                    npc.noTurn(true);
                     System.out.println("NPC speaking");
+                }
                 }
             }
         }
@@ -219,12 +235,20 @@ public class MainWindow extends JFrame implements KeyListener {
             }
                 
         }
+        // ------------ Refresh ------------ \\
         // this allows tome to move away from the boundary
         if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == false) {
             boundaryPanel.moveL = true;
             boundaryPanel.moveR = true; 
             boundaryPanel.moveU = true; 
             boundaryPanel.moveD = true;
+        }
+        if (boundaryPanel.npcSpeaking(playerBox.getBox()) == false) {
+            for (NPC npc : this.place.sendNPCs()) {
+                if (npc.isSpeaking()) {
+                    npc.noTurn(false);
+                }
+            }
         }
 //        System.out.printf("x = %d, y = %d\n", x, y);
     }

@@ -289,14 +289,9 @@ public class Place implements LoadImage {
     // ------------ NPCs ------------ \\
     public void addNPC(NPC npc) {
         this.npcs.add(npc);
-//        this.npcList.add(enemy.getName());
         this.hasNPCs = true;
     }
     
-//    public void removeNPC(NPC enemy) {
-//        this.enemies.remove(enemy);
-//        if (this.enemies.size() <= 0) this.hasEnemies = false;
-//    } 
     
     public void loadNPCPoints(int[][] npcPoints) {
         for (int i = 0; i < npcPoints.length; i++) {
