@@ -177,7 +177,7 @@ public class MainWindow extends JFrame implements KeyListener {
             boundaryPanel.moveU = true; 
             boundaryPanel.moveD = true;
         }
-        System.out.printf("x = %d, y = %d\n", x, y);
+//        System.out.printf("x = %d, y = %d\n", x, y);
     }
     
     public void keyReleased(KeyEvent event) {
@@ -220,7 +220,7 @@ public class MainWindow extends JFrame implements KeyListener {
     private static final int OFFSET_Y = 285;
     private static final int START_X = -1830;
     private static final int START_Y = -290;
-    private static final int MOVE = 25;                 // movement speed 10
+    private static final int MOVE = 15;                 // movement speed 10
     
     // variables
     private static int x = -1830;
@@ -251,7 +251,7 @@ public class MainWindow extends JFrame implements KeyListener {
         tome = new Player();
         playerLevel.setIcon(tome.sprite);
         playerLevel.setBounds(PLAYER_X, PLAYER_Y, tome.getWidth(), tome.getHeight());
-        playerBox = new CollisionBox(PLAYER_X, PLAYER_Y, tome.getWidth() + 5, tome.getHeight() + 5);
+        playerBox = new CollisionBox(PLAYER_X + 10, PLAYER_Y + 20, tome.getWidth() - 15, tome.getHeight() - 20);
         playerBox.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         // ------------ Panels ------------ \\
         boundaryPanel = new BoundaryLines(this.place, OFFSET_X, OFFSET_Y);

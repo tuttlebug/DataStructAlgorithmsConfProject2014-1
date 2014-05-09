@@ -188,7 +188,7 @@ public class CreatePlaces {
             -2620, -965 
         };  
         int[] villageToBridgeEndPoint = new int[] {
-            -2190, -1070
+            -2110, -1355
         };
         
         // build gates
@@ -288,7 +288,7 @@ public class CreatePlaces {
         clearing_Cave.loadGates(cave, clearingToCaveEndPoint);
         clearing_Cave.buildGates();
         // spawn Point
-//        clearing_Cave.loadSpawnPoint(-2025, -845);
+        clearing_Cave.loadSpawnPoint(-2025, -845);
         
 
         // ------------ Cave ------------ \\
@@ -406,11 +406,11 @@ public class CreatePlaces {
         bridge.loadBoundaryPoints(bridgeBoundaries);
         // gates
         int[][] bridgeGates = new int[][]{
-          { 34, 17, 36, 17 },
-//          { 35, 53, 33, 53 }
+//          { 34, 17, 36, 17 },
+          { 35, 53, 33, 53 }
         };
         int[] bridgeToVillageEndPoint = new int[] {
-            -1665, -965
+           -2154, -356
         };
         
         // build gates

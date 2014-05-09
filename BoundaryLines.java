@@ -27,23 +27,13 @@ public class BoundaryLines extends JPanel {
     public Gate crossedGate;
     public Item touchedItem;
     private Place place;
-//    public ItemPanel itemPanel;
     // flags for dictating which directions are blocked off
     public boolean moveL = true;
     public boolean moveR = true;
     public boolean moveU = true;
     public boolean moveD = true;
 
-    // ------------ Constructors ------------ \\
-    // only used in the MainWindow constructor
-//    public BoundaryLines() {
-//        this.crossedGate = null;
-//        this.touchedItem = null;
-//        this.currentPlace = null;
-////        this.lines = new ArrayList<Line2D.Double>();
-//        this.gates = new ArrayList<Gate>();
-//        this.items = new ArrayList<Item>();
-//    }
+    // ------------ Constructor ------------ \\
     
     // constructor for places with items
      public BoundaryLines(Place place, int offsetX, int offsetY) {
@@ -77,6 +67,7 @@ public class BoundaryLines extends JPanel {
                 pen.draw(item.box);
                 pen.setColor(this.img);
                 pen.drawImage(item.image, item.getX(), item.getY(), null); 
+                System.out.printf("x = %d, y = %d\n", item.getX(), item.getY());
             }
         }
         // makes background transparent
@@ -165,7 +156,6 @@ public class BoundaryLines extends JPanel {
     public void createLines(Place place, int offsetX, int offsetY) {
         // sets the background and lines invisible
         setOpaque(false);    
-//        setVisible(false);
         
         this.place = place;
         
