@@ -19,16 +19,18 @@ public class BoundaryLines extends JPanel {
     private Color b;
     private Color g;
     private Color p;
+    private Color o;
     private Color img;
 //    private ArrayList<Gate> gates;
 //    private ArrayList<Item> items;
 //    private int[][] boundaryPoints;
 //    private int[][] gatePoints;
 //    private int[][] itemPoints;
-    public Gate crossedGate;
-    public Item touchedItem;
-    public Enemy touchedEnemy;
-    private Place place;
+    private Gate crossedGate;
+    private Item touchedItem;
+    private Enemy touchedEnemy;
+    private NPC speakingNPC;
+    private Place place; 
     // flags for dictating which directions are blocked off
     public boolean moveL = true;
     public boolean moveR = true;
@@ -45,6 +47,7 @@ public class BoundaryLines extends JPanel {
          this.b = new Color(0, 0, 255, 255);
          this.g = new Color(0, 255, 0, 255);
          this.p = new Color(100, 0, 100, 255);
+         this.o = new Color(250, 115, 47, 255);
          this.img = new Color(0, 0, 0, 255);
     }
 
@@ -81,6 +84,15 @@ public class BoundaryLines extends JPanel {
                 pen.drawImage(enemy.image, enemy.getX(), enemy.getY(), null); 
             }
         }
+        // draw npcs
+        if (this.place.hasNPCs()) {
+            pen.setColor(this.o);
+            for (NPC npc : this.place.sendNPCs()) {
+                pen.draw(npc.box);
+                pen.setColor(this.img);
+                pen.drawImage(npc.image, npc.getX(), npc.getY(), null); 
+            }
+        }
         // makes background transparent
         g.setColor(getBackground());
     }
@@ -114,6 +126,13 @@ public class BoundaryLines extends JPanel {
             for (Enemy enemy : this.place.sendEnemies()) {
                 enemy.loadBox(enemy.box.getX() + dx, 
                              enemy.box.getY() + dy);
+            }
+        }
+        // move npcs
+        if (this.place.hasNPCs()) {
+            for (NPC npc : this.place.sendNPCs()) {
+                npc.loadBox(npc.box.getX() + dx, 
+                             npc.box.getY() + dy);
             }
         }
     }
@@ -171,6 +190,21 @@ public class BoundaryLines extends JPanel {
         return false;
     }
     
+    // tests if a Rectangle intersected an npc's box
+    public boolean npcSpeaking(Rectangle2D.Double box) {
+        for (int i = 0; i < this.place.sendNPCs().size(); i++) {
+            NPC npc = this.place.sendNPCs().get(i);
+            if (box.intersects(npc.box.getX(),
+                               npc.box.getY(),
+                               npc.box.getWidth(),
+                               npc.box.getHeight())) {
+                this.speakingNPC = npc;
+                return true;
+            }
+        }    
+        return false;
+    }
+    
     public Gate getCrossedGate() {
         return this.crossedGate;
     }
@@ -181,6 +215,10 @@ public class BoundaryLines extends JPanel {
     
     public Enemy getTouchedEnemy() {
         return this.touchedEnemy;
+    }
+    
+    public NPC getSpeakingNPC() {
+        return this.speakingNPC;
     }
     
     // ------------ Remove Shapes ------------ \\

@@ -58,17 +58,20 @@ public class Place implements LoadImage {
     private ArrayList<String> enemyList;      // ONLY HERE FOR SAKE OF TOSTRING 
     private ArrayList<Gate> gateList;
     private ArrayList<Enemy> enemies;
+    private ArrayList<NPC> npcs;
     private int[] spawnPoint;
     private int[][] boundaryPoints;
     private int[][] gatePoints;
     private int[][] itemPoints;
     private int[][] enemyPoints;
+    private int[][] npcPoints;
     private String imageFile;
     private String gatePointsString;         // ONLY HERE FOR SAKE OF TOSTRING
     private String gatePointsStringBefore;   // ONLY HERE FOR SAKE OF TOSTRING
     private ImageIcon background;
     private boolean hasItems;
     private boolean hasEnemies;
+    private boolean hasNPCs;
 //    private JPanel gui; // Menu gui
     
     // ------------ Constructor ------------ \\
@@ -79,6 +82,7 @@ public class Place implements LoadImage {
         this.neighborList = new ArrayList<String>();
         this.itemList = new ArrayList<String>();
         this.enemyList = new ArrayList<String>();
+        this.npcs = new ArrayList<NPC>();
         this.enemies = new ArrayList<Enemy>();
         this.items = new ArrayList<Item>();
         this.gateList = new ArrayList<Gate>();
@@ -89,6 +93,7 @@ public class Place implements LoadImage {
         this.gatePointsStringBefore = "";
         this.hasItems = false;
         this.hasEnemies = false;
+        this.hasNPCs = false;
     }
     // ------------ Background Image ------------ \\
     // loads the background image
@@ -279,6 +284,49 @@ public class Place implements LoadImage {
     
     public boolean hasEnemies() {
         return this.hasEnemies;
+    }
+    
+    // ------------ NPCs ------------ \\
+    public void addNPC(NPC npc) {
+        this.npcs.add(npc);
+//        this.npcList.add(enemy.getName());
+        this.hasNPCs = true;
+    }
+    
+//    public void removeNPC(NPC enemy) {
+//        this.enemies.remove(enemy);
+//        if (this.enemies.size() <= 0) this.hasEnemies = false;
+//    } 
+    
+    public void loadNPCPoints(int[][] npcPoints) {
+        for (int i = 0; i < npcPoints.length; i++) {
+            for (int j = 0; j < npcPoints[i].length; j++) {
+                npcPoints[i][j] *= 32;
+            }
+        }
+        this.npcPoints = npcPoints;
+    }
+    
+    // build enemy boxes
+    public void buildNPCs() {
+        int npcIterator = 0;
+        for (int i = 0; i < this.npcPoints.length; i++) {
+            for (int j = 1; j < this.npcPoints[i].length; j+=1) {
+                this.npcs.get(npcIterator).loadBox(
+                                                      this.npcPoints[i][j-1] - OFFSET_X,
+                                                      this.npcPoints[i][j] - OFFSET_Y
+                                                     );
+            }
+            npcIterator++;
+        }
+    }
+    
+    public ArrayList<NPC> sendNPCs() {
+        return this.npcs;
+    }
+    
+    public boolean hasNPCs() {
+        return this.hasNPCs;
     }
     
     // ------------ toString() ------------ \\

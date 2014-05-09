@@ -24,13 +24,8 @@ public class TestGamePlay {
         wMap = CreatePlaces.createWorldMap();
         Place current = wMap.getPlace("Village");  
         mw = new MainWindow(current);
-//        mw = new MainWindow();
         mw.swapWorlds();
     }
     
 }
-
-/**
- * -2415 - (-590) = -1825
- * -665 - (-390) = -275
- */   
+  

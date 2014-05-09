@@ -81,6 +81,11 @@ public class MainWindow extends JFrame implements KeyListener {
                     tome.loseHealth(e.attack());
                     System.out.printf("Tome's health is %d\n", tome.getHealth());
                 }
+                // ------------ NPC Collision ------------ \\
+                if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
+                    NPC npc = boundaryPanel.getSpeakingNPC();
+                    System.out.println("NPC speaking");
+                }
             }
         }
         // going right
@@ -112,6 +117,11 @@ public class MainWindow extends JFrame implements KeyListener {
                     Enemy e = boundaryPanel.getTouchedEnemy();
                     tome.loseHealth(e.attack());
                     System.out.printf("Tome's health is %d\n", tome.getHealth());
+                }
+                // ------------ NPC Collision ------------ \\
+                if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
+                    NPC npc = boundaryPanel.getSpeakingNPC();
+                    System.out.println("NPC speaking");
                 }
             }
         }
@@ -145,6 +155,11 @@ public class MainWindow extends JFrame implements KeyListener {
                     tome.loseHealth(e.attack());
                     System.out.printf("Tome's health is %d\n", tome.getHealth());
                 }
+                // ------------ NPC Collision ------------ \\
+                if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
+                    NPC npc = boundaryPanel.getSpeakingNPC();
+                    System.out.println("NPC speaking");
+                }
             }
         }
         // going up
@@ -176,6 +191,11 @@ public class MainWindow extends JFrame implements KeyListener {
                     Enemy e = boundaryPanel.getTouchedEnemy();
                     tome.loseHealth(e.attack());
                     System.out.printf("Tome's health is %d\n", tome.getHealth());
+                }
+                // ------------ NPC Collision ------------ \\
+                if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
+                    NPC npc = boundaryPanel.getSpeakingNPC();
+                    System.out.println("NPC speaking");
                 }
             }
         }
@@ -334,6 +354,9 @@ public class MainWindow extends JFrame implements KeyListener {
         }
         if (this.place.hasEnemies()){
             this.place.buildEnemies();
+        }
+        if (this.place.hasNPCs()) {
+            this.place.buildNPCs();
         }
         addBoundaries();
     }

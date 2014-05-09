@@ -15,4 +15,9 @@ public class NPC extends Interactable {
         this.box = new Rectangle2D.Double();
     }
     
+    /*
+    public String speak() {
+        
+    }
+    */
 }

@@ -47,8 +47,6 @@ public class CreatePlaces {
      *     - PLACE for where this gate will send tome
      *     - SPAWNPOINT for where e will spawn in the world.
      *          - village.loadGates(forestPath_Cave, villageToForestEndPoint);
-     * 4) Finally, use BUILDGATES to completely build the gates
-     *     - village.buildGates
      *************************************************************************************/
     
     private static Place village = new Place("Village", "village.png");
@@ -92,6 +90,9 @@ public class CreatePlaces {
         
         // ------------ Create Enemies ------------ \\
         Enemy bridgeHellSpwn = new Enemy("Bridge Hell Spawn", "HellSpawn.png", 5);
+        
+        // ------------ Create NPCs ------------ \\
+        NPC brother = new NPC("Brother", "warrior down stand.png");
         
         // ------------ Background Image ------------ \\
         // places
@@ -198,7 +199,6 @@ public class CreatePlaces {
         village.loadGatePoints(villageGates); 
         village.loadGates(forestPath_Cave, villageToForestEndPoint);
         village.loadGates(bridge, villageToBridgeEndPoint); 
-        village.buildGates();
             
         // ------------ ForestPath_Cave ------------ \\
         int[][] forestPath_CaveBoundaries = new int[][]{
@@ -248,7 +248,6 @@ public class CreatePlaces {
         forestPath_Cave.loadGatePoints(forestPath_CaveGates);
         forestPath_Cave.loadGates(clearing_Cave, forestToCaveEndPoint); 
         forestPath_Cave.loadGates(village, forestToVillageEndPoint); 
-        forestPath_Cave.buildGates();
         
         // ------------ Clearing_Cave ------------ \\
         int[][] clearing_CaveBoundaries = new int[][]{
@@ -289,7 +288,6 @@ public class CreatePlaces {
         clearing_Cave.loadGatePoints(clearing_CaveGates);
         clearing_Cave.loadGates(forestPath_Cave, clearingToForestEndPoint);
         clearing_Cave.loadGates(cave, clearingToCaveEndPoint);
-        clearing_Cave.buildGates();
         // spawn Point
 //        clearing_Cave.loadSpawnPoint(-2025, -845);
         
@@ -335,7 +333,6 @@ public class CreatePlaces {
         // build gates
         cave.loadGatePoints(caveGates);
         cave.loadGates(clearing_Cave, caveToClearingEndPoint);
-        cave.buildGates();
         
         
         // ------------ Bridge ------------ \\
@@ -419,7 +416,7 @@ public class CreatePlaces {
         // build gates
         bridge.loadGatePoints(bridgeGates);        
         bridge.loadGates(village, bridgeToVillageEndPoint);
-        bridge.buildGates();
+//        bridge.buildGates();
         
 //        bridge.loadSpawnPoint(-2190, -1070);
         
@@ -437,10 +434,10 @@ public class CreatePlaces {
         
         // ------------ Items ------------ \\
         forestFood.loadImage();
-        int [][] forestFoodCoords = new int[][] {
+        int [][] itemCoords = new int[][] {
             {44, 31}
         };
-        forestPath_Cave.loadItemPoints(forestFoodCoords);
+        forestPath_Cave.loadItemPoints(itemCoords);
         
         // add items to Places
         forestPath_Cave.addItem(forestFood);
@@ -448,14 +445,26 @@ public class CreatePlaces {
         
         // ------------ Enemies ------------ \\
         bridgeHellSpwn.loadImage();
-        int [][] bridgeHellSpwnCoords = new int[][] {
+        int [][] enemyCoords = new int[][] {
             {26, 44}
         };
-        bridge.loadEnemyPoints(bridgeHellSpwnCoords);
+        bridge.loadEnemyPoints(enemyCoords);
         
         // add enemies to Places
         bridge.addEnemy(bridgeHellSpwn);
         bridge.buildEnemies();
+        
+        // ------------ NPCs ------------ \\
+        brother.loadImage();
+        int[][] npcCoords = new int[][] {
+            {35, 20}
+        };
+        village.loadNPCPoints(npcCoords);
+        
+        // add npcs to places
+        village.addNPC(brother);
+        village.buildNPCs();
+        
         
         // ------------ World Map ------------ \\
         WorldMap worldMap = new WorldMap();
