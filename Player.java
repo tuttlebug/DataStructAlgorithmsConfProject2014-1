@@ -122,7 +122,7 @@ public class Player {
     public ImageIcon[] sprites;
     private String[] filenames;
     private int width, height;
-    public int health;
+    private int health;
     
     public Player() throws IOException {
         // ------------ Sprites ------------ \\
@@ -176,6 +176,10 @@ public class Player {
     
     public void regainHealth(int restore) {
         this.health += restore;
+    }
+    
+    public int getHealth() {
+        return this.health;
     }
     
     // ------------ Pack ------------ \\

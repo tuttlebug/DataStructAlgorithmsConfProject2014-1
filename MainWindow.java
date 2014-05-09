@@ -67,11 +67,19 @@ public class MainWindow extends JFrame implements KeyListener {
                 if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
                     System.out.println("gate crossed");
                     Gate g = boundaryPanel.getCrossedGate();
-                    swapWorlds(g);
+                    this.place = g.toNextWorld();
+                    swapWorlds();
                 }
                 // ------------ Item Collision ------------ \\
                 if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
                     System.out.println("item touched");
+                    
+                }
+                // ------------ Enemy Collision ------------ \\
+                if (boundaryPanel.enemyTouched(playerBox.getBox()) == true) {
+                    Enemy e = boundaryPanel.getTouchedEnemy();
+                    tome.loseHealth(e.attack());
+                    System.out.printf("Tome's health is %d\n", tome.getHealth());
                 }
             }
         }
@@ -92,11 +100,18 @@ public class MainWindow extends JFrame implements KeyListener {
                 if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
                     System.out.println("gate crossed");
                     Gate g = boundaryPanel.getCrossedGate();
-                    swapWorlds(g);
+                    this.place = g.toNextWorld();
+                    swapWorlds();
                 }
                 // ------------ Item Collision ------------ \\
                 if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
                     System.out.println("item touched");
+                }
+                // ------------ Enemy Collision ------------ \\
+                if (boundaryPanel.enemyTouched(playerBox.getBox()) == true) {
+                    Enemy e = boundaryPanel.getTouchedEnemy();
+                    tome.loseHealth(e.attack());
+                    System.out.printf("Tome's health is %d\n", tome.getHealth());
                 }
             }
         }
@@ -117,11 +132,18 @@ public class MainWindow extends JFrame implements KeyListener {
                 if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
                     System.out.println("gate crossed");
                     Gate g = boundaryPanel.getCrossedGate();
-                    swapWorlds(g);
+                    this.place = g.toNextWorld();
+                    swapWorlds();
                 }
                 // ------------ Item Collision ------------ \\
                 if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
                     System.out.println("item touched");
+                }
+                // ------------ Enemy Collision ------------ \\
+                if (boundaryPanel.enemyTouched(playerBox.getBox()) == true) {
+                    Enemy e = boundaryPanel.getTouchedEnemy();
+                    tome.loseHealth(e.attack());
+                    System.out.printf("Tome's health is %d\n", tome.getHealth());
                 }
             }
         }
@@ -142,11 +164,18 @@ public class MainWindow extends JFrame implements KeyListener {
                 if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
                     System.out.println("gate crossed");
                     Gate g = boundaryPanel.getCrossedGate();
-                    swapWorlds(g);
+                    this.place = g.toNextWorld();
+                    swapWorlds();
                 }
                 // ------------ Item Collision ------------ \\
                 if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
                     System.out.println("item touched");
+                }
+                // ------------ Enemy Collision ------------ \\
+                if (boundaryPanel.enemyTouched(playerBox.getBox()) == true) {
+                    Enemy e = boundaryPanel.getTouchedEnemy();
+                    tome.loseHealth(e.attack());
+                    System.out.printf("Tome's health is %d\n", tome.getHealth());
                 }
             }
         }
@@ -297,22 +326,14 @@ public class MainWindow extends JFrame implements KeyListener {
     
     // ------------ Changing Worlds ------------ \\
     // Handles all changes 
-    
-    // used when tome crosses a gate
-    public void swapWorlds(Gate g) {
-        this.place = g.toNextWorld();
+
+    public void swapWorlds() {
         shiftWorld(this.place.sendImage());
         if (this.place.hasItems()) { 
             this.place.buildItems();
         }
-        addBoundaries();
-    }
-    
-    // With Place parameter
-    public void swapWorlds() {
-        shiftWorld(place.sendImage());
-        if (this.place.hasItems()) { 
-            this.place.buildItems();
+        if (this.place.hasEnemies()){
+            this.place.buildEnemies();
         }
         addBoundaries();
     }

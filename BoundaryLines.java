@@ -18,6 +18,7 @@ public class BoundaryLines extends JPanel {
     private Color r;
     private Color b;
     private Color g;
+    private Color p;
     private Color img;
 //    private ArrayList<Gate> gates;
 //    private ArrayList<Item> items;
@@ -26,6 +27,7 @@ public class BoundaryLines extends JPanel {
 //    private int[][] itemPoints;
     public Gate crossedGate;
     public Item touchedItem;
+    public Enemy touchedEnemy;
     private Place place;
     // flags for dictating which directions are blocked off
     public boolean moveL = true;
@@ -42,6 +44,7 @@ public class BoundaryLines extends JPanel {
          this.r = new Color(255, 0, 0, 255);
          this.b = new Color(0, 0, 255, 255);
          this.g = new Color(0, 255, 0, 255);
+         this.p = new Color(100, 0, 100, 255);
          this.img = new Color(0, 0, 0, 255);
     }
 
@@ -67,7 +70,15 @@ public class BoundaryLines extends JPanel {
                 pen.draw(item.box);
                 pen.setColor(this.img);
                 pen.drawImage(item.image, item.getX(), item.getY(), null); 
-                System.out.printf("x = %d, y = %d\n", item.getX(), item.getY());
+            }
+        }
+        // draw enemies
+        if (this.place.hasEnemies()) {
+            pen.setColor(this.p);
+            for (Enemy enemy : this.place.sendEnemies()) {
+                pen.draw(enemy.box);
+                pen.setColor(this.img);
+                pen.drawImage(enemy.image, enemy.getX(), enemy.getY(), null); 
             }
         }
         // makes background transparent
@@ -96,6 +107,13 @@ public class BoundaryLines extends JPanel {
             for (Item item : this.place.sendItems()) {
                 item.loadBox(item.box.getX() + dx, 
                              item.box.getY() + dy);
+            }
+        }
+        // move enemies
+        if (this.place.hasEnemies()) {
+            for (Enemy enemy : this.place.sendEnemies()) {
+                enemy.loadBox(enemy.box.getX() + dx, 
+                             enemy.box.getY() + dy);
             }
         }
     }
@@ -138,12 +156,31 @@ public class BoundaryLines extends JPanel {
         return false;
     }
     
+    // tests if a Rectangle intersected an enemy's box
+    public boolean enemyTouched(Rectangle2D.Double box) {
+        for (int i = 0; i < this.place.sendEnemies().size(); i++) {
+            Enemy enemy = this.place.sendEnemies().get(i);
+            if (box.intersects(enemy.box.getX(),
+                               enemy.box.getY(),
+                               enemy.box.getWidth(),
+                               enemy.box.getHeight())) {
+                this.touchedEnemy = enemy;
+                return true;
+            }
+        }    
+        return false;
+    }
+    
     public Gate getCrossedGate() {
         return this.crossedGate;
     }
     
     public Item getTouchedItem() {
         return this.touchedItem;
+    }
+    
+    public Enemy getTouchedEnemy() {
+        return this.touchedEnemy;
     }
     
     // ------------ Remove Shapes ------------ \\

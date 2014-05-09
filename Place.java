@@ -55,17 +55,20 @@ public class Place implements LoadImage {
     private ArrayList<Item> items;
     private ArrayList<String> neighborList;  // ONLY HERE FOR SAKE OF TOSTRING 
     private ArrayList<String> itemList;      // ONLY HERE FOR SAKE OF TOSTRING 
+    private ArrayList<String> enemyList;      // ONLY HERE FOR SAKE OF TOSTRING 
     private ArrayList<Gate> gateList;
+    private ArrayList<Enemy> enemies;
     private int[] spawnPoint;
     private int[][] boundaryPoints;
     private int[][] gatePoints;
     private int[][] itemPoints;
+    private int[][] enemyPoints;
     private String imageFile;
     private String gatePointsString;         // ONLY HERE FOR SAKE OF TOSTRING
     private String gatePointsStringBefore;   // ONLY HERE FOR SAKE OF TOSTRING
     private ImageIcon background;
     private boolean hasItems;
-//    public BoundaryLines boundaryPanel;
+    private boolean hasEnemies;
 //    private JPanel gui; // Menu gui
     
     // ------------ Constructor ------------ \\
@@ -75,6 +78,8 @@ public class Place implements LoadImage {
 //        this.items = new HashMap<String, Item>();
         this.neighborList = new ArrayList<String>();
         this.itemList = new ArrayList<String>();
+        this.enemyList = new ArrayList<String>();
+        this.enemies = new ArrayList<Enemy>();
         this.items = new ArrayList<Item>();
         this.gateList = new ArrayList<Gate>();
         this.imageFile = imageFile;
@@ -83,6 +88,7 @@ public class Place implements LoadImage {
         this.gatePointsString = "";
         this.gatePointsStringBefore = "";
         this.hasItems = false;
+        this.hasEnemies = false;
     }
     // ------------ Background Image ------------ \\
     // loads the background image
@@ -124,10 +130,6 @@ public class Place implements LoadImage {
         this.gatePoints = gatePoints;
     }
     
-//    public int[][] sendGatePoints() {
-//        return this.gatePoints;
-//    }
-    
     public void loadGates(Place nextArea, int[] end) throws IOException {
         this.gateList.add(new Gate(nextArea, end));  
     }
@@ -162,8 +164,7 @@ public class Place implements LoadImage {
 //            }
 //        }
 //        return this.gatePointsString;
-//    }
-    
+//    }    
     
     // ------------ Spawn points ------------ \\
     // load spawn point
@@ -197,14 +198,12 @@ public class Place implements LoadImage {
     
     // ------------ Items ------------ \\
     public void addItem(Item item) {
-//        this.items.put(item.getName(), item);
         this.items.add(item);
         this.itemList.add(item.getName());
         this.hasItems = true;
     }
     
     public void removeItem(Item item) {
-//        int index = this.items.indexOf(item);
         this.items.remove(item);
         if (this.items.size() <= 0) this.hasItems = false;
     }   
@@ -216,10 +215,6 @@ public class Place implements LoadImage {
             }
         }
         this.itemPoints = itemPoints;
-    }
-    
-    public int[][] sendItemPoints() {
-        return this.itemPoints;
     }
     
     public void buildItems() {
@@ -241,6 +236,49 @@ public class Place implements LoadImage {
     
     public boolean hasItems() {
         return this.hasItems;
+    }
+    
+    // ------------ Enemies ------------ \\
+    public void addEnemy(Enemy enemy) {
+        this.enemies.add(enemy);
+        this.enemyList.add(enemy.getName());
+        this.hasEnemies = true;
+    }
+    
+    public void removeEnemy(Enemy enemy) {
+        this.enemies.remove(enemy);
+        if (this.enemies.size() <= 0) this.hasEnemies = false;
+    } 
+    
+    public void loadEnemyPoints(int[][] enemyPoints) {
+        for (int i = 0; i < enemyPoints.length; i++) {
+            for (int j = 0; j < enemyPoints[i].length; j++) {
+                enemyPoints[i][j] *= 32;
+            }
+        }
+        this.enemyPoints = enemyPoints;
+    }
+    
+    // build enemy boxes
+    public void buildEnemies() {
+        int enemyIterator = 0;
+        for (int i = 0; i < this.enemyPoints.length; i++) {
+            for (int j = 1; j < this.enemyPoints[i].length; j+=1) {
+                this.enemies.get(enemyIterator).loadBox(
+                                                      this.enemyPoints[i][j-1] - OFFSET_X,
+                                                      this.enemyPoints[i][j] - OFFSET_Y
+                                                     );
+            }
+            enemyIterator++;
+        }
+    }
+    
+    public ArrayList<Enemy> sendEnemies() {
+        return this.enemies;
+    }
+    
+    public boolean hasEnemies() {
+        return this.hasEnemies;
     }
     
     // ------------ toString() ------------ \\

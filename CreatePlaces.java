@@ -90,6 +90,9 @@ public class CreatePlaces {
         // ------------ Create Items ------------ \\
         Item forestFood = new Item("ForestFood", "potion.png"); // 1408, 992
         
+        // ------------ Create Enemies ------------ \\
+        Enemy bridgeHellSpwn = new Enemy("Bridge Hell Spawn", "HellSpawn.png", 5);
+        
         // ------------ Background Image ------------ \\
         // places
         village.loadImage();
@@ -288,7 +291,7 @@ public class CreatePlaces {
         clearing_Cave.loadGates(cave, clearingToCaveEndPoint);
         clearing_Cave.buildGates();
         // spawn Point
-        clearing_Cave.loadSpawnPoint(-2025, -845);
+//        clearing_Cave.loadSpawnPoint(-2025, -845);
         
 
         // ------------ Cave ------------ \\
@@ -442,6 +445,17 @@ public class CreatePlaces {
         // add items to Places
         forestPath_Cave.addItem(forestFood);
         forestPath_Cave.buildItems();
+        
+        // ------------ Enemies ------------ \\
+        bridgeHellSpwn.loadImage();
+        int [][] bridgeHellSpwnCoords = new int[][] {
+            {26, 44}
+        };
+        bridge.loadEnemyPoints(bridgeHellSpwnCoords);
+        
+        // add enemies to Places
+        bridge.addEnemy(bridgeHellSpwn);
+        bridge.buildEnemies();
         
         // ------------ World Map ------------ \\
         WorldMap worldMap = new WorldMap();
