@@ -87,7 +87,7 @@ public class BoundaryLines extends JPanel {
             for (NPC npc : this.place.sendNPCs()) {
                 pen.draw(npc.box);
                 pen.setColor(this.img);
-                pen.drawImage(npc.image, npc.getX(), npc.getY(), null); 
+                pen.drawImage(npc.image, npc.getX() + 10 , npc.getY() + 10, null); 
             }
         }
         // makes background transparent

@@ -302,7 +302,7 @@ public class Place implements LoadImage {
         this.npcPoints = npcPoints;
     }
     
-    // build enemy boxes
+    // build npc boxes
     public void buildNPCs() {
         int npcIterator = 0;
         for (int i = 0; i < this.npcPoints.length; i++) {

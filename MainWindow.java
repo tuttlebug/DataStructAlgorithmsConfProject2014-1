@@ -85,10 +85,11 @@ public class MainWindow extends JFrame implements KeyListener {
                 if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
                     NPC npc = boundaryPanel.getSpeakingNPC();
                     if (!npc.isSpeaking()) {
-                    npc.turn(npc.sprites[0]);
-                    npc.noTurn(true);
-                    System.out.println("NPC speaking");
+                        npc.turn(npc.sprites[0]);
+                        npc.noTurn(true);
+                        System.out.println("NPC speaking");
                     }
+                    boundaryPanel.moveR = false;
                 }
             }
         }
@@ -126,10 +127,11 @@ public class MainWindow extends JFrame implements KeyListener {
                 if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
                     NPC npc = boundaryPanel.getSpeakingNPC();
                     if (!npc.isSpeaking()) {
-                    npc.turn(npc.sprites[3]);
-                    npc.noTurn(true);
-                    System.out.println("NPC speaking");
-                }
+                        npc.turn(npc.sprites[3]);
+                        npc.noTurn(true);
+                        System.out.println("NPC speaking");
+                    }
+                    boundaryPanel.moveL = false;
                 }
             }
         }
@@ -167,11 +169,12 @@ public class MainWindow extends JFrame implements KeyListener {
                 if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
                     NPC npc = boundaryPanel.getSpeakingNPC();
                     if (!npc.isSpeaking()) {
-                    npc.turn(npc.sprites[6]);
-                    npc.noTurn(true);
-                    System.out.println("NPC speaking");
+                        npc.turn(npc.sprites[6]);
+                        npc.noTurn(true);
+                        System.out.println("NPC speaking");
+                    }
+                    boundaryPanel.moveU = false;
                 }
-            }
             }
         }
         // going up
@@ -208,10 +211,11 @@ public class MainWindow extends JFrame implements KeyListener {
                 if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
                     NPC npc = boundaryPanel.getSpeakingNPC();
                     if (!npc.isSpeaking()) {
-                    npc.turn(npc.sprites[11]);
-                    npc.noTurn(true);
-                    System.out.println("NPC speaking");
-                }
+                        npc.turn(npc.sprites[11]);
+                        npc.noTurn(true);
+                        System.out.println("NPC speaking");
+                        boundaryPanel.moveD = false;
+                    }
                 }
             }
         }
@@ -233,11 +237,11 @@ public class MainWindow extends JFrame implements KeyListener {
             if (tome.sprite.equals(tome.sprites[7]) || tome.sprite.equals(tome.sprites[8]) || tome.sprite.equals(tome.sprites[6])) {
                 shiftPlayerSprite(tome.sprites[12]);
             }
-                
+            
         }
         // ------------ Refresh ------------ \\
         // this allows tome to move away from the boundary
-        if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == false) {
+        if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == false && boundaryPanel.npcSpeaking(playerBox.getBox()) == false) {
             boundaryPanel.moveL = true;
             boundaryPanel.moveR = true; 
             boundaryPanel.moveU = true; 
@@ -324,7 +328,7 @@ public class MainWindow extends JFrame implements KeyListener {
         tome = new Player();
         playerLevel.setIcon(tome.sprite);
         playerLevel.setBounds(PLAYER_X, PLAYER_Y, tome.getWidth(), tome.getHeight());
-        playerBox = new CollisionBox(PLAYER_X + 10, PLAYER_Y + 20, tome.getWidth() - 15, tome.getHeight() - 20);
+        playerBox = new CollisionBox(PLAYER_X + 9, PLAYER_Y + 20, tome.getWidth() - 15, tome.getHeight() - 20);
         playerBox.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         // ------------ Panels ------------ \\
         boundaryPanel = new BoundaryLines(this.place, OFFSET_X, OFFSET_Y);

@@ -29,8 +29,8 @@ public class NPC extends Interactable {
     public void loadImage() throws IOException {
         super.loadImage();
         this.image = ImageIO.read(new File(this.imageFile));
-        this.width = this.image.getWidth(null) + 10;
-        this.height = this.image.getHeight(null) + 10;
+        this.width = this.image.getWidth(null) + 20;
+        this.height = this.image.getHeight(null) + 20;
     }
     
     public void turn(Image image) {

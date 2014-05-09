@@ -449,8 +449,44 @@ public class CreatePlaces {
             "warrior up 1.png",
             "warrior up 2.png"
         };
-        NPC ranger = new NPC("Ranger", "ranger down.png");
-        NPC twnfolk = new NPC("Town Person", "twnfolk 1.png");
+        NPC ranger = new NPC("Ranger", "ranger down stand.png");
+        String[] rangerSprites = new String[] {
+            // left
+            "ranger left stand.png",
+            "ranger left 1.png",
+            "ranger left 2.png",
+            // right
+            "ranger right stand.png",
+            "ranger right 1.png",
+            "ranger right 2.png",
+            // down
+            "ranger down stand.png",
+            "ranger down 1.png",
+            "ranger down 2.png",
+            // up
+            "ranger up stand.png",
+            "ranger up 1.png",
+            "ranger up 2.png"
+        };
+        NPC twnprsn = new NPC("Town Person", "twnprsn left stand.png");
+        String[] twnprsnSprites = new String[] {
+            // left
+            "twnprsn left stand.png",
+            "twnprsn left 1.png",
+            "twnprsn left 2.png",
+            // right
+            "twnprsn right stand.png",
+            "twnprsn right 1.png",
+            "twnprsn right 2.png",
+            // down
+            "twnprsn down stand.png",
+            "twnprsn down 1.png",
+            "twnprsn down 2.png",
+            // up
+            "twnprsn up stand.png",
+            "twnprsn up 1.png",
+            "twnprsn up 2.png"
+        };
         // cave
         NPC sage = new NPC("Sage", "mage down stand.png");
         String[] sageSprites = new String[] {
@@ -504,17 +540,19 @@ public class CreatePlaces {
         // load images
         brother.loadImage();
         ranger.loadImage();
-        twnfolk.loadImage();
+        twnprsn.loadImage();
         sage.loadImage();
         // load sprites
         brother.loadSprites(brotherSprites);
+        ranger.loadSprites(rangerSprites);
+        twnprsn.loadSprites(twnprsnSprites);
         sage.loadSprites(sageSprites);
         
         // create spawn points
         int[][] villageNPCCoords = new int[][] {
             {35, 20},  // brother
             {28, 32},  // ranger
-            {43, 38},  // townFolk    
+            {43, 38},  // twnprsn    
         };
         int [][] caveNPCCoords = new int[][] {
             {36, 32}  // sage
@@ -525,7 +563,7 @@ public class CreatePlaces {
         // add npcs to places
         village.addNPC(brother);
         village.addNPC(ranger);
-        village.addNPC(twnfolk);
+        village.addNPC(twnprsn);
         cave.addNPC(sage);
         
         village.buildNPCs();
