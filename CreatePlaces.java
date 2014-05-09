@@ -93,6 +93,7 @@ public class CreatePlaces {
         
         // ------------ Create NPCs ------------ \\
         NPC brother = new NPC("Brother", "warrior down stand.png");
+        NPC sage = new NPC("Sage", "mage down stand.png");
         
         // ------------ Background Image ------------ \\
         // places
@@ -433,37 +434,54 @@ public class CreatePlaces {
         
         
         // ------------ Items ------------ \\
+        // load images
         forestFood.loadImage();
-        int [][] itemCoords = new int[][] {
+        
+        // create spawn points
+        int [][] forestItemsCoords = new int[][] {
             {44, 31}
         };
-        forestPath_Cave.loadItemPoints(itemCoords);
+        forestPath_Cave.loadItemPoints(forestItemsCoords);
         
         // add items to Places
         forestPath_Cave.addItem(forestFood);
         forestPath_Cave.buildItems();
         
         // ------------ Enemies ------------ \\
+        // load images
         bridgeHellSpwn.loadImage();
-        int [][] enemyCoords = new int[][] {
+        
+        // create spawn points
+        int [][] bridgeEnemyCoords = new int[][] {
             {26, 44}
         };
-        bridge.loadEnemyPoints(enemyCoords);
+        bridge.loadEnemyPoints(bridgeEnemyCoords);
         
         // add enemies to Places
         bridge.addEnemy(bridgeHellSpwn);
         bridge.buildEnemies();
         
         // ------------ NPCs ------------ \\
+        // load images
         brother.loadImage();
-        int[][] npcCoords = new int[][] {
-            {35, 20}
+        sage.loadImage();
+        
+        // create spawn points
+        int[][] villageNPCCoords = new int[][] {
+            {35, 20}  // brother
         };
-        village.loadNPCPoints(npcCoords);
+        int [][] caveNPCCoords = new int[][] {
+            {36, 32}  // sage
+        };
+        village.loadNPCPoints(villageNPCCoords);
+        cave.loadNPCPoints(caveNPCCoords);
         
         // add npcs to places
         village.addNPC(brother);
+        cave.addNPC(sage);
+        
         village.buildNPCs();
+        cave.buildNPCs();
         
         
         // ------------ World Map ------------ \\
