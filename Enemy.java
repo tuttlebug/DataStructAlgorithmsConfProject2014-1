@@ -8,11 +8,18 @@ import java.awt.Image;
 
 public class Enemy extends Interactable {
     
-    public Enemy(String name, String imageFile) {
+    private int atkPower;
+    
+    public Enemy(String name, String imageFile, int atkPower) {
         super(name, imageFile);
         this.name = name;
         this.imageFile = imageFile;
         this.box = new Rectangle2D.Double();
+        this.atkPower = atkPower;
     }
     
+    // ------------ Attack ------------ \\
+    public int attack() {
+        return this.atkPower;
+    }
 }
