@@ -169,6 +169,14 @@ public class Player {
         return this.width;
     }
     
+    // ------------ Health ------------ \\
+    public void loseHealth(int damage) {
+        this.health -= damage;
+    }
+    
+    public void regainHealth(int restore) {
+        this.health += restore;
+    }
     
     // ------------ Pack ------------ \\
     /*
