@@ -12,18 +12,18 @@
  * [Ã] Switch over to Layered Panels
  * 
  * To Add/Implement:
- * [] method that handles switching from place to another place
+ * [Ã] method that handles switching from place to another place
  *   - [] changing the image
  *   - [] 
  * [] move the images like we move the lines
  *   - using paint
- * [] make tome abstract
  * 
  * Temporary:
  * 
  * METHODS TO THINK ABOUT:
  * [] JLayeredPane.paint(Graphics g)
  * [] player as variable
+ * [] setPosition(Component c, int position)
  * 
  * THINGS TO CONSIDER:
  * Graphs
@@ -239,6 +239,17 @@ public class MainWindow extends JFrame implements KeyListener {
             }
             
         }
+        // ------------ Menu ------------ \\
+//        if (event.getKeyCode() == KeyEvent.VK_M) {
+//            boundaryPanel.moveL = false;
+//            boundaryPanel.moveR = false; 
+//            boundaryPanel.moveU = false; 
+//            boundaryPanel.moveD = false;
+//            System.out.println(window.highestLayer());
+//            System.out.println(window.getIndexOf(stscreen));
+//            window.remove(0);
+//            repaint();
+//        }
         // ------------ Refresh ------------ \\
         // this allows tome to move away from the boundary
         if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == false && boundaryPanel.npcSpeaking(playerBox.getBox()) == false) {
@@ -308,7 +319,8 @@ public class MainWindow extends JFrame implements KeyListener {
     private static JLabel playerLevel = new JLabel();
     private static BoundaryLines boundaryPanel;
     private static CollisionBox playerBox;
-    private static Player tome; //
+    private static StartScreen stscreen;
+    private static Player tome;
     private static Place place;
     
     // ------------ Constructor ------------ \\
@@ -328,7 +340,7 @@ public class MainWindow extends JFrame implements KeyListener {
         tome = new Player();
         playerLevel.setIcon(tome.sprite);
         playerLevel.setBounds(PLAYER_X, PLAYER_Y, tome.getWidth(), tome.getHeight());
-        playerBox = new CollisionBox(PLAYER_X + 9, PLAYER_Y + 20, tome.getWidth() - 15, tome.getHeight() - 20);
+        playerBox = new CollisionBox(PLAYER_X + 8, PLAYER_Y + 20, tome.getWidth() - 15, tome.getHeight() - 20);
         playerBox.setBounds(0, 0, CA_WIDTH, CA_HEIGHT);
         // ------------ Panels ------------ \\
         boundaryPanel = new BoundaryLines(this.place, OFFSET_X, OFFSET_Y);
@@ -336,11 +348,14 @@ public class MainWindow extends JFrame implements KeyListener {
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.add(currentArea);
+        stscreen = new StartScreen();
+        stscreen.setBounds(0, 0, W_WIDTH, W_HEIGHT / 2); 
         // add to window
         window.add(caPanel, new Integer(0), 0);
         window.add(boundaryPanel, new Integer(1), 0);
         window.add(playerBox, new Integer(1), 0);
         window.add(playerLevel, new Integer(2), 0);
+        window.add(stscreen, new Integer(3), 0);
         
         //--------add more code before this line -------//
         

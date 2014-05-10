@@ -190,6 +190,7 @@ public class CreatePlaces {
         village.loadGatePoints(villageGates); 
         village.loadGates(forestPath_Cave, villageToForestEndPoint);
         village.loadGates(bridge, villageToBridgeEndPoint); 
+        village.buildGates();
             
         // ------------ ForestPath_Cave ------------ \\
         int[][] forestPath_CaveBoundaries = new int[][]{
@@ -239,7 +240,7 @@ public class CreatePlaces {
         forestPath_Cave.loadGatePoints(forestPath_CaveGates);
         forestPath_Cave.loadGates(clearing_Cave, forestToCaveEndPoint); 
         forestPath_Cave.loadGates(village, forestToVillageEndPoint); 
-        
+        forestPath_Cave.buildGates();
         // ------------ Clearing_Cave ------------ \\
         int[][] clearing_CaveBoundaries = new int[][]{
           { 43, 32, 42, 32 }, 
@@ -279,6 +280,7 @@ public class CreatePlaces {
         clearing_Cave.loadGatePoints(clearing_CaveGates);
         clearing_Cave.loadGates(forestPath_Cave, clearingToForestEndPoint);
         clearing_Cave.loadGates(cave, clearingToCaveEndPoint);
+        clearing_Cave.buildGates();
         // spawn Point
 //        clearing_Cave.loadSpawnPoint(-2025, -845);
         
@@ -324,7 +326,7 @@ public class CreatePlaces {
         // build gates
         cave.loadGatePoints(caveGates);
         cave.loadGates(clearing_Cave, caveToClearingEndPoint);
-        
+        cave.buildGates();
         
         // ------------ Bridge ------------ \\
         int[][] bridgeBoundaries = new int[][]{
@@ -407,7 +409,7 @@ public class CreatePlaces {
         // build gates
         bridge.loadGatePoints(bridgeGates);        
         bridge.loadGates(village, bridgeToVillageEndPoint);
-//        bridge.buildGates();
+        bridge.buildGates();
         
 //        bridge.loadSpawnPoint(-2190, -1070);
         

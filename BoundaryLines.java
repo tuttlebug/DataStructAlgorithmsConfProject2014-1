@@ -31,8 +31,8 @@ public class BoundaryLines extends JPanel {
     public boolean moveR = true;
     public boolean moveU = true;
     public boolean moveD = true;
-//    // flag for dictating whether an NPC turns around
-//    public boolean isSpeaking = false;
+//    // flag for dictating whether Tome can attack
+//    public boolean canAttack = true;
 
     // ------------ Constructor ------------ \\
     
