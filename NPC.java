@@ -18,7 +18,7 @@ public class NPC extends Interactable {
     private boolean speaking;
     private boolean wL = true;
     private boolean wR = false;
-    private boolean wD = true;
+    private boolean wD = false;
     private boolean wU = false;
     
     public NPC(String name, String imageFile) {
@@ -77,39 +77,44 @@ public class NPC extends Interactable {
     
     // ------------ Walking ------------ \\
     public void walk() {
-        System.out.println("WALKING");
-        if (this.wL == true) this.walkRight();
-        else if (this.wR == true) this.walkLeft();
-        if (this.wD == true) this.walkUp();
-        else if (this.wU == true) this.walkDown();
+//        System.out.println("WALKING");
+        if (this.wU == true) this.walkRight();
+        else if (this.wR == true) this.walkDown();
+        else if (this.wD == true) this.walkLeft();
+        else if (this.wL == true) this.walkDown();
     }
-    
+    // left
     private void walkLeft() {
         this.coords[0] -= 10;
+        this.turn(this.sprites[1]);
+        this.moveBox();
         this.wL = true;
         this.wR = false;
-        System.out.println("WALKING LEFT");
+//        System.out.println("WALKING LEFT");
     }
-    
+    // right
     private void walkRight() {
         this.coords[0] += 10;
+        this.turn(this.sprites[4]);
         this.wR = true;    
         this.wL = false;
-        System.out.println("WALKING RIGHT");
+//        System.out.println("WALKING RIGHT");
     }
-    
+    // down
     private void walkDown() {
         this.coords[1] += 10;
+        this.turn(this.sprites[7]);
         this.wD = true;
         this.wU = false;
-        System.out.println("WALKING DOWN");
+//        System.out.println("WALKING DOWN");
     }
-    
+    // up
     private void walkUp() {
         this.coords[1] -= 10;
+        this.turn(this.sprites[10]);
         this.wU = true;
         this.wD = false;
-        System.out.println("WALKING UP");
+//        System.out.println("WALKING UP");
     }
         
 }

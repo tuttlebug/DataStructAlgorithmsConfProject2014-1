@@ -25,6 +25,7 @@ public class Interactable implements LoadImage {
         this.name = name;
         this.imageFile = imageFile; 
         this.box = new Rectangle2D.Double();
+        this.coords = new int[2];
     }
     
     // ------------ Image ------------ \\
@@ -42,9 +43,12 @@ public class Interactable implements LoadImage {
     // ------------ Box ------------ \\
     public void loadBox(double x, double y) {
         this.box.setRect(x,  y, this.width, this.height);
-        this.coords = new int[] {
-            (int) x, (int) y
-        };
+        this.coords[0] = (int) x;
+        this.coords[1] = (int) y;
+    }
+    
+    public void moveBox() {
+        this.box.setRect(this.coords[0],  this.coords[1], this.width, this.height);
     }
     
     public Rectangle2D.Double sendBox() {

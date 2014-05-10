@@ -108,13 +108,6 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
     
     // ------------ Stopping ------------ \\
     public void keyReleased(KeyEvent event) {
-//        System.out.println("Running");
-//        Timer timer = new Timer(500, new StopSprite(event));
-//        timer.start();
-//        System.out.println("Stopped running");
-//        System.out.println(timer.isRepeats());
-//        System.out.println(timer.getDelay());
-//        timer.removeActionListener(stopSp);
         stop(event);
     }
     
@@ -154,7 +147,7 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
     private static Player tome;
     private static Place place;
     private static Timer npcMoveLR;
-    private static Timer npcMoveUD;
+//    private static Timer npcMoveUD;
         
     // ------------ Constructor ------------ \\
     public MainWindow(Place place) throws IOException {
@@ -194,10 +187,10 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
         
         // ------------ Timers ------------ \\
         this.addKeyListener(this);
-        this.npcMoveLR = new Timer(500, this); 
-        this.npcMoveUD = new Timer(900, this);
+        this.npcMoveLR = new Timer(1000, this); 
+//        this.npcMoveUD = new Timer(900, this);
         this.npcMoveLR.start();
-        this.npcMoveUD.start();
+//        this.npcMoveUD.start();
         this.setFocusable(true);
         setLocation(XLCOORD, YLCOORD);
         setVisible(true);
