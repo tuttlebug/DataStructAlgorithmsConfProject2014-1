@@ -65,23 +65,7 @@ public class MainWindow extends JFrame implements KeyListener {
         }
         // ------------ Attacking ------------ \\
         if (event.getKeyCode() == KeyEvent.VK_SHIFT) {
-            // attack left
-            if (tome.sprite.equals(tome.sprites[4]) || tome.sprite.equals(tome.sprites[5]) || tome.sprite.equals(tome.sprites[3])) {
-                shiftPlayerSprite(tome.sprites[14]);
-            }
-            // attack right
-            if (tome.sprite.equals(tome.sprites[1]) || tome.sprite.equals(tome.sprites[2]) || tome.sprite.equals(tome.sprites[0])) {
-                shiftPlayerSprite(tome.sprites[13]);
-            }
-            // attack up
-            if (tome.sprite.equals(tome.sprites[10]) || tome.sprite.equals(tome.sprites[11]) || tome.sprite.equals(tome.sprites[9])) {
-                shiftPlayerSprite(tome.sprites[15]);
-            }
-            // attack down
-            if (tome.sprite.equals(tome.sprites[7]) || tome.sprite.equals(tome.sprites[8]) || tome.sprite.equals(tome.sprites[6])) {
-                shiftPlayerSprite(tome.sprites[12]);
-            }
-            
+            attack();
         }
         // ------------ Menu ------------ \\
 //        if (event.getKeyCode() == KeyEvent.VK_M) {
@@ -252,7 +236,7 @@ public class MainWindow extends JFrame implements KeyListener {
         addBoundaries();
     }
     
-    // ------------ Key methods ------------ \\
+    // ------------ Movement methods ------------ \\
     // ------------ Left ------------ \\
     public void moveLeft() {
         if (boundaryPanel.moveR == true) {
@@ -425,6 +409,25 @@ public class MainWindow extends JFrame implements KeyListener {
                     boundaryPanel.moveD = false;
                 }
             }
+        }
+    }    
+    // ------------ Attacking ------------ \\
+    public void attack() {
+        // attack left
+        if (tome.sprite.equals(tome.sprites[4]) || tome.sprite.equals(tome.sprites[5]) || tome.sprite.equals(tome.sprites[3])) {
+            shiftPlayerSprite(tome.sprites[14]);
+        }
+        // attack right
+        if (tome.sprite.equals(tome.sprites[1]) || tome.sprite.equals(tome.sprites[2]) || tome.sprite.equals(tome.sprites[0])) {
+            shiftPlayerSprite(tome.sprites[13]);
+        }
+        // attack up
+        if (tome.sprite.equals(tome.sprites[10]) || tome.sprite.equals(tome.sprites[11]) || tome.sprite.equals(tome.sprites[9])) {
+            shiftPlayerSprite(tome.sprites[15]);
+        }
+        // attack down
+        if (tome.sprite.equals(tome.sprites[7]) || tome.sprite.equals(tome.sprites[8]) || tome.sprite.equals(tome.sprites[6])) {
+            shiftPlayerSprite(tome.sprites[12]);
         }
     }
 }
