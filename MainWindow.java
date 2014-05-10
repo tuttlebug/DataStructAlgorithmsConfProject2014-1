@@ -32,6 +32,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Line2D;
 import java.io.File;
@@ -42,8 +43,17 @@ import javax.swing.Timer;
 import java.util.*;
 
 ///*
-public class MainWindow extends JFrame implements KeyListener {
+public class MainWindow extends JFrame implements KeyListener, ActionListener {
     
+     // ------------ Action Listener ------------ \\
+    public void actionPerformed(ActionEvent event) {
+        for (NPC npc : this.place.sendNPCs()) {
+            npc.walk();
+            this.boundaryPanel.repaint();
+        }
+    }
+    
+     // ------------ Key Listener ------------ \\
     // Moves currentArea with arrow keys
     public void keyPressed(KeyEvent event) {
         // ------------ Movement ------------ \\
@@ -96,23 +106,16 @@ public class MainWindow extends JFrame implements KeyListener {
 //        System.out.printf("x = %d, y = %d\n", x, y);
     }
     
+    // ------------ Stopping ------------ \\
     public void keyReleased(KeyEvent event) {
-        // left
-        if (event.getKeyCode() == KeyEvent.VK_RIGHT) { 
-            shiftPlayerSprite(tome.sprites[3]);
-        }
-        // right
-        if (event.getKeyCode() == KeyEvent.VK_LEFT) { 
-            shiftPlayerSprite(tome.sprites[0]);
-        }
-        // down
-        if (event.getKeyCode() == KeyEvent.VK_UP) { 
-            shiftPlayerSprite(tome.sprites[9]);
-        }
-        // up
-        if (event.getKeyCode() == KeyEvent.VK_DOWN) { 
-            shiftPlayerSprite(tome.sprites[6]);
-        }
+//        System.out.println("Running");
+//        Timer timer = new Timer(500, new StopSprite(event));
+//        timer.start();
+//        System.out.println("Stopped running");
+//        System.out.println(timer.isRepeats());
+//        System.out.println(timer.getDelay());
+//        timer.removeActionListener(stopSp);
+        stop(event);
     }
     
     public void keyTyped(KeyEvent event) {
@@ -150,8 +153,9 @@ public class MainWindow extends JFrame implements KeyListener {
 //    private static StartScreen stscreen;
     private static Player tome;
     private static Place place;
-    private static Timer timer;
-    
+    private static Timer npcMoveLR;
+    private static Timer npcMoveUD;
+        
     // ------------ Constructor ------------ \\
     public MainWindow(Place place) throws IOException {
         // standard setup
@@ -188,10 +192,12 @@ public class MainWindow extends JFrame implements KeyListener {
         
         //--------add more code before this line -------//
         
+        // ------------ Timers ------------ \\
         this.addKeyListener(this);
-//        this.timer = new Timer(500, this); 
-//        this.timer.setDelay(50);
-//        this.timer.start();
+        this.npcMoveLR = new Timer(500, this); 
+        this.npcMoveUD = new Timer(900, this);
+        this.npcMoveLR.start();
+        this.npcMoveUD.start();
         this.setFocusable(true);
         setLocation(XLCOORD, YLCOORD);
         setVisible(true);
@@ -428,6 +434,25 @@ public class MainWindow extends JFrame implements KeyListener {
         // attack down
         if (tome.sprite.equals(tome.sprites[7]) || tome.sprite.equals(tome.sprites[8]) || tome.sprite.equals(tome.sprites[6])) {
             shiftPlayerSprite(tome.sprites[12]);
+        }
+    }
+    // ------------ Stopping ------------ \\
+    public void stop(KeyEvent event) {
+        // left
+        if (event.getKeyCode() == KeyEvent.VK_RIGHT) { 
+            shiftPlayerSprite(tome.sprites[3]);
+        }
+        // right
+        if (event.getKeyCode() == KeyEvent.VK_LEFT) { 
+            shiftPlayerSprite(tome.sprites[0]);
+        }
+        // down
+        if (event.getKeyCode() == KeyEvent.VK_UP) { 
+            shiftPlayerSprite(tome.sprites[9]);
+        }
+        // up
+        if (event.getKeyCode() == KeyEvent.VK_DOWN) { 
+            shiftPlayerSprite(tome.sprites[6]);
         }
     }
 }

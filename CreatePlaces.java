@@ -552,8 +552,8 @@ public class CreatePlaces {
         
         // create spawn points
         int[][] villageNPCCoords = new int[][] {
-            {35, 20},  // brother
-            {28, 32},  // ranger
+//            {35, 20},  // brother
+//            {28, 32},  // ranger
             {43, 38},  // twnprsn    
         };
         int [][] caveNPCCoords = new int[][] {
@@ -563,8 +563,8 @@ public class CreatePlaces {
         cave.loadNPCPoints(caveNPCCoords);
         
         // add npcs to places
-        village.addNPC(brother);
-        village.addNPC(ranger);
+//        village.addNPC(brother);
+//        village.addNPC(ranger);
         village.addNPC(twnprsn);
         cave.addNPC(sage);
         

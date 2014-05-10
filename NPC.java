@@ -16,6 +16,10 @@ public class NPC extends Interactable {
     
     public Image[] sprites;
     private boolean speaking;
+    private boolean wL = true;
+    private boolean wR = false;
+    private boolean wD = true;
+    private boolean wU = false;
     
     public NPC(String name, String imageFile) {
         super(name, imageFile);
@@ -70,4 +74,42 @@ public class NPC extends Interactable {
         
     }
     */
+    
+    // ------------ Walking ------------ \\
+    public void walk() {
+        System.out.println("WALKING");
+        if (this.wL == true) this.walkRight();
+        else if (this.wR == true) this.walkLeft();
+        if (this.wD == true) this.walkUp();
+        else if (this.wU == true) this.walkDown();
+    }
+    
+    private void walkLeft() {
+        this.coords[0] -= 10;
+        this.wL = true;
+        this.wR = false;
+        System.out.println("WALKING LEFT");
+    }
+    
+    private void walkRight() {
+        this.coords[0] += 10;
+        this.wR = true;    
+        this.wL = false;
+        System.out.println("WALKING RIGHT");
+    }
+    
+    private void walkDown() {
+        this.coords[1] += 10;
+        this.wD = true;
+        this.wU = false;
+        System.out.println("WALKING DOWN");
+    }
+    
+    private void walkUp() {
+        this.coords[1] -= 10;
+        this.wU = true;
+        this.wD = false;
+        System.out.println("WALKING UP");
+    }
+        
 }
