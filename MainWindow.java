@@ -31,12 +31,14 @@
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.awt.event.KeyListener;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Line2D;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.Timer;
 import java.util.*;
 
 ///*
@@ -47,177 +49,19 @@ public class MainWindow extends JFrame implements KeyListener {
         // ------------ Movement ------------ \\
         // going left
         if (event.getKeyCode() == KeyEvent.VK_RIGHT) {
-            if (boundaryPanel.moveR == true) {
-                x -= MOVE;
-                boundaryPanel.moveLines(-MOVE, 0);
-                caPanel.setLocation(x, y);
-                // ------------ Changing sprites ------------ \\
-                if (!tome.sprite.equals(tome.sprites[4])) shiftPlayerSprite(tome.sprites[4]);
-                else shiftPlayerSprite(tome.sprites[5]);  
-                // ------------ Boundary Collision ------------ \\
-                // if this movement caused a collision:
-                // the movement flag becomes false.
-                // tome can no longer go in this direction 
-                // and will not be able to until the movement flag turns true again.
-                // i.e. tome moves away from the boundary
-                if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
-                    boundaryPanel.moveR = false;
-                }
-                // ------------ Gate Collision ------------ \\
-                if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
-                    System.out.println("gate crossed");
-                    Gate g = boundaryPanel.getCrossedGate();
-                    this.place = g.toNextWorld();
-                    swapWorlds();
-                }
-                // ------------ Item Collision ------------ \\
-                if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
-                    System.out.println("item touched");
-                    
-                }
-                // ------------ Enemy Collision ------------ \\
-                if (boundaryPanel.enemyTouched(playerBox.getBox()) == true) {
-                    Enemy e = boundaryPanel.getTouchedEnemy();
-                    tome.loseHealth(e.attack());
-                    System.out.printf("Tome's health is %d\n", tome.getHealth());
-                }
-                // ------------ NPC Collision ------------ \\
-                if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
-                    NPC npc = boundaryPanel.getSpeakingNPC();
-                    if (!npc.isSpeaking()) {
-                        npc.turn(npc.sprites[0]);
-                        npc.noTurn(true);
-                        System.out.println("NPC speaking");
-                    }
-                    boundaryPanel.moveR = false;
-                }
-            }
+            moveLeft();
         }
         // going right
         if (event.getKeyCode() == KeyEvent.VK_LEFT) {
-            if (boundaryPanel.moveL == true) {
-                x += MOVE;
-                boundaryPanel.moveLines(MOVE, 0);
-                caPanel.setLocation(x, y);
-                // ------------ Changing sprites ------------ \\
-                if (!tome.sprite.equals(tome.sprites[1])) shiftPlayerSprite(tome.sprites[1]);
-                else shiftPlayerSprite(tome.sprites[2]);
-                // ------------ Boundary Collision ------------ \\
-                if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
-                    boundaryPanel.moveL = false;
-                }
-                // ------------ Gate Collision ------------ \\
-                if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
-                    System.out.println("gate crossed");
-                    Gate g = boundaryPanel.getCrossedGate();
-                    this.place = g.toNextWorld();
-                    swapWorlds();
-                }
-                // ------------ Item Collision ------------ \\
-                if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
-                    System.out.println("item touched");
-                }
-                // ------------ Enemy Collision ------------ \\
-                if (boundaryPanel.enemyTouched(playerBox.getBox()) == true) {
-                    Enemy e = boundaryPanel.getTouchedEnemy();
-                    tome.loseHealth(e.attack());
-                    System.out.printf("Tome's health is %d\n", tome.getHealth());
-                }
-                // ------------ NPC Collision ------------ \\
-                if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
-                    NPC npc = boundaryPanel.getSpeakingNPC();
-                    if (!npc.isSpeaking()) {
-                        npc.turn(npc.sprites[3]);
-                        npc.noTurn(true);
-                        System.out.println("NPC speaking");
-                    }
-                    boundaryPanel.moveL = false;
-                }
-            }
+            moveRight();
         }
         // going down
         if (event.getKeyCode() == KeyEvent.VK_UP) {
-            if (boundaryPanel.moveU == true) {
-                y += MOVE;
-                boundaryPanel.moveLines(0, MOVE);
-                caPanel.setLocation(x, y);
-                // ------------ Changing sprites ------------ \\
-                if (!tome.sprite.equals(tome.sprites[10])) shiftPlayerSprite(tome.sprites[10]);
-                else shiftPlayerSprite(tome.sprites[11]);
-                // ------------ Boundary Collision ------------ \\
-                if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
-                    boundaryPanel.moveU = false;
-                }
-                // ------------ Gate Collision ------------ \\
-                if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
-                    System.out.println("gate crossed");
-                    Gate g = boundaryPanel.getCrossedGate();
-                    this.place = g.toNextWorld();
-                    swapWorlds();
-                }
-                // ------------ Item Collision ------------ \\
-                if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
-                    System.out.println("item touched");
-                }
-                // ------------ Enemy Collision ------------ \\
-                if (boundaryPanel.enemyTouched(playerBox.getBox()) == true) {
-                    Enemy e = boundaryPanel.getTouchedEnemy();
-                    tome.loseHealth(e.attack());
-                    System.out.printf("Tome's health is %d\n", tome.getHealth());
-                }
-                // ------------ NPC Collision ------------ \\
-                if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
-                    NPC npc = boundaryPanel.getSpeakingNPC();
-                    if (!npc.isSpeaking()) {
-                        npc.turn(npc.sprites[6]);
-                        npc.noTurn(true);
-                        System.out.println("NPC speaking");
-                    }
-                    boundaryPanel.moveU = false;
-                }
-            }
+            moveDown();
         }
         // going up
         if (event.getKeyCode() == KeyEvent.VK_DOWN) { 
-            if (boundaryPanel.moveD == true) {
-                y -= MOVE;
-                boundaryPanel.moveLines(0, -MOVE);
-                caPanel.setLocation(x, y);
-                // ------------ Changing sprites ------------ \\
-                if (!tome.sprite.equals(tome.sprites[7])) shiftPlayerSprite(tome.sprites[7]);
-                else shiftPlayerSprite(tome.sprites[8]);
-                // ------------ Boundary Collision ------------ \\
-                if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
-                    boundaryPanel.moveD = false;
-                }
-                // ------------ Gate Collision ------------ \\
-                if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
-                    System.out.println("gate crossed");
-                    Gate g = boundaryPanel.getCrossedGate();
-                    this.place = g.toNextWorld();
-                    swapWorlds();
-                }
-                // ------------ Item Collision ------------ \\
-                if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
-                    System.out.println("item touched");
-                }
-                // ------------ Enemy Collision ------------ \\
-                if (boundaryPanel.enemyTouched(playerBox.getBox()) == true) {
-                    Enemy e = boundaryPanel.getTouchedEnemy();
-                    tome.loseHealth(e.attack());
-                    System.out.printf("Tome's health is %d\n", tome.getHealth());
-                }
-                // ------------ NPC Collision ------------ \\
-                if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
-                    NPC npc = boundaryPanel.getSpeakingNPC();
-                    if (!npc.isSpeaking()) {
-                        npc.turn(npc.sprites[11]);
-                        npc.noTurn(true);
-                        System.out.println("NPC speaking");
-                        boundaryPanel.moveD = false;
-                    }
-                }
-            }
+            moveUp(); 
         }
         // ------------ Attacking ------------ \\
         if (event.getKeyCode() == KeyEvent.VK_SHIFT) {
@@ -319,9 +163,10 @@ public class MainWindow extends JFrame implements KeyListener {
     private static JLabel playerLevel = new JLabel();
     private static BoundaryLines boundaryPanel;
     private static CollisionBox playerBox;
-    private static StartScreen stscreen;
+//    private static StartScreen stscreen;
     private static Player tome;
     private static Place place;
+    private static Timer timer;
     
     // ------------ Constructor ------------ \\
     public MainWindow(Place place) throws IOException {
@@ -348,18 +193,21 @@ public class MainWindow extends JFrame implements KeyListener {
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.add(currentArea);
-        stscreen = new StartScreen();
-        stscreen.setBounds(0, 0, W_WIDTH, W_HEIGHT / 2); 
+//        stscreen = new StartScreen();
+//        stscreen.setBounds(0, 0, W_WIDTH, W_HEIGHT / 2); 
         // add to window
         window.add(caPanel, new Integer(0), 0);
         window.add(boundaryPanel, new Integer(1), 0);
         window.add(playerBox, new Integer(1), 0);
         window.add(playerLevel, new Integer(2), 0);
-        window.add(stscreen, new Integer(3), 0);
+//        window.add(stscreen, new Integer(3), 0);
         
         //--------add more code before this line -------//
         
         this.addKeyListener(this);
+//        this.timer = new Timer(500, this); 
+//        this.timer.setDelay(50);
+//        this.timer.start();
         this.setFocusable(true);
         setLocation(XLCOORD, YLCOORD);
         setVisible(true);
@@ -402,6 +250,182 @@ public class MainWindow extends JFrame implements KeyListener {
             this.place.buildNPCs();
         }
         addBoundaries();
+    }
+    
+    // ------------ Key methods ------------ \\
+    // ------------ Left ------------ \\
+    public void moveLeft() {
+        if (boundaryPanel.moveR == true) {
+            x -= MOVE;
+            boundaryPanel.moveLines(-MOVE, 0);
+            caPanel.setLocation(x, y);
+            // ------------ Changing sprites ------------ \\
+            if (!tome.sprite.equals(tome.sprites[4])) shiftPlayerSprite(tome.sprites[4]);
+            else shiftPlayerSprite(tome.sprites[5]);  
+            // ------------ Boundary Collision ------------ \\
+            // if this movement caused a collision:
+            // the movement flag becomes false.
+            // tome can no longer go in this direction 
+            // and will not be able to until the movement flag turns true again.
+            // i.e. tome moves away from the boundary
+            if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
+                boundaryPanel.moveR = false;
+            }
+            // ------------ Gate Collision ------------ \\
+            if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
+                System.out.println("gate crossed");
+                Gate g = boundaryPanel.getCrossedGate();
+                this.place = g.toNextWorld();
+                swapWorlds();
+            }
+            // ------------ Item Collision ------------ \\
+            if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
+                System.out.println("item touched");
+                
+            }
+            // ------------ Enemy Collision ------------ \\
+            if (boundaryPanel.enemyTouched(playerBox.getBox()) == true) {
+                Enemy e = boundaryPanel.getTouchedEnemy();
+                tome.loseHealth(e.attack());
+                System.out.printf("Tome's health is %d\n", tome.getHealth());
+            }
+            // ------------ NPC Collision ------------ \\
+            if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
+                NPC npc = boundaryPanel.getSpeakingNPC();
+                if (!npc.isSpeaking()) {
+                    npc.turn(npc.sprites[0]);
+                    npc.noTurn(true);
+                    System.out.println("NPC speaking");
+                }
+                boundaryPanel.moveR = false;
+            }
+        }
+    }
+    // ------------ Right ------------ \\
+    public void moveRight() {
+        if (boundaryPanel.moveL == true) {
+            x += MOVE;
+            boundaryPanel.moveLines(MOVE, 0);
+            caPanel.setLocation(x, y);
+            // ------------ Changing sprites ------------ \\
+            if (!tome.sprite.equals(tome.sprites[1])) shiftPlayerSprite(tome.sprites[1]);
+            else shiftPlayerSprite(tome.sprites[2]);
+            // ------------ Boundary Collision ------------ \\
+            if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
+                boundaryPanel.moveL = false;
+            }
+            // ------------ Gate Collision ------------ \\
+            if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
+                System.out.println("gate crossed");
+                Gate g = boundaryPanel.getCrossedGate();
+                this.place = g.toNextWorld();
+                swapWorlds();
+            }
+            // ------------ Item Collision ------------ \\
+            if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
+                System.out.println("item touched");
+            }
+            // ------------ Enemy Collision ------------ \\
+            if (boundaryPanel.enemyTouched(playerBox.getBox()) == true) {
+                Enemy e = boundaryPanel.getTouchedEnemy();
+                tome.loseHealth(e.attack());
+                System.out.printf("Tome's health is %d\n", tome.getHealth());
+            }
+            // ------------ NPC Collision ------------ \\
+            if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
+                NPC npc = boundaryPanel.getSpeakingNPC();
+                if (!npc.isSpeaking()) {
+                    npc.turn(npc.sprites[3]);
+                    npc.noTurn(true);
+                    System.out.println("NPC speaking");
+                }
+                boundaryPanel.moveL = false;
+            }
+        }
+    }
+    // ------------ Down ------------ \\
+    public void moveDown() {
+        if (boundaryPanel.moveU == true) {
+            y += MOVE;
+            boundaryPanel.moveLines(0, MOVE);
+            caPanel.setLocation(x, y);
+            // ------------ Changing sprites ------------ \\
+            if (!tome.sprite.equals(tome.sprites[10])) shiftPlayerSprite(tome.sprites[10]);
+            else shiftPlayerSprite(tome.sprites[11]);
+            // ------------ Boundary Collision ------------ \\
+            if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
+                boundaryPanel.moveU = false;
+            }
+            // ------------ Gate Collision ------------ \\
+            if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
+                System.out.println("gate crossed");
+                Gate g = boundaryPanel.getCrossedGate();
+                this.place = g.toNextWorld();
+                swapWorlds();
+            }
+            // ------------ Item Collision ------------ \\
+            if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
+                System.out.println("item touched");
+            }
+            // ------------ Enemy Collision ------------ \\
+            if (boundaryPanel.enemyTouched(playerBox.getBox()) == true) {
+                Enemy e = boundaryPanel.getTouchedEnemy();
+                tome.loseHealth(e.attack());
+                System.out.printf("Tome's health is %d\n", tome.getHealth());
+            }
+            // ------------ NPC Collision ------------ \\
+            if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
+                NPC npc = boundaryPanel.getSpeakingNPC();
+                if (!npc.isSpeaking()) {
+                    npc.turn(npc.sprites[6]);
+                    npc.noTurn(true);
+                    System.out.println("NPC speaking");
+                }
+                boundaryPanel.moveU = false;
+            }
+        }
+    }
+    // ------------ Up ------------ \\
+    public void moveUp() {
+        if (boundaryPanel.moveD == true) {
+            y -= MOVE;
+            boundaryPanel.moveLines(0, -MOVE);
+            caPanel.setLocation(x, y);
+            // ------------ Changing sprites ------------ \\
+            if (!tome.sprite.equals(tome.sprites[7])) shiftPlayerSprite(tome.sprites[7]);
+            else shiftPlayerSprite(tome.sprites[8]);
+            // ------------ Boundary Collision ------------ \\
+            if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == true) {
+                boundaryPanel.moveD = false;
+            }
+            // ------------ Gate Collision ------------ \\
+            if (boundaryPanel.gateCrossed(playerBox.getBox()) == true) {
+                System.out.println("gate crossed");
+                Gate g = boundaryPanel.getCrossedGate();
+                this.place = g.toNextWorld();
+                swapWorlds();
+            }
+            // ------------ Item Collision ------------ \\
+            if (boundaryPanel.itemTouched(playerBox.getBox()) == true) {
+                System.out.println("item touched");
+            }
+            // ------------ Enemy Collision ------------ \\
+            if (boundaryPanel.enemyTouched(playerBox.getBox()) == true) {
+                Enemy e = boundaryPanel.getTouchedEnemy();
+                tome.loseHealth(e.attack());
+                System.out.printf("Tome's health is %d\n", tome.getHealth());
+            }
+            // ------------ NPC Collision ------------ \\
+            if (boundaryPanel.npcSpeaking(playerBox.getBox()) == true) {
+                NPC npc = boundaryPanel.getSpeakingNPC();
+                if (!npc.isSpeaking()) {
+                    npc.turn(npc.sprites[11]);
+                    npc.noTurn(true);
+                    System.out.println("NPC speaking");
+                    boundaryPanel.moveD = false;
+                }
+            }
+        }
     }
 }
 //*/

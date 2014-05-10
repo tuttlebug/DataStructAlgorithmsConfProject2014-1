@@ -27,7 +27,6 @@ public class StartScreen extends JPanel {
     // constructor
     public StartScreen() {
         // initialize values
-        setOpaque(false);
         GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         String[] fontNames = env.getAvailableFontFamilyNames();
         this.fontMenu = new JComboBox(fontNames);
