@@ -81,40 +81,39 @@ public class NPC extends Interactable {
         if (this.wU == true) this.walkRight();
         else if (this.wR == true) this.walkDown();
         else if (this.wD == true) this.walkLeft();
-        else if (this.wL == true) this.walkDown();
+        else if (this.wL == true) this.walkUp();
     }
     // left
     private void walkLeft() {
         this.coords[0] -= 10;
         this.turn(this.sprites[1]);
         this.moveBox();
+        this.wD = false;
         this.wL = true;
-        this.wR = false;
-//        System.out.println("WALKING LEFT");
     }
     // right
     private void walkRight() {
         this.coords[0] += 10;
         this.turn(this.sprites[4]);
+        this.moveBox();
         this.wR = true;    
-        this.wL = false;
-//        System.out.println("WALKING RIGHT");
+        this.wU = false; 
     }
     // down
     private void walkDown() {
         this.coords[1] += 10;
         this.turn(this.sprites[7]);
+        this.moveBox();
+        this.wR = false;
         this.wD = true;
-        this.wU = false;
-//        System.out.println("WALKING DOWN");
     }
     // up
     private void walkUp() {
         this.coords[1] -= 10;
         this.turn(this.sprites[10]);
+        this.moveBox();
+        this.wL = false;
         this.wU = true;
-        this.wD = false;
-//        System.out.println("WALKING UP");
     }
         
 }
