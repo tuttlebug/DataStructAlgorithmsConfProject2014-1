@@ -412,6 +412,26 @@ public class CreatePlaces {
         bridge.buildGates();
         
 //        bridge.loadSpawnPoint(-2190, -1070);
+         
+        // ------------ EndBridge ------------ \\
+        int[][] endBridgeBoundaries = new int[][]{
+          
+        };
+        endBridge.loadBoundaryPoints(endBridgeBoundaries);
+        // gates
+        int[][] endBridgeGates = new int[][]{
+          //{ 35, 44, 38, 44 }
+        };
+        
+        // spawn points
+//        endBridge.loadSpawnPoint(-2190, -1070);
+        int [] endBridgeToForestVillageEndPoint = new int[] {
+              -2055, -830
+        };
+        // build gates
+        endBridge.loadGatePoints(endBridgeGates);
+        endBridge.loadGates(bridge, caveToForestVillageEndPoint); //not sure about this line?
+        cave.buildGates();
         
         
         //for future reference:

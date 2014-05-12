@@ -14,8 +14,6 @@ import java.io.*;
 
 public class CreatePlaces {
     
-    public static Player player = new Player();
-    
     /* COMPREHENSIVE LIST OF WORLDS (in order of first appearance):
      * - "Village"
      * - "ForestPath_Cave"
@@ -29,6 +27,27 @@ public class CreatePlaces {
      * - "SecretPaths"
      * - "Temple"
      */ 
+    
+    
+    /*************************************************************************************
+     * 1) Write out all the boundary points
+     * 
+     * Method for adding Gates:
+     * 1) Write the GATE POINTS:
+     *    - int[][] villageGates = new int[][]{
+            { 21, 38, 21, 40 },
+            { 34, 20, 37, 20 },
+            };
+     * 2) Write the SPAWNPOINT for where this gate will send tome
+     *    - int[] villageToForestEndPoint = new int[] {
+            -2620, -965 
+            };  
+     * 3) Write out the LOADGATES method. 
+     *    Parameters:
+     *     - PLACE for where this gate will send tome
+     *     - SPAWNPOINT for where e will spawn in the world.
+     *          - village.loadGates(forestPath_Cave, villageToForestEndPoint);
+     *************************************************************************************/
     
     private static Place village = new Place("Village", "village.png");
     private static Place forestPath_Cave = new Place("ForestPath_Cave", "forestPath_Cave.png");
@@ -44,7 +63,7 @@ public class CreatePlaces {
     
     // create a map of all Places
     public static WorldMap createWorldMap() throws IOException {
-        // add accessible areas
+        // ------------ Add Accessible Areas ------------ \\
         village.addPlace(forestPath_Cave);
         village.addPlace(bridge);
         forestPath_Cave.addPlace(village);
@@ -66,10 +85,7 @@ public class CreatePlaces {
         secretPaths.addPlace(temple);
         temple.addPlace(secretPaths);
         
-        // create items
-        Item dummy = new Item("Dummy", "item.png");
-        
-        // Load images
+        // ------------ Background Image ------------ \\
         // places
         village.loadImage();
         forestPath_Cave.loadImage();
@@ -84,9 +100,8 @@ public class CreatePlaces {
         temple.loadImage();
         
         // ------------- Load boundaries, gate points, and spawn points ------------- //
-        // Village
+        // ------------ Village ------------ \\
         int[][] villageBoundaries = new int[][]{
-          { 34, 20, 37, 20 },
           { 37, 20, 37, 21 },
           { 37, 21, 38, 21 },
           { 38, 21, 41, 24 },
@@ -98,7 +113,7 @@ public class CreatePlaces {
           { 42, 28, 45, 28 },
           { 45, 28, 45, 27 },
           { 45, 27, 46, 27 },
-          { 46, 27, 49, 20 },
+          { 46, 27, 49, 30 },
           { 49, 30, 49, 37 },
           { 49, 37, 44, 42 },
           { 44, 42, 41, 42 },  
@@ -107,12 +122,11 @@ public class CreatePlaces {
           { 31, 40, 29, 42 }, 
           { 29, 42, 24, 42 }, 
           { 24, 42, 21, 39 },
-          { 21, 39, 21, 38 }, 
-          { 21, 38, 23, 38 },
+//          { 21, 38, 23, 38 },
           { 23, 38, 23, 36 }, 
           { 23, 36, 22, 36 }, 
           { 22, 36, 22, 28 }, 
-          { 22, 28, 25, 26 },
+          { 22, 29, 25, 26 },
           { 25, 26, 27, 26 }, 
           { 27, 26, 30, 23 },
           { 30, 23, 30, 25 }, 
@@ -158,14 +172,27 @@ public class CreatePlaces {
         village.loadBoundaryPoints(villageBoundaries);
         // gates
         int[][] villageGates = new int[][]{
-          { 21, 38, 21, 40 }, 
+          { 21, 38, 21, 40 },
           { 34, 20, 37, 20 },
         };
-        village.loadGatePoints(villageGates);
-        // spawnPoints 
-        village.loadSpawnPoint(43, 33);
         
-        // ForestPath_Cave
+        // spawnPoints 
+        village.loadSpawnPoint(-2399, -736);
+        
+        int[] villageToForestEndPoint = new int[] {
+            -2620, -965 
+        };  
+        int[] villageToBridgeEndPoint = new int[] {
+            -2110, -1355
+        };
+        
+        // build gates
+        village.loadGatePoints(villageGates); 
+        village.loadGates(forestPath_Cave, villageToForestEndPoint);
+        village.loadGates(bridge, villageToBridgeEndPoint); 
+        village.buildGates();
+            
+        // ------------ ForestPath_Cave ------------ \\
         int[][] forestPath_CaveBoundaries = new int[][]{
           { 51, 41, 41, 41 }, 
           { 41, 41, 41, 37 }, 
@@ -179,8 +206,7 @@ public class CreatePlaces {
           { 25, 45, 25, 43 },
           { 25, 43, 23, 43 }, 
           { 23, 43, 23, 41 },
-          { 23, 41, 19, 41 }, 
-          { 19, 41, 19, 39 }, 
+          { 23, 41, 19, 41 },  
           { 19, 39, 25, 39 }, 
           { 25, 39, 25, 41 },
           { 25, 41, 27, 41 }, 
@@ -193,8 +219,7 @@ public class CreatePlaces {
           { 46, 30, 46, 33 },   
           { 46, 33, 43, 33 }, 
           { 43, 33, 43, 39 }, 
-          { 43, 39, 51, 39 },
-          { 41, 39, 51, 41 }
+          { 43, 39, 51, 39 }
         };
         forestPath_Cave.loadBoundaryPoints(forestPath_CaveBoundaries);
         // gates
@@ -202,11 +227,21 @@ public class CreatePlaces {
           { 19, 39, 19, 41 }, 
           { 50, 39, 50, 41 },
         };
-        forestPath_Cave.loadGatePoints(forestPath_CaveGates);
         // spawn Point
-        forestPath_Cave.loadSpawnPoint(20, 33);
+//        forestPath_Cave.loadSpawnPoint(-2620, -965);
+        int[] forestToVillageEndPoint = new int[] {
+            -1724, -911 
+        };
+        int[] forestToCaveEndPoint = new int[] {
+            -2385, -680
+        };
         
-        //clearing_Cave
+        // build gates
+        forestPath_Cave.loadGatePoints(forestPath_CaveGates);
+        forestPath_Cave.loadGates(clearing_Cave, forestToCaveEndPoint); 
+        forestPath_Cave.loadGates(village, forestToVillageEndPoint); 
+        forestPath_Cave.buildGates();
+        // ------------ Clearing_Cave ------------ \\
         int[][] clearing_CaveBoundaries = new int[][]{
           { 43, 32, 42, 32 }, 
           { 42, 32, 42, 40 }, 
@@ -232,29 +267,312 @@ public class CreatePlaces {
           { 43, 30, 43, 32 }, 
           { 31, 35, 31, 37 },
         };
+       
+        // spawn points 
+        int[] clearingToForestEndPoint = new int[] {
+            -1665, -965
+        };
+        int[] clearingToCaveEndPoint = new int[] {
+            -2190, -1070
+        };
+        
+        // build gates
         clearing_Cave.loadGatePoints(clearing_CaveGates);
+        clearing_Cave.loadGates(forestPath_Cave, clearingToForestEndPoint);
+        clearing_Cave.loadGates(cave, clearingToCaveEndPoint);
+        clearing_Cave.buildGates();
         // spawn Point
-        clearing_Cave.loadSpawnPoint(41, 31);
+//        clearing_Cave.loadSpawnPoint(-2025, -845);
         
 
+        // ------------ Cave ------------ \\
+        int[][] caveBoundaries = new int[][]{
+          { 32, 23, 36, 23 }, 
+          { 36, 23, 38, 25 }, 
+          { 38, 25, 40, 25 }, 
+          { 40, 25, 42, 23 },
+          { 42, 23, 44, 23 }, 
+          { 44, 23, 47, 26 },
+          { 47, 26, 47, 27 }, 
+          { 47, 27, 46, 27 }, 
+          { 46, 27, 46, 28 }, 
+          { 46, 28, 44, 30 },
+          { 44, 30, 44, 35 }, 
+          { 44, 35, 43, 35 },
+          { 43, 35, 43, 37 },
+          { 43, 37, 38, 42 }, 
+          { 38, 42, 38, 44 },
+          { 35, 44, 35, 43 },
+          { 35, 43, 28, 36 }, 
+          { 28, 36, 28, 33 },
+          { 28, 33, 26, 33 },
+          { 26, 33, 26, 29 }, 
+          { 26, 29, 29, 26 },
+          { 29, 26, 30, 26 },
+          { 30, 26, 30, 25 }, 
+          { 30, 25, 32, 23 }
+        };
+        cave.loadBoundaryPoints(caveBoundaries);
+        // gates
+        int[][] caveGates = new int[][]{
+          { 35, 44, 38, 44 }
+        };
+        
+        // spawn points
+//        cave.loadSpawnPoint(-2190, -1070);
+        int [] caveToClearingEndPoint = new int[] {
+              -2055, -830
+        };
+        // build gates
+        cave.loadGatePoints(caveGates);
+        cave.loadGates(clearing_Cave, caveToClearingEndPoint);
+        cave.buildGates();
+        
+        // ------------ Bridge ------------ \\
+        int[][] bridgeBoundaries = new int[][]{
+          { 33, 53, 33, 49 }, 
+          { 33, 49, 34, 49 }, 
+          { 34, 49, 34, 45 }, 
+          { 34, 45, 30, 45 },
+          { 30, 45, 30, 46 }, 
+          { 30, 46, 28, 48 },
+          { 28, 48, 26, 48 }, 
+          { 26, 48, 24, 46 },
+          { 24, 46, 24, 34 }, 
+          { 24, 34, 28, 34 }, 
+          { 28, 34, 28, 33 }, 
+          { 28, 33, 32, 33 },
+          { 32, 33, 32, 30 }, 
+          { 32, 30, 34, 30 },
+          { 34, 30, 34, 17 }, 
+          { 36, 17, 36, 31 }, 
+          { 36, 31, 33, 31 }, 
+          { 33, 31, 33, 34 },
+          { 33, 34, 32, 34 }, 
+          { 32, 34, 32, 38 },
+          { 32, 38, 33, 38 }, 
+          { 33, 38, 33, 40 }, 
+          { 33, 40, 29, 40 }, 
+          { 29, 40, 29, 38 },
+          { 29, 38, 31, 38 }, 
+          { 31, 38, 31, 34 },
+          { 31, 34, 29, 34 }, 
+          { 29, 34, 29, 35 }, 
+          { 29, 35, 26, 35 }, 
+          { 26, 35, 26, 42 },
+          { 26, 42, 30, 42 }, 
+          { 30, 42, 30, 43 },
+          { 30, 43, 35, 43 }, 
+          { 35, 43, 35, 42 },
+          { 35, 42, 37, 42 }, 
+          { 37, 42, 37, 41 },
+          { 37, 41, 39, 41 }, 
+          { 39, 41, 39, 39 }, 
+          { 39, 39, 38, 38 }, 
+          { 38, 38, 35, 38 },
+          { 35, 38, 35, 34 }, 
+          { 35, 34, 36, 34 },
+          { 36, 34, 36, 37 }, 
+          { 36, 37, 39, 37 },
+          { 39, 37, 39, 34 }, 
+          { 39, 34, 44, 34 },
+          { 44, 34, 44, 32 }, 
+          { 44, 32, 46, 30 }, 
+          { 46, 30, 50, 34 }, 
+          { 50, 34, 50, 35 },
+          { 50, 35, 47, 38 }, 
+          { 47, 38, 47, 40 },
+          { 47, 40, 40, 40 }, 
+          { 40, 40, 40, 43 },
+          { 40, 43, 38, 43 }, 
+          { 38, 43, 35, 46 },
+          { 35, 46, 35, 53 }, 
+            
+          { 40, 35, 44, 35 },
+          { 44, 35, 44, 37 }, 
+          { 44, 37, 45, 37 },
+          { 45, 37, 45, 39 }, 
+          { 45, 39, 41, 39 }, 
+          { 41, 39, 40, 38 }, 
+          { 40, 38, 40, 35 }
+        };
+        bridge.loadBoundaryPoints(bridgeBoundaries);
+        // gates
+        int[][] bridgeGates = new int[][]{
+//          { 34, 17, 36, 17 },
+          { 35, 53, 33, 53 }
+        };
+        int[] bridgeToVillageEndPoint = new int[] {
+           -2154, -356
+        };
+        
+        // build gates
+        bridge.loadGatePoints(bridgeGates);        
+        bridge.loadGates(village, bridgeToVillageEndPoint);
+        bridge.buildGates();
+        
+//        bridge.loadSpawnPoint(-2190, -1070);
+        
+        
         //for future reference:
 //        { 0, 0, 0, 0 },
 //          { 0, 0, 0, 0 },
-//        { 320, 352, 320, 224 }, 
+//          { 320, 352, 320, 224 }, 
 //          { 320, 352, 320, 224 }, 
 //          { 320, 352, 320, 224 }, 
 //          { 320, 352, 320, 224 },
 //          { 320, 352, 320, 224 }, 
 //          { 320, 352, 320, 224 },
         
+        // ------------ Create Items ------------ \\
+        Item forestFood = new Item("ForestFood", "potion.png"); // 1408, 992
         
-        // items
-        dummy.loadImage();
+        // ------------ Create Enemies ------------ \\
+        Enemy bridgeHellSpwn = new Enemy("Bridge Hell Spawn", "HellSpawn.png", 5);
+        
+        // ------------ Create NPCs ------------ \\
+        // village
+        NPC brother = new NPC("Brother", "warrior down stand.png");
+        String[] brotherSprites = new String[] {
+            // left
+            "warrior left stand.png",
+            "warrior left 1.png",
+            "warrior left 2.png",
+            // right
+            "warrior right stand.png",
+            "warrior right 1.png",
+            "warrior right 2.png",
+            // down
+            "warrior down stand.png",
+            "warrior down 1.png",
+            "warrior down 2.png",
+            // up
+            "warrior up stand.png",
+            "warrior up 1.png",
+            "warrior up 2.png"
+        };
+        NPC ranger = new NPC("Ranger", "ranger down stand.png");
+        String[] rangerSprites = new String[] {
+            // left
+            "ranger left stand.png",
+            "ranger left 1.png",
+            "ranger left 2.png",
+            // right
+            "ranger right stand.png",
+            "ranger right 1.png",
+            "ranger right 2.png",
+            // down
+            "ranger down stand.png",
+            "ranger down 1.png",
+            "ranger down 2.png",
+            // up
+            "ranger up stand.png",
+            "ranger up 1.png",
+            "ranger up 2.png"
+        };
+        NPC twnprsn = new NPC("Town Person", "twnprsn left stand.png");
+        String[] twnprsnSprites = new String[] {
+            // left
+            "twnprsn left stand.png",
+            "twnprsn left 1.png",
+            "twnprsn left 2.png",
+            // right
+            "twnprsn right stand.png",
+            "twnprsn right 1.png",
+            "twnprsn right 2.png",
+            // down
+            "twnprsn down stand.png",
+            "twnprsn down 1.png",
+            "twnprsn down 2.png",
+            // up
+            "twnprsn up stand.png",
+            "twnprsn up 1.png",
+            "twnprsn up 2.png"
+        };
+        // cave
+        NPC sage = new NPC("Sage", "mage down stand.png");
+        String[] sageSprites = new String[] {
+            // left
+            "mage left stand.png",
+            "mage left 1.png",
+            "mage left 2.png",
+            // right
+            "mage right stand.png",
+            "mage right 1.png",
+            "mage right 2.png",
+            // down
+            "mage down stand.png",
+            "mage down 1.png",
+            "mage down 2.png",
+            // up
+            "mage up stand.png",
+            "mage up 1.png",
+            "mage up 2.png"
+        };
+        
+        // ------------ Items ------------ \\
+        // load images
+        forestFood.loadImage();
+        
+        // create spawn points
+        int [][] forestItemsCoords = new int[][] {
+            {44, 31}
+        };
+        forestPath_Cave.loadItemPoints(forestItemsCoords);
         
         // add items to Places
-        village.addItem(dummy);
+        forestPath_Cave.addItem(forestFood);
+        forestPath_Cave.buildItems();
         
-        // Add all to World map 
+        // ------------ Enemies ------------ \\
+        // load images
+        bridgeHellSpwn.loadImage();
+        
+        // create spawn points
+        int [][] bridgeEnemyCoords = new int[][] {
+            {26, 44}
+        };
+        bridge.loadEnemyPoints(bridgeEnemyCoords);
+        
+        // add enemies to Places
+        bridge.addEnemy(bridgeHellSpwn);
+        bridge.buildEnemies();
+        
+        // ------------ NPCs ------------ \\
+        // load images
+        brother.loadImage();
+        ranger.loadImage();
+        twnprsn.loadImage();
+        sage.loadImage();
+        // load sprites
+        brother.loadSprites(brotherSprites);
+        ranger.loadSprites(rangerSprites);
+        twnprsn.loadSprites(twnprsnSprites);
+        sage.loadSprites(sageSprites);
+        
+        // create spawn points
+        int[][] villageNPCCoords = new int[][] {
+//            {35, 20},  // brother
+//            {28, 32},  // ranger
+            {43, 38},  // twnprsn    
+        };
+        int [][] caveNPCCoords = new int[][] {
+            {36, 32}  // sage
+        };
+        village.loadNPCPoints(villageNPCCoords);
+        cave.loadNPCPoints(caveNPCCoords);
+        
+        // add npcs to places
+//        village.addNPC(brother);
+//        village.addNPC(ranger);
+        village.addNPC(twnprsn);
+        cave.addNPC(sage);
+        
+        village.buildNPCs();
+        cave.buildNPCs();
+        
+        
+        // ------------ World Map ------------ \\
         WorldMap worldMap = new WorldMap();
         worldMap.add(village.getName(), village);
         worldMap.add(forestPath_Cave.getName(), forestPath_Cave);
