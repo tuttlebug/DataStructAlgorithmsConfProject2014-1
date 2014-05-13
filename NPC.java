@@ -20,6 +20,7 @@ public class NPC extends Interactable {
     private boolean wR = false;
     private boolean wD = false;
     private boolean wU = false;
+    private int steps;
     
     public NPC(String name, String imageFile) {
         super(name, imageFile);
@@ -28,6 +29,7 @@ public class NPC extends Interactable {
         this.box = new Rectangle2D.Double();
         this.sprites = new Image[12];
         this.speaking = false;
+        this.steps = 0;
     }
     // ------------ Sprites ------------ \\
     public void loadImage() throws IOException {
@@ -77,43 +79,43 @@ public class NPC extends Interactable {
     
     // ------------ Walking ------------ \\
     public void walk() {
-//        System.out.println("WALKING");
-        if (this.wU == true) this.walkRight();
-        else if (this.wR == true) this.walkDown();
-        else if (this.wD == true) this.walkLeft();
-        else if (this.wL == true) this.walkUp();
+//        if (this.wU == true) this.walkRight();
+//        else if (this.wR == true) this.walkDown();
+//        else if (this.wD == true) this.walkLeft();
+//        else if (this.wL == true) this.walkUp();
+        
     }
     // left
     private void walkLeft() {
         this.coords[0] -= 10;
         this.turn(this.sprites[1]);
         this.moveBox();
-        this.wD = false;
-        this.wL = true;
+//        this.wD = false;
+//        this.wL = true;
     }
     // right
     private void walkRight() {
         this.coords[0] += 10;
         this.turn(this.sprites[4]);
         this.moveBox();
-        this.wR = true;    
-        this.wU = false; 
+//        this.wR = true;    
+//        this.wU = false; 
     }
     // down
     private void walkDown() {
         this.coords[1] += 10;
         this.turn(this.sprites[7]);
         this.moveBox();
-        this.wR = false;
-        this.wD = true;
+//        this.wR = false;
+//        this.wD = true;
     }
     // up
     private void walkUp() {
         this.coords[1] -= 10;
         this.turn(this.sprites[10]);
         this.moveBox();
-        this.wL = false;
-        this.wU = true;
+//        this.wL = false;
+//        this.wU = true;
     }
         
 }
