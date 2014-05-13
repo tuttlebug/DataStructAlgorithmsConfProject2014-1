@@ -33,7 +33,9 @@ public class StartScreen extends JPanel implements MouseListener {
     private Image bg;
     private boolean gameStarted;
     private Rectangle2D.Double cursor;
-    private int x, y, tRectX, tRectY;
+//    private int x, y, tRectX, tRectY;
+    public int x, y;
+    private int tRectX, tRectY;
     private Rectangle2D.Double titleRect, play;
     
     // constructor
