@@ -6,23 +6,23 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import java.awt.geom.*;
 
-public class StartScreen extends JPanel implements LoadImage{
+public class StartScreen extends JPanel {
     
     private static final int W_WIDTH = 700;             // width of frame
     private static final int W_HEIGHT = 600;            // height of window
     
     // instance variables
-    private JLayeredPane window;
+//    private JLayeredPane window;
     private JComboBox fontMenu;       // User selects desired font from the pull down menu
     private JCheckBox italicCheckbox; // makes text italicized
     private JCheckBox boldCheckbox;   // makes text bold
     private JSlider sizeSlider;       // adjusts the size of the text
     private JLabel sizeLabel;         // shows the size
     private JLabel textLabel;         // "Here is some sample text"
-    private JLabel background;
     private int textSize;
-    private ImageIcon bg;
+    private Image bg;
     
 
     // listener class
@@ -39,10 +39,6 @@ public class StartScreen extends JPanel implements LoadImage{
         // initialize values
         GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
         String[] fontNames = env.getAvailableFontFamilyNames();
-        // ------------ Window ------------ \\
-        this.window = new JLayeredPane();
-        add(window);
-        window.setBounds(0, 0, W_WIDTH, W_HEIGHT);
         
         this.fontMenu = new JComboBox(fontNames);
         this.italicCheckbox = new JCheckBox("italic");
@@ -51,12 +47,11 @@ public class StartScreen extends JPanel implements LoadImage{
         this.sizeSlider = new JSlider(10, 72, this.textSize);
         this.sizeLabel = new JLabel();
         this.textLabel = new JLabel("Here's some sample text");
-        this.background = new JLabel();
         JPanel controlPanel = new JPanel();
         JPanel textPanel = new JPanel();
         
         // set background
-        this.loadImage();
+        this.bg = ImageIO.read(new File("home.png")); // filler picture
         
         // add listener to slider, checkboxes, menu
         FontViewerListener listener = new FontViewerListener();
@@ -66,20 +61,23 @@ public class StartScreen extends JPanel implements LoadImage{
         this.sizeSlider.addChangeListener(listener);
         
         // add to panels
-//        controlPanel.add(this.background);
         controlPanel.add(this.fontMenu);
         controlPanel.add(this.boldCheckbox);
         controlPanel.add(this.italicCheckbox);
         controlPanel.add(this.sizeSlider);
         controlPanel.add(this.sizeLabel); 
         textPanel.add(this.textLabel);
-//        updateSizeLabel();
+        
+//        controlPanel.setBounds(0, 0, W_WIDTH / 4, W_HEIGHT / 4);
+//        controlPanel.setOpaque(false);
+//        textPanel.setBounds(0, 0, W_WIDTH / 4, W_HEIGHT / 4);
+//        textPanel.setOpaque(false);
         
         // add panels
-        window.setLayout(new BorderLayout());  
-        window.add(this.background, BorderLayout.CENTER, new Integer(0));
-        window.add(controlPanel, BorderLayout.NORTH, new Integer(1));
-        window.add(textPanel, BorderLayout.WEST, new Integer(1));
+//        window.setLayout(new BorderLayout());  
+//        window.add(this.background, new Integer(0), 0);
+//        window.add(controlPanel, BorderLayout.NORTH, new Integer(1));
+//        window.add(textPanel, BorderLayout.WEST, new Integer(1));
         
         // configure frame parameters
         this.setSize(W_WIDTH, W_HEIGHT);
@@ -87,9 +85,18 @@ public class StartScreen extends JPanel implements LoadImage{
         this.setVisible(true); 
     }
     
-    public void loadImage() throws IOException {
-        BufferedImage image = ImageIO.read(new File("home.png")); // filler picture
-        this.bg = new ImageIcon(image);
-        this.background.setIcon(this.bg);
+    public void paintComponent(Graphics g) { 
+        // ------------ Pen ------------ \\
+        super.paintComponent(g);
+        Graphics2D pen = (Graphics2D) g;
+        // ------------ Rectangle ------------ \\
+        Rectangle2D.Double rect = new Rectangle2D.Double(W_WIDTH / 2, W_HEIGHT / 2, 50, 50); 
+        // ------------ Draw ------------ \\
+        pen.drawImage(this.bg, 0, 0, this);
+        pen.setColor(Color.RED);
+        pen.draw(rect);
+        pen.setColor(Color.BLUE);
+        pen.drawString("Press M to play", W_WIDTH / 2, W_HEIGHT / 2);
     }
+
 }

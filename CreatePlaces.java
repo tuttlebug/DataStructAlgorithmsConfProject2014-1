@@ -58,7 +58,7 @@ public class CreatePlaces {
     private static Place wildForest_ForeignVillage = new Place("WildForest_ForeignVillage", "wildForest_ForeignVillage.png");
     private static Place foreignVillage = new Place("ForeignVillage", "foreignVillage.png");
     private static Place wasteland = new Place("Wasteland", "wasteland.png");
-    private static Place secretPaths = new Place("SecretPaths", "secretPaths.png");
+    private static Place secretPaths = new Place("SecretPaths", "shadowPath.png");
     private static Place temple = new Place("Temple", "temple.png");
     
     // create a map of all Places
@@ -190,7 +190,7 @@ public class CreatePlaces {
         village.loadGatePoints(villageGates); 
         village.loadGates(forestPath_Cave, villageToForestEndPoint);
         village.loadGates(bridge, villageToBridgeEndPoint); 
-        village.buildGates();
+//        village.buildGates();
             
         // ------------ ForestPath_Cave ------------ \\
         int[][] forestPath_CaveBoundaries = new int[][]{
@@ -240,7 +240,7 @@ public class CreatePlaces {
         forestPath_Cave.loadGatePoints(forestPath_CaveGates);
         forestPath_Cave.loadGates(clearing_Cave, forestToCaveEndPoint); 
         forestPath_Cave.loadGates(village, forestToVillageEndPoint); 
-        forestPath_Cave.buildGates();
+//        forestPath_Cave.buildGates();
         // ------------ Clearing_Cave ------------ \\
         int[][] clearing_CaveBoundaries = new int[][]{
           { 43, 32, 42, 32 }, 
@@ -280,7 +280,7 @@ public class CreatePlaces {
         clearing_Cave.loadGatePoints(clearing_CaveGates);
         clearing_Cave.loadGates(forestPath_Cave, clearingToForestEndPoint);
         clearing_Cave.loadGates(cave, clearingToCaveEndPoint);
-        clearing_Cave.buildGates();
+//        clearing_Cave.buildGates();
         // spawn Point
 //        clearing_Cave.loadSpawnPoint(-2025, -845);
         
@@ -326,7 +326,7 @@ public class CreatePlaces {
         // build gates
         cave.loadGatePoints(caveGates);
         cave.loadGates(clearing_Cave, caveToClearingEndPoint);
-        cave.buildGates();
+//        cave.buildGates();
         
         // ------------ Bridge ------------ \\
         int[][] bridgeBoundaries = new int[][]{
@@ -413,32 +413,34 @@ public class CreatePlaces {
         bridge.loadGatePoints(bridgeGates);        
         bridge.loadGates(village, bridgeToVillageEndPoint);
         bridge.loadGates(endBridge, bridgeToEndBridgeEndPoint);
-        bridge.buildGates();
+//        bridge.buildGates();
         
 //        bridge.loadSpawnPoint(-2190, -1070);
          
         // ------------ EndBridge ------------ \\
         int[][] endBridgeBoundaries = new int[][]{
-            { 26, 48, 24, 46 },
+            { 26, 48, 24, 46 }, // filler
         };
         endBridge.loadBoundaryPoints(endBridgeBoundaries);
         // gates
         int[][] endBridgeGates = new int[][]{
-          { 35, 44, 38, 44 }
+          { 33, 17, 37, 17 },
+          { 34, 36, 36, 36 }
         };
         
         // spawn points
 //        endBridge.loadSpawnPoint(-2190, -1070);
-        int[] endBridgeToForestVillageEndPoint = new int[] {
-               -2055, -830
+        int[] endBridgeToWildForestEndPoint = new int[] {
+            -2165, -1295
         };
         int[] endBridgeToBridgeEndPoint = new int[] {
             -2135, -275
         };
         // build gates
         endBridge.loadGatePoints(endBridgeGates);
-        endBridge.loadGates(bridge, endBridgeToForestVillageEndPoint); //not sure about this line?
-        cave.buildGates();
+        endBridge.loadGates(wildForest_ForeignVillage, endBridgeToWildForestEndPoint); //not sure about this line?
+        endBridge.loadGates(bridge, endBridgeToBridgeEndPoint);  
+//        endBridge.buildGates();
         
         
         //for future reference:
@@ -450,6 +452,128 @@ public class CreatePlaces {
 //          { 320, 352, 320, 224 },
 //          { 320, 352, 320, 224 }, 
 //          { 320, 352, 320, 224 },
+        
+        // ------------ WildForest_ForeignVillage ------------ \\ 
+        int[][] wildForestBoundaries = new int[][] {
+            {20, 30, 20, 25},
+            {35, 53, 33, 53}
+        };
+        wildForest_ForeignVillage.loadBoundaryPoints(wildForestBoundaries);
+        
+        // spawn Points
+        int[] wildForestToForeignVillageEndPoint = new int[] {
+            -2140, -1355, // filler
+        };
+        int[] wildForestToEndBridgeEndPoint = new int[] {
+            -2135, -245 // filler
+        };
+        
+        // gates
+        int[][] wildForestGatePoints = new int[][]{
+          { 35, 16, 37, 16 },
+          { 35, 51, 37, 51 }
+        };
+        
+        wildForest_ForeignVillage.loadGatePoints(wildForestGatePoints);
+        wildForest_ForeignVillage.loadGates(foreignVillage, wildForestToForeignVillageEndPoint);
+        wildForest_ForeignVillage.loadGates(endBridge, wildForestToEndBridgeEndPoint);
+        
+        // ------------ ForeignVillage ------------ \\ 
+        int[][] foreignVillageBoundaries = new int[][] {
+            {20, 30, 20, 25},
+            {35, 53, 33, 53}
+        };
+        foreignVillage.loadBoundaryPoints(foreignVillageBoundaries);
+        
+        // spawn Points
+//        foreignVillage.loadSpawnPoint(-2140, -1355);
+        int[] foreignVillageToWasteLandEndPoint = new int[] {
+            -2155, -1355
+        };
+        int[] foreignVillageToWildForestEndPoint = new int[] {
+            -2160, -215, 
+        };
+        
+        // gates
+        int[][] foreignVillageGatePoints = new int[][]{
+          { 35, 17, 37, 17 },
+          { 33, 53, 37, 53 }
+        };
+        
+        foreignVillage.loadGatePoints(foreignVillageGatePoints);
+        foreignVillage.loadGates(wasteland, foreignVillageToWasteLandEndPoint);
+        foreignVillage.loadGates(wildForest_ForeignVillage, foreignVillageToWildForestEndPoint);
+        
+        // ------------ Wasteland ------------ \\ 
+        int[][] wastelandBoundaries = new int[][] {
+            {20, 30, 20, 25},
+            {35, 53, 33, 53}
+        };
+        wasteland.loadBoundaryPoints(wastelandBoundaries);
+        
+        // spawn Points
+        int[] wastelandToSecretPathsEndPoint = new int[] {
+            -2059, -1331
+        };
+        int[] wastelandToForeignVillageEndPoint = new int[] {
+            -2170, -260
+        };
+        
+        // gates
+        int[][] wastelandGatePoints = new int[][]{
+          { 17, 17, 54, 17 },
+          { 35, 53, 37, 53 }
+        };
+        
+        wasteland.loadGatePoints(wastelandGatePoints);
+        wasteland.loadGates(secretPaths, wastelandToSecretPathsEndPoint);
+        wasteland.loadGates(foreignVillage, wastelandToForeignVillageEndPoint);
+        
+        // ------------ Secret Paths ------------ \\ 
+        int[][] secretPathsBoundaries = new int[][] {
+            {20, 30, 20, 25},
+            {35, 53, 33, 53}
+        };
+        secretPaths.loadBoundaryPoints(secretPathsBoundaries);
+        
+        // spawn Points
+        secretPaths.loadSpawnPoint(-2059, -1331);
+        int[] secretPathsToTempleEndPoint = new int[] {
+            -2155, -1295
+        };
+        int[] secretPathsToWasteLandEndPoint = new int[] {
+            -2154, -251
+        };
+        
+        // gates
+        int[][] secretPathsGatePoints = new int[][]{
+          { 50, 18, 52, 18 },
+          { 16, 52, 53, 52 }
+        };
+        
+        secretPaths.loadGatePoints(secretPathsGatePoints);
+        secretPaths.loadGates(temple, secretPathsToTempleEndPoint);
+        secretPaths.loadGates(wasteland, secretPathsToWasteLandEndPoint);
+        
+        // ------------ Temple ------------ \\ 
+        int[][] templeBoundaries = new int[][] {
+            {20, 30, 20, 25},
+            {35, 53, 33, 53}
+        };
+        temple.loadBoundaryPoints(templeBoundaries);
+        
+        // spawn Points
+        int[] templeToSecretPathsEndPoint = new int[] {
+            -2644, -296
+        };
+        
+        // gates
+        int[][] templeGatePoints = new int[][]{
+          { 24, 52, 47, 52 }
+        };
+        
+        temple.loadGatePoints(templeGatePoints);
+        temple.loadGates(secretPaths, templeToSecretPathsEndPoint);
         
         // ------------ Create Items ------------ \\
         Item forestFood = new Item("ForestFood", "potion.png"); // 1408, 992
