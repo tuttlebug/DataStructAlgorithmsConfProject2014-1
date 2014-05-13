@@ -399,38 +399,45 @@ public class CreatePlaces {
         bridge.loadBoundaryPoints(bridgeBoundaries);
         // gates
         int[][] bridgeGates = new int[][]{
-//          { 34, 17, 36, 17 },
-          { 35, 53, 33, 53 }
+          { 35, 53, 33, 53 }, 
+          { 34, 17, 36, 17 }    
         };
         int[] bridgeToVillageEndPoint = new int[] {
            -2154, -356
+        };
+        int[] bridgeToEndBridgeEndPoint = new int[] {
+            -2140, -800
         };
         
         // build gates
         bridge.loadGatePoints(bridgeGates);        
         bridge.loadGates(village, bridgeToVillageEndPoint);
+        bridge.loadGates(endBridge, bridgeToEndBridgeEndPoint);
         bridge.buildGates();
         
 //        bridge.loadSpawnPoint(-2190, -1070);
          
         // ------------ EndBridge ------------ \\
         int[][] endBridgeBoundaries = new int[][]{
-          
+            { 26, 48, 24, 46 },
         };
         endBridge.loadBoundaryPoints(endBridgeBoundaries);
         // gates
         int[][] endBridgeGates = new int[][]{
-          //{ 35, 44, 38, 44 }
+          { 35, 44, 38, 44 }
         };
         
         // spawn points
 //        endBridge.loadSpawnPoint(-2190, -1070);
-        int [] endBridgeToForestVillageEndPoint = new int[] {
-              -2055, -830
+        int[] endBridgeToForestVillageEndPoint = new int[] {
+               -2055, -830
+        };
+        int[] endBridgeToBridgeEndPoint = new int[] {
+            -2135, -275
         };
         // build gates
         endBridge.loadGatePoints(endBridgeGates);
-        endBridge.loadGates(bridge, caveToForestVillageEndPoint); //not sure about this line?
+        endBridge.loadGates(bridge, endBridgeToForestVillageEndPoint); //not sure about this line?
         cave.buildGates();
         
         
@@ -471,6 +478,7 @@ public class CreatePlaces {
             "warrior up 1.png",
             "warrior up 2.png"
         };
+        brother.canWalk(false);
         NPC ranger = new NPC("Ranger", "ranger down stand.png");
         String[] rangerSprites = new String[] {
             // left
@@ -572,8 +580,8 @@ public class CreatePlaces {
         
         // create spawn points
         int[][] villageNPCCoords = new int[][] {
-//            {35, 20},  // brother
-//            {28, 32},  // ranger
+            {22, 37},  // brother
+            {28, 32},  // ranger
             {43, 38},  // twnprsn    
         };
         int [][] caveNPCCoords = new int[][] {
@@ -583,8 +591,8 @@ public class CreatePlaces {
         cave.loadNPCPoints(caveNPCCoords);
         
         // add npcs to places
-//        village.addNPC(brother);
-//        village.addNPC(ranger);
+        village.addNPC(brother);
+        village.addNPC(ranger);
         village.addNPC(twnprsn);
         cave.addNPC(sage);
         

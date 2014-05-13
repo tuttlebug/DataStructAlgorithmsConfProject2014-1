@@ -13,17 +13,17 @@
  * 
  * To Add/Implement:
  * [Ã] method that handles switching from place to another place
- *   - [] changing the image
+ *   - [Ã] changing the image
  *   - [] 
  * [] move the images like we move the lines
  *   - using paint
  * 
  * Temporary:
+ * [] StartScreen
  * 
  * METHODS TO THINK ABOUT:
  * [] JLayeredPane.paint(Graphics g)
- * [] player as variable
- * [] setPosition(Component c, int position)
+ * [Ã] player as variable
  * 
  * THINGS TO CONSIDER:
  * Graphs
@@ -48,8 +48,10 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
      // ------------ Action Listener ------------ \\
     public void actionPerformed(ActionEvent event) {
         for (NPC npc : this.place.sendNPCs()) {
-            npc.walk();
-            this.boundaryPanel.repaint();
+            if (npc.canWalk()) {
+                npc.walk();
+                this.boundaryPanel.repaint();
+            }
         }
     }
     
@@ -78,16 +80,13 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
             attack();
         }
         // ------------ Menu ------------ \\
-//        if (event.getKeyCode() == KeyEvent.VK_M) {
-//            boundaryPanel.moveL = false;
-//            boundaryPanel.moveR = false; 
-//            boundaryPanel.moveU = false; 
-//            boundaryPanel.moveD = false;
-//            System.out.println(window.highestLayer());
-//            System.out.println(window.getIndexOf(stscreen));
-//            window.remove(0);
-//            repaint();
-//        }
+        if (event.getKeyCode() == KeyEvent.VK_M && atMenu == true) {
+            window.remove(0);
+            repaint();
+            System.out.println(window.highestLayer());
+            System.out.println(window.getIndexOf(stscreen));
+            atMenu = false;
+        }
         // ------------ Refresh ------------ \\
         // this allows tome to move away from the boundary
         if (boundaryPanel.boundaryCrossed(playerBox.getBox()) == false && boundaryPanel.npcSpeaking(playerBox.getBox()) == false) {
@@ -103,7 +102,7 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
                 }
             }
         }
-//        System.out.printf("x = %d, y = %d\n", x, y);
+        System.out.printf("x = %d, y = %d\n", x, y);
     }
     
     // ------------ Stopping ------------ \\
@@ -143,11 +142,11 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
     private static JLabel playerLevel = new JLabel();
     private static BoundaryLines boundaryPanel;
     private static CollisionBox playerBox;
-//    private static StartScreen stscreen;
+    private static StartScreen stscreen;
     private static Player tome;
     private static Place place;
-    private static Timer npcMoveLR;
-//    private static Timer npcMoveUD;
+    private static Timer npcMove;
+    private static boolean atMenu = true;
         
     // ------------ Constructor ------------ \\
     public MainWindow(Place place) throws IOException {
@@ -174,23 +173,20 @@ public class MainWindow extends JFrame implements KeyListener, ActionListener {
         caPanel.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         currentArea.setBounds(x, y, CA_WIDTH, CA_HEIGHT); 
         caPanel.add(currentArea);
-//        stscreen = new StartScreen();
-//        stscreen.setBounds(0, 0, W_WIDTH, W_HEIGHT / 2); 
+        stscreen = new StartScreen();
+        stscreen.setBounds(0, 0, W_WIDTH, W_HEIGHT); 
         // add to window
         window.add(caPanel, new Integer(0), 0);
         window.add(boundaryPanel, new Integer(1), 0);
         window.add(playerBox, new Integer(1), 0);
         window.add(playerLevel, new Integer(2), 0);
-//        window.add(stscreen, new Integer(3), 0);
-        
-        //--------add more code before this line -------//
-        
+        window.add(stscreen, new Integer(3), 0);
         // ------------ Timers ------------ \\
         this.addKeyListener(this);
-        this.npcMoveLR = new Timer(1000, this); 
-//        this.npcMoveUD = new Timer(900, this);
-        this.npcMoveLR.start();
-//        this.npcMoveUD.start();
+        this.npcMove = new Timer(10000, this); 
+        this.npcMove.start();
+        //--------add more code before this line -------//
+        
         this.setFocusable(true);
         setLocation(XLCOORD, YLCOORD);
         setVisible(true);

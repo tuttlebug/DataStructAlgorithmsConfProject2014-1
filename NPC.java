@@ -21,6 +21,7 @@ public class NPC extends Interactable {
     private boolean wD = false;
     private boolean wU = false;
     private int steps;
+    private boolean canWalk;
     
     public NPC(String name, String imageFile) {
         super(name, imageFile);
@@ -30,6 +31,7 @@ public class NPC extends Interactable {
         this.sprites = new Image[12];
         this.speaking = false;
         this.steps = 0;
+        this.canWalk = true;
     }
     // ------------ Sprites ------------ \\
     public void loadImage() throws IOException {
@@ -78,11 +80,19 @@ public class NPC extends Interactable {
     */
     
     // ------------ Walking ------------ \\
+    public boolean canWalk() {
+        return this.canWalk;
+    }
+    
+    public void canWalk(boolean bool) {
+        this.canWalk = bool;
+    }
+    
     public void walk() {
-//        if (this.wU == true) this.walkRight();
-//        else if (this.wR == true) this.walkDown();
-//        else if (this.wD == true) this.walkLeft();
-//        else if (this.wL == true) this.walkUp();
+        if (this.wU == true) this.walkRight();
+        else if (this.wR == true) this.walkDown();
+        else if (this.wD == true) this.walkLeft();
+        else if (this.wL == true) this.walkUp();
         
     }
     // left
@@ -90,32 +100,32 @@ public class NPC extends Interactable {
         this.coords[0] -= 10;
         this.turn(this.sprites[1]);
         this.moveBox();
-//        this.wD = false;
-//        this.wL = true;
+        this.wD = false;
+        this.wL = true;
     }
     // right
     private void walkRight() {
         this.coords[0] += 10;
         this.turn(this.sprites[4]);
         this.moveBox();
-//        this.wR = true;    
-//        this.wU = false; 
+        this.wR = true;    
+        this.wU = false; 
     }
     // down
     private void walkDown() {
         this.coords[1] += 10;
         this.turn(this.sprites[7]);
         this.moveBox();
-//        this.wR = false;
-//        this.wD = true;
+        this.wR = false;
+        this.wD = true;
     }
     // up
     private void walkUp() {
         this.coords[1] -= 10;
         this.turn(this.sprites[10]);
         this.moveBox();
-//        this.wL = false;
-//        this.wU = true;
+        this.wL = false;
+        this.wU = true;
     }
         
 }
