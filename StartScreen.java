@@ -8,95 +8,89 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import java.awt.geom.*;
 
-public class StartScreen extends JPanel {
+public class StartScreen extends JPanel implements MouseListener {
     
     private static final int W_WIDTH = 700;             // width of frame
     private static final int W_HEIGHT = 600;            // height of window
+
+    // Mouse Listener
+    public void mousePressed(MouseEvent event) {
+    }
+    public void mouseReleased(MouseEvent event) {
+    }
+    public void mouseClicked(MouseEvent event) {
+        x = event.getX();
+        y = event.getY();
+        repaint();
+        System.out.printf("x = %d, y = %d\ncursex = %f, cursey = %f\n", x, y, cursor.getX(), cursor.getY());
+    }
+    public void mouseEntered(MouseEvent event) {
+    }
+    public void mouseExited(MouseEvent event) {
+    }
     
     // instance variables
-//    private JLayeredPane window;
-    private JComboBox fontMenu;       // User selects desired font from the pull down menu
-    private JCheckBox italicCheckbox; // makes text italicized
-    private JCheckBox boldCheckbox;   // makes text bold
-    private JSlider sizeSlider;       // adjusts the size of the text
-    private JLabel sizeLabel;         // shows the size
-    private JLabel textLabel;         // "Here is some sample text"
-    private int textSize;
     private Image bg;
+    private boolean gameStarted;
+    private Rectangle2D.Double cursor;
+    private int x, y, tRectX, tRectY;
+    private Rectangle2D.Double titleRect, play;
     
-
-    // listener class
-    private class FontViewerListener implements ActionListener, ChangeListener {
-        public void actionPerformed(ActionEvent event) {
-        }
-        
-        public void stateChanged(ChangeEvent event) {
-        }
-    }
-
     // constructor
     public StartScreen() throws IOException {
-        // initialize values
-        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        String[] fontNames = env.getAvailableFontFamilyNames();
-        
-        this.fontMenu = new JComboBox(fontNames);
-        this.italicCheckbox = new JCheckBox("italic");
-        this.boldCheckbox = new JCheckBox("bold");
-        this.textSize = 40;
-        this.sizeSlider = new JSlider(10, 72, this.textSize);
-        this.sizeLabel = new JLabel();
-        this.textLabel = new JLabel("Here's some sample text");
-        JPanel controlPanel = new JPanel();
-        JPanel textPanel = new JPanel();
-        
-        // set background
-        this.bg = ImageIO.read(new File("home.png")); // filler picture
-        
-        // add listener to slider, checkboxes, menu
-        FontViewerListener listener = new FontViewerListener();
-        this.fontMenu.addActionListener(listener);
-        this.italicCheckbox.addActionListener(listener);
-        this.boldCheckbox.addActionListener(listener);
-        this.sizeSlider.addChangeListener(listener);
-        
-        // add to panels
-        controlPanel.add(this.fontMenu);
-        controlPanel.add(this.boldCheckbox);
-        controlPanel.add(this.italicCheckbox);
-        controlPanel.add(this.sizeSlider);
-        controlPanel.add(this.sizeLabel); 
-        textPanel.add(this.textLabel);
-        
-//        controlPanel.setBounds(0, 0, W_WIDTH / 4, W_HEIGHT / 4);
-//        controlPanel.setOpaque(false);
-//        textPanel.setBounds(0, 0, W_WIDTH / 4, W_HEIGHT / 4);
-//        textPanel.setOpaque(false);
-        
-        // add panels
-//        window.setLayout(new BorderLayout());  
-//        window.add(this.background, new Integer(0), 0);
-//        window.add(controlPanel, BorderLayout.NORTH, new Integer(1));
-//        window.add(textPanel, BorderLayout.WEST, new Integer(1));
-        
-        // configure frame parameters
-        this.setSize(W_WIDTH, W_HEIGHT);
-//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true); 
+        this.bg = ImageIO.read(new File("StartScreen.png")); // filler picture
+        this.gameStarted = false;
+        this.x = W_WIDTH / 2;
+        this.y = W_HEIGHT / 2;
+        this.addMouseListener(this);
+        this.tRectX = 100;
+        this.tRectY = 50;
+        this.titleRect = new Rectangle2D.Double(tRectX, tRectY, W_WIDTH - 200, W_HEIGHT - 400); 
+        this.play = new Rectangle2D.Double(tRectX + titleRect.getWidth() / 3, 
+                                                                  tRectY + titleRect.getHeight() + 20,
+                                                                  200,
+                                                                  100);
+        System.out.printf("play x = %f, play y = %f, play width = %f, play height = %f\n", 
+                          play.getX(), play.getY(), play.getWidth(), play.getHeight());
     }
     
     public void paintComponent(Graphics g) { 
+        this.cursor = new Rectangle2D.Double(x, y, 10, 10); 
         // ------------ Pen ------------ \\
         super.paintComponent(g);
         Graphics2D pen = (Graphics2D) g;
-        // ------------ Rectangle ------------ \\
-        Rectangle2D.Double rect = new Rectangle2D.Double(W_WIDTH / 2, W_HEIGHT / 2, 50, 50); 
         // ------------ Draw ------------ \\
         pen.drawImage(this.bg, 0, 0, this);
         pen.setColor(Color.RED);
-        pen.draw(rect);
+        pen.draw(this.titleRect);
+        pen.draw(this.play);
+        pen.draw(this.cursor);
+        pen.fill(this.cursor);
         pen.setColor(Color.BLUE);
-        pen.drawString("Press M to play", W_WIDTH / 2, W_HEIGHT / 2);
+        g.setFont(new Font("Adobe Caslon Pro", Font.PLAIN, 100));
+        pen.drawString("TITLE", this.tRectX, this.tRectY + 100);
+        g.setFont(new Font("Adobe Caslon Pro", Font.PLAIN, 30));
+        pen.drawString("Press \"M\" to start", 
+                       (int) (this.tRectX + this.titleRect.getWidth() / 3),
+                       (int) (this.tRectY + this.titleRect.getHeight() + 20 + 30));
+        if (this.playPressed()) {
+            this.gameStarted = true;
+            System.out.println("clicked");
+        }
     }
+    
+//    public boolean gameStarted() {
+//        return this.gameStarted;
+//    }
+    
+    public boolean playPressed() {
+        return (this.x > this.play.getX() && 
+            (this.x + this.cursor.getWidth() < this.play.getX() + this.play.getWidth()) &&
+            (this.y > this.play.getY()) && 
+            (this.y + this.cursor.getHeight() < this.play.getY() + this.play.getHeight()));
+    }
+    
 
 }
+
+
